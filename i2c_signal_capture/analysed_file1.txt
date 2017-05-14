@@ -1,0 +1,3019 @@
+Python 2.7.12
+>>> 
+
+Reg Info: Register 3. Output Disable Control. Page: 17.
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.000079000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.000159125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 1
+Compare error!
+Registers diff:
+Register: Error: not found
+Register Value: b00001111-0xf
+Register: Register 15. PLL Input Source. Page: 18
+Register Value: b00000000-0x0
+Register: Register 16. CLK0 Control. Page: 19
+Register Value: b01001111-0x4f
+Register: Register 17. CLK1 Control. Page: 20
+Register Value: b10000000-0x80
+Register: Register 18. CLK2 Control. Page: 21
+Register Value: b01101111-0x6f
+Register: Register 19. CLK3 Control. Page: 22
+Register Value: b10000000-0x80
+Register: Register 20. CLK4 Control. Page: 23
+Register Value: b10000000-0x80
+Register: Register 21. CLK5 Control. Page: 24
+Register Value: b10000000-0x80
+Register: Register 22. CLK6 Control. Page: 25
+Register Value: b10000000-0x80
+Register: Register 23. CLK7 Control. Page: 26
+Register Value: b10000000-0x80
+Register: Register 24. CLK3–0 Disable State. Page: 27
+Register Value: b10101010-0xaa
+Register: Register 25. CLK7–4 Disable State. Page: 27
+Register Value: b00000000-0x0
+Register: Register 26. Multisynth NA Parameters. Page: 28
+Register Value: b00000000-0x0
+Register: Register 27. Multisynth NA Parameters. Page: 28
+Register Value: b00011001-0x19
+Register: Register 28. Multisynth NA Parameters. Page: 28
+Register Value: b00000000-0x0
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register Value: b00001010-0xa
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register Value: b11110101-0xf5
+Register: Register 31. Multisynth NA Parameters. Page: 29
+Register Value: b00000000-0x0
+Register: Register 32. Multisynth NA Parameters. Page: 30
+Register Value: b00000000-0x0
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register Value: b00010011-0x13
+Register: Register 34. Multisynth NB Parameters. Page: 30
+Register Value: b00000100-0x4
+Register: Register 35. Multisynth NB Parameters. Page: 31
+Register Value: b11100010-0xe2
+Register: Register 36. Multisynth NB Parameters. Page: 31
+Register Value: b00000000-0x0
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register Value: b00001010-0xa
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register Value: b11110101-0xf5
+Register: Register 39. Multisynth NB Parameters. Page: 32
+Register Value: b00000000-0x0
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register Value: b00000011-0x3
+Register: Register 41. Multisynth NB Parameters. Page: 33
+Register Value: b00110110-0x36
+Register: Register 42. Multisynth0 Parameters. Page: 33
+Register Value: b00000000-0x0
+Register: Register 43. Multisynth0 Parameters. Page: 33
+Register Value: b00000001-0x1
+Register: Register 44. Multisynth0 Parameters. Page: 34
+Register Value: b00001100-0xc
+Register: Register 45. Multisynth0 Parameters. Page: 34
+Register Value: b00000000-0x0
+Register: Register 46. Multisynth0 Parameters. Page: 35
+Register Value: b00000000-0x0
+Register: Register 47. Multisynth0 Parameters. Page: 35
+Register Value: b00000000-0x0
+Register: Register 48. Multisynth0 Parameters. Page: 35
+Register Value: b00000000-0x0
+Register: Register 49. Multisynth0 Parameters. Page: 36
+Register Value: b00000000-0x0
+Register: Register 50. Multisynth1 Parameters. Page: 36
+Register Value: b00000000-0x0
+Register: Register 51. Multisynth1 Parameters. Page: 36
+Register Value: b00000000-0x0
+Register: Register 52. Multisynth1 Parameters. Page: 37
+Register Value: b00000000-0x0
+Register: Register 53. Multisynth1 Parameters. Page: 37
+Register Value: b00000000-0x0
+Register: Register 54. Multisynth1 Parameters. Page: 38
+Register Value: b00000000-0x0
+Register: Register 55. Multisynth1 Parameters. Page: 38
+Register Value: b00000000-0x0
+Register: Register 56. Multisynth1 Parameters. Page: 38
+Register Value: b00000000-0x0
+Register: Register 57. Multisynth1 Parameters. Page: 39
+Register Value: b00000000-0x0
+Register: Register 58. Multisynth2 Parameters. Page: 39
+Register Value: b00000000-0x0
+Register: Register 59. Multisynth2 Parameters. Page: 39
+Register Value: b00000001-0x1
+Register: Register 60. Multisynth2 Parameters. Page: 40
+Register Value: b00001100-0xc
+Register: Register 61. Multisynth2 Parameters. Page: 40
+Register Value: b00000000-0x0
+Register: Register 62. Multisynth2 Parameters. Page: 41
+Register Value: b00000000-0x0
+Register: Register 63. Multisynth2 Parameters. Page: 41
+Register Value: b00000000-0x0
+Register: Register 64. Multisynth2 Parameters. Page: 41
+Register Value: b00000000-0x0
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.011445875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 11.28675 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.011524875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.055421125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 43.89625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.055500250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.055580375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 2
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.056880375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.056959500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.061809000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.061888000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.061968250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 3
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.063268250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.063347250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.068196750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.068275875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.068356000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 4
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.069656000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.069735125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.074585125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.074664125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.074744375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 5
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.076044125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.29975 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.076123250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.080972375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.081051500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.081131625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 6
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.082431625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.082510750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.087360625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.087439625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.087519750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 7
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.088819750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.088898875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.093748375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.093827500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.093907625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 8
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.095207625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.095286625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.100136625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.100215750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.100295875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 9
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.101595750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.101674750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.106524000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.106603000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.106683250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 10
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.107983250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.108062250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.112911750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.112990875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.113071000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 11
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.114371000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.114450125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.119299625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.119378625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.119458875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 12
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.120758875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.120837875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.125687875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.125767000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.125847125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 13
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.127147000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.127226000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.132075250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.132154250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.132234500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 14
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.133534500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.133613500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.138463375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.138542500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.138622625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 15
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.139922625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.140001625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.144851250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.144930250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.145010375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 16
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.146310375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.146389500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.151239500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.151318625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.151398750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 17
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.152698500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.29975 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.152777625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.157626875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.157705875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.157786000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 18
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.159086000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.159165125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.164014625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.164093750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.164173875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 19
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.165473875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.165552875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.170402500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.170481500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.170561625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 20
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.171861625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.171940750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.176791125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.850375 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.176870125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.176950250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 21
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.178250125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.178329125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.183178375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.183257500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.183337625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 22
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.184637625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.184716625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.189566250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.189645250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.189725375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 23
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.191025375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.191104500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.195954000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.196033125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.196113250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 24
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.197413250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.197492250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.202342375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.850125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.202421375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.202501500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 25
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.203801375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.203880375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.208729625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.208808750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.208888875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 26
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.210188875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.210267875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.215117500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.215196500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.215276625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 27
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.216576625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.216655750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.221505625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.221584625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.221664750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 28
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.222964750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.223043875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.227893875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.227973000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.228053125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 29
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.229353000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.229432000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.234281250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.234360250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.234440375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 30
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.235740375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.235819500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.240669000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.240748125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.240828250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 31
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.242128250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.242207250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.247056875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.247135875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.247216000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 32
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.248516000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.248595125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.253445125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.253524250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.253604375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 33
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.254904125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.29975 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.254983250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.259832500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.259911500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.259991625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 34
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.261291625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.261370750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.266220625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.266299625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.266379875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 35
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.267679750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.267758875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.272608125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.272687125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.272767250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 36
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.274067250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.274146375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.278996375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.279075500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.279155625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 37
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.280455375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.29975 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.280534500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.285384000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.285463125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.285543250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 38
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.286843250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.286922250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.291771875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.291850875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.291931000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 39
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.293231000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.293310125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.298159625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.298238750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.298318875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 40
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.299618875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.299697875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.304548000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.850125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.304627000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.304707125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 41
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.306007000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.306086125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.310935250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.311014375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.311094500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 42
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.312394500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.312473500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.317323125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.317402125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.317482250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 43
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.318782250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.318861375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.323710875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.323790000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.323870125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 44
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.325170125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.325249125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.330099250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.850125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.330178250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.330258375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 45
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.331558250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.331637375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.336486500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.336565625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.336645750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 46
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.337945750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.338024750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.342874625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.342953750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.343033875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 47
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.344333875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.344412875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.349262500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.349341500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.0790000000001 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.349421750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.0802499999999 ms
+Big packet count: 48
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.350721625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.350800750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.355650750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.355729875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.355810000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 49
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.357109875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.357188875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.362038375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.362117500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.362197625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 50
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.363497625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.363576750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.368425875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.368505000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.368585125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 51
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.369885125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.369964125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.374814000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.374893125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.374973250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 52
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.376273250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.376352375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.381202000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.381281125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.381361250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 53
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.382661125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.382740125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.387589375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.84925 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.387668375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.387748500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 54
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.389048500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.389127625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.393977500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.394056500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.394136750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 55
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.395436750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.395515750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.400365250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.400444375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.400524500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 56
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.401824500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.401903625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.406753625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.406832625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.406912875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 57
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.408212625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.29975 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.408291750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.413140875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.413220000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.413300125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 58
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.414600125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.414679125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.419528750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849625 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.419607750000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.419688000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 59
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.420987875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.421067000000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.425916875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.425995875000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.0790000000001 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.426076125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 60
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.427376125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.427455125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.432305125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.85 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.432384250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.432464375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 61
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 2805
+MSNA_P2: 19
+MSNA_P3: 25
+MULT: 25+23/25
+FREQ A: 162.0 MHz
+MSNB_P1: 2805
+MSNB_P2: 822
+MSNB_P3: 1250
+MULT: 25+1149/1250
+FREQ B: 161.995 MHz
+This packet size: 51
+ 
+0.433764250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.299875 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.433843250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.438692125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.848875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.438771250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.438851375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 62
+Registers diff:
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3358
+MSNA_P2: 18
+MSNA_P3: 25
+MULT: 30+6/25
+FREQ A: 189.0 MHz
+MSNB_P1: 3358
+MSNB_P2: 772
+MSNB_P3: 1250
+MULT: 30+299/1250
+FREQ B: 188.995 MHz
+This packet size: 51
+ 
+0.440151375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.440230375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.445080250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.445159375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.445239500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 63
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3435
+MSNA_P2: 13
+MSNA_P3: 25
+MULT: 30+21/25
+FREQ A: 192.75 MHz
+MSNB_P1: 3435
+MSNB_P2: 522
+MSNB_P3: 1250
+MULT: 30+1049/1250
+FREQ B: 192.745 MHz
+This packet size: 51
+ 
+0.446539500000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.446618625000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.451468125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.8495 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.451547125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 187. Fanout Enable. Page: 61
+Reg Data: 0b11000000
+This packet size: 2
+ 
+0.451627375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.08025 ms
+Big packet count: 64
+Registers diff:
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register: Register 41. Multisynth NB Parameters. Page: 33
+MSNA_P1: 3450
+MSNA_P2: 22
+MSNA_P3: 25
+MULT: 30+24/25
+FREQ A: 193.5 MHz
+MSNB_P1: 3450
+MSNB_P2: 972
+MSNB_P3: 1250
+MULT: 30+1199/1250
+FREQ B: 193.495 MHz
+This packet size: 51
+ 
+0.452927375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 1.3 ms
+Reg Info: Register 177. PLL Reset. Page: 60. b7 - reset PLLA, b5 - reset PLLB
+Reg Data: 0b10101100
+This packet size: 2
+ 
+0.453006375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111010
+This packet size: 2
+ 
+0.457856250000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 4.849875 ms
+Reg Info: Register 3. Output Disable Control. Page: 17. 0-ON, 1-OFF
+Reg Data: 0b11111111
+This packet size: 2
+ 
+0.457935375000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.079125 ms
+>>> 

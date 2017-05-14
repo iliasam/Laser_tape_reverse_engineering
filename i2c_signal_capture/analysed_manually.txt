@@ -1,0 +1,154 @@
+//Manual comments
+//Only single big packet 
+
+0.000159125000000,I2C,Setup Write to [0xC0] + ACK
+Time from last packet: 0.080125 ms
+Big packet count: 1
+Compare error!
+
+Register: Register 15. PLL Input Source. Page: 18
+Register Value: 0b0 //ClKIN Divide by 1. - 0: Select the XTAL input as the reference clock for PLLB & PLLA
+
+Register: Register 16. CLK0 Control. Page: 19
+Register Value: 0b01001111
+//+ CLK0 is powered up.
+//+ MS0 operates in integer mode.
+//+ Select PLLA as the source for MultiSynth0.
+//+ Output Clock 0 is not inverted.
+//+ Select MultiSynth 0 as the source for CLK0
+//+ Drive Strength Control--8 mA
+
+Register: Register 17. CLK1 Control. Page: 20
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 18. CLK2 Control. Page: 21
+Register Value: 0b01101111
+//+ CLK2 is powered up.
+//+ MS2 operates in integer mode.
+//+ 1: Select PLLB as the source for MultiSynth2.
+//+ Output Clock 2 is not inverted.
+//+ Select MultiSynth 2 as the source for CLK2
+//+ Drive Strength Control--8 mA
+
+Register: Register 19. CLK3 Control. Page: 22
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 20. CLK4 Control. Page: 23
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 21. CLK5 Control. Page: 24
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 22. CLK6 Control. Page: 25
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 23. CLK7 Control. Page: 26
+Register Value: 0b10000000//Clock Power Down.
+
+Register: Register 24. CLK3–0 Disable State. Page: 27
+Register Value: 0b10101010//10: CLKx is set to a HIGH IMPEDANCE state when disabled.
+
+Register: Register 25. CLK7–4 Disable State. Page: 27
+Register Value: 0b0//00: CLKx is set to a LOW state when disabled.
+
+
+Register: Register 26. Multisynth NA Parameters. Page: 28
+Register Value: 0b0
+
+Register: Register 27. Multisynth NA Parameters. Page: 28
+Register Value: 0b11001
+
+Register: Register 28. Multisynth NA Parameters. Page: 28
+Register Value: 0b0
+
+Register: Register 29. Multisynth NA Parameters. Page: 29
+Register Value: 0b1010
+
+Register: Register 30. Multisynth NA Parameters. Page: 29
+Register Value: 0b11110101
+
+Register: Register 31. Multisynth NA Parameters. Page: 29
+Register Value: 0b0
+
+Register: Register 32. Multisynth NA Parameters. Page: 30
+Register Value: 0b0
+
+Register: Register 33. Multisynth NA Parameters. Page: 30
+Register Value: 0b10011
+###
+Register: Register 34. Multisynth NB Parameters. Page: 30
+Register Value: 0b100
+
+Register: Register 35. Multisynth NB Parameters. Page: 31
+Register Value: 0b11100010
+
+Register: Register 36. Multisynth NB Parameters. Page: 31
+Register Value: 0b0
+
+Register: Register 37. Multisynth NB Parameters. Page: 31
+Register Value: 0b1010
+
+Register: Register 38. Multisynth NB Parameters. Page: 32
+Register Value: 0b11110101
+
+Register: Register 39. Multisynth NB Parameters. Page: 32
+Register Value: 0b0
+
+Register: Register 40. Multisynth NB Parameters. Page: 32
+Register Value: 0b11
+
+Register: Register 41. Multisynth NB Parameters. Page: 33
+Register Value: 0b110110
+###
+Register: Register 42. Multisynth0 Parameters. Page: 33
+Register Value: 0b0
+Register: Register 43. Multisynth0 Parameters. Page: 33
+Register Value: 0b00000001
+Register: Register 44. Multisynth0 Parameters. Page: 34
+Register Value: 0b00001100
+Register: Register 45. Multisynth0 Parameters. Page: 34
+Register Value: 0b0
+Register: Register 46. Multisynth0 Parameters. Page: 35
+Register Value: 0b0
+Register: Register 47. Multisynth0 Parameters. Page: 35
+Register Value: 0b0
+Register: Register 48. Multisynth0 Parameters. Page: 35
+Register Value: 0b0
+Register: Register 49. Multisynth0 Parameters. Page: 36
+Register Value: 0b0
+###
+/*
+Register: Register 50. Multisynth1 Parameters. Page: 36
+Register Value: 0b0
+Register: Register 51. Multisynth1 Parameters. Page: 36
+Register Value: 0b0
+Register: Register 52. Multisynth1 Parameters. Page: 37
+Register Value: 0b0
+Register: Register 53. Multisynth1 Parameters. Page: 37
+Register Value: 0b0
+Register: Register 54. Multisynth1 Parameters. Page: 38
+Register Value: 0b0
+Register: Register 55. Multisynth1 Parameters. Page: 38
+Register Value: 0b0
+Register: Register 56. Multisynth1 Parameters. Page: 38
+Register Value: 0b0
+Register: Register 57. Multisynth1 Parameters. Page: 39
+Register Value: 0b0
+*/
+
+####
+Register: Register 58. Multisynth2 Parameters. Page: 39
+Register Value: 0b0
+Register: Register 59. Multisynth2 Parameters. Page: 39
+Register Value: 0b00000001
+Register: Register 60. Multisynth2 Parameters. Page: 40
+Register Value: 0b00001100
+Register: Register 61. Multisynth2 Parameters. Page: 40
+Register Value: 0b0
+Register: Register 62. Multisynth2 Parameters. Page: 41
+Register Value: 0b0
+Register: Register 63. Multisynth2 Parameters. Page: 41
+Register Value: 0b0
+Register: Register 64. Multisynth2 Parameters. Page: 41
+Register Value: 0b0
+This packet size: 51
