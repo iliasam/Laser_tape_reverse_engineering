@@ -2,12 +2,13 @@
 #include "pll_functions.h"
 #include "stm32f10x_it.h"
 #include "config_periph.h"
+#include <string.h>
 
 void PLL_send_enable_output(void);
 void PLL_send_disable_output(void);
 void PLL_send_fanout_enable(void);
 void PLL_send_reset(void);
-void PLL_send_data1(void);
+void PLL_send_data2(uint8_t start_reg, uint8_t* data, uint16_t length);
 
 const uint8_t pll_data_array_dis_output[2] = {3, 0xff};//0-enable
 const uint8_t pll_data_array_en_output[2] =  {3, 0xFA};
@@ -42,16 +43,51 @@ void PLL_send_reset(void)
   PLL_send_data((uint8_t*)pll_data_array_reset, 2);
 }
 
-void PLL_send_data1(void)
+//Send data to PLL
+//start_reg - address
+void PLL_send_data2(uint8_t start_reg, uint8_t* data, uint16_t length)
 {
-  PLL_send_data((uint8_t*)pll_data_array1, 51);
+  uint16_t i;
+  I2C_StartTransmission(I2C_Direction_Transmitter, PLL_I2C_ADDRESS);
+  I2C_WriteData(start_reg);
+  for (i=0;i<length;i++)
+  {
+    I2C_WriteData(data[i]);
+  }
+  I2C_EndTransmission();
 }
 
 void configure_pll(void)
 {
   PLL_send_disable_output();
   PLL_send_fanout_enable();
-  PLL_send_data1();
+  PLL_send_data((uint8_t*)pll_data_array1, 51);
   PLL_send_reset();
   PLL_send_enable_output();
+}
+
+//config_reg - number, from which configuration starts
+void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
+{
+  uint32_t p1, p2, p3;
+  uint8_t params[8];
+  memset(params, 0, 8);
+  
+  //capculate "p" coefficuents
+  p3  = c;
+  p2  = (128 * b) % c;
+  p1  = 128 * a;
+  p1 += (128 * b / c);
+  p1 -= 512;
+  
+  params[0] = (uint8_t)((p3 >> 8) & 0xFF);      //MSN_P3[15:8]
+  params[1] = (uint8_t)( p3  & 0xFF);           //MSNA_P3[7:0]
+  params[2] = (uint8_t)((p1 >> 16) & 0x03);     //MSN_P1[17:16]
+  params[3] = (uint8_t)((p1 >> 8) & 0xFF);      //MSN_P1[15:8]
+  params[4] = (uint8_t)( p1  & 0xFF);           //MSN_P1[7:0]
+  params[5] = (uint8_t)((p3 >> 12) & 0xF0) + (uint8_t)((p2 >> 16) & 0x0F);//MSN_P3[19:16] + MSN_P2[19:16]
+  params[6] = (uint8_t)((p2 >> 8) & 0xFF);      //MSN_P2[15:8]
+  params[7] = (uint8_t)( p2  & 0xFF);           //MSN_P2[7:0]
+  
+  PLL_send_data2(config_reg, params, 8);
 }

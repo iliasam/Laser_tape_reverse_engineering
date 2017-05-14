@@ -26,7 +26,6 @@ void uart_send_data(uint8_t* data, uint16_t length);
 int main()
 {
   uint8_t rx_byte  = 0;
-  
   RCC_ClocksTypeDef RCC_Clocks;
   
   init_sys_clock();
@@ -46,10 +45,19 @@ int main()
   Delay_ms(50);
   configure_pll();
   Delay_ms(100);
+  
+  set_pll_coeff(26, 0, 1250, MSNA_PLL_START_REG);//162.5
+  set_pll_coeff(26, 1,1250, MSNB_PLL_START_REG);//162.505
+  PLL_send_reset();
+  PLL_send_enable_output();
+
+  
   prepare_capture();
   
   start_adc_capture();
   Delay_ms(2000);
+  
+  
   
   while(1) 
   {
@@ -90,6 +98,23 @@ void process_rx_data(uint8_t data)
       case (uint8_t)'L'://Set APD low voltage
       {
         DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE3);//APD_DAC2_VALUE3 - 80V
+        break;
+      }
+      case (uint8_t)'A'://Set PLL freq1
+      {
+        set_pll_coeff(26, 0, 1250, MSNA_PLL_START_REG);//162.5
+        set_pll_coeff(26, 1,1250, MSNB_PLL_START_REG);//162.505
+        PLL_send_reset();
+        PLL_send_enable_output();
+        break;
+      }
+      case (uint8_t)'B'://Set PLL freq2
+      {
+        //set freq2
+        set_pll_coeff(26, 1200, 1250, MSNA_PLL_START_REG);//168.5
+        set_pll_coeff(26, 1201,1250, MSNB_PLL_START_REG);//168.505
+        PLL_send_reset();
+        PLL_send_enable_output();
         break;
       }
     

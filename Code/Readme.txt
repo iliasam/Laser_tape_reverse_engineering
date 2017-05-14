@@ -1,1 +1,1 @@
-Firmware_raw_capture: firmware for laser tape STM32. Program capture data from ADC and send it to UART.
+Firmware_raw_capture: firmware for laser tape MCU. Program captures data from ADC and send it to UART.
