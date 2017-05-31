@@ -1,6 +1,5 @@
 Firmware for "x-40" laser tape
 By ILIASAM
-This program captures data from ADC, calculate phase difference using Goertzel algorithm, send results to UART.
 
 This program captures data from ADC, calculate phase difference using Goertzel algorithm.
 All this done sequentially for 3 frequencies. 
