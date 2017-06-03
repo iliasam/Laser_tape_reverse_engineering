@@ -107,7 +107,7 @@ int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8
   int32_t tmp_value = 0;
   double tmp_value_d = 0.0;
   
-  if (apd_voltage == 80)
+  if (apd_voltage == 82)
   {
     //temperature compensation
     tmp_value = (int32_t)raw_temperature * (int32_t)(-7* PHASE_MULT) / 1024;

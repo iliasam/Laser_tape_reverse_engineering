@@ -3,37 +3,32 @@
 //Plain data processing
 //UART baudrate - 256000
 //MCU - STM32F100C8T6
+//By ILIASAM
 
 #include "stm32f10x.h"
 #include "config_periph.h"
-#include "main.h"
 #include "pll_functions.h"
 #include "capture_configure.h"
 #include "i2c_functions.h"
-#include "pll_functions.h"
 #include "analyse.h"
 #include "delay_us_timer.h"
 #include "measure_functions.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
-extern volatile uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];
 extern volatile uint8_t capture_done;
 
 uint16_t APD_temperature_raw = 0;//raw temperature value
-uint8_t  APD_current_voltage = 80;//value in volts
-
+uint8_t  APD_current_voltage = 82;//value in volts
 
 extern AnalyseResultType result1;
-extern AnalyseResultType result2;
-extern AnalyseResultType result3;
 
 uint8_t measure_enabled = 1;//auto distance measurement enabled flag
 uint8_t calibration_needed = 0;//1- calibration needed flag
 
 //for testing purposes
 volatile uint32_t delta_time = 0;
-volatile uint32_t delta_time2 = 0;//do_triple_phase_measurement time
 
 int main()
 {
@@ -56,28 +51,21 @@ int main()
   
   printf("Start\r\n");
   
-  
   while(1) 
   {
-    //for testing purposes
-    static uint32_t old_dwt_value = 0;
-    uint32_t cur_dwt_value = get_dwt_value();
-    delta_time = cur_dwt_value - old_dwt_value;
-    old_dwt_value = cur_dwt_value;
+    static uint32_t old_dwt_value = 0;//for testing purposes
     
-    do_single_adc_measurements();//measure temperature
-    
-    uint32_t dwt_value1 = get_dwt_value();
-    
-    do_triple_phase_measurement();
-    
-    uint32_t dwt_value2 = get_dwt_value();
-    delta_time2 = dwt_value2 - dwt_value1;
-    
-    do_distance_calculation();
-    
-    auto_switch_apd_voltage(result1.Amplitude);//if auto switch enabled, manual switching is not working
-    
+    if (measure_enabled == 1)
+    {
+      uint32_t cur_dwt_value = get_dwt_value();
+      delta_time = cur_dwt_value - old_dwt_value;
+      old_dwt_value = cur_dwt_value;
+      
+      do_single_adc_measurements();//measure temperature
+      do_triple_phase_measurement();
+      do_distance_calculation();
+      auto_switch_apd_voltage(result1.Amplitude);//if auto switch enabled, manual switching is not working
+    }
     
     if (calibration_needed == 1)
     {
@@ -110,7 +98,7 @@ void process_rx_data(uint8_t data)
       }
       case (uint8_t)'L':
       {
-        switch_apd_voltage(80); //Set APD low voltage
+        switch_apd_voltage(82); //Set APD low voltage
         break;
       }
       case (uint8_t)'C'://Start calibration process

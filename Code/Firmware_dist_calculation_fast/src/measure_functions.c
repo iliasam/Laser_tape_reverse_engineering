@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CALIBRATION_REPEAT_NUMBER       64 //number of averaging points for calibration - for single freqency
-#define REPEAT_NUMBER                   3 //number of averaging points
+#define CALIBRATION_REPEAT_NUMBER       64  //number of averaging points for calibration - for single freqency
+#define REPEAT_NUMBER                   3   //number of averaging points
 #define SWITCH_DELAY                    300 //time in uS to switch frequency
 
 AnalyseResultType result1;
@@ -43,6 +43,7 @@ uint8_t new_data_ready = 0;//new data ready to be processed
 //debug only
 volatile uint32_t delta_time = 0;
 
+//Auto switch capture process
 void auto_handle_capture(void)
 {
   static uint16_t* result_ptr;//pointer to data array (adc_capture_bufferX) with data to be processed
@@ -66,7 +67,7 @@ void auto_handle_capture(void)
     dwt_delay(SWITCH_DELAY);
     result_ptr = (uint16_t*)adc_capture_buffer2;
     
-    start_adc_capture(result_ptr);//freq1
+    start_adc_capture(result_ptr);//freq2
     dma_state = DMA_FREQ2_CAPTURING;
     new_data_ready = 1;//data1 ready
   }
@@ -77,7 +78,7 @@ void auto_handle_capture(void)
     dwt_delay(SWITCH_DELAY);
     result_ptr = (uint16_t*)adc_capture_buffer3;
     
-    start_adc_capture(result_ptr);//freq1
+    start_adc_capture(result_ptr);//freq3
     dma_state = DMA_FREQ3_CAPTURING;
     new_data_ready = 1;//data2 ready
   }
@@ -104,7 +105,7 @@ void auto_handle_data_processing(void)
   {
     //debug functions
     uint32_t cur_dwt_value = get_dwt_value();
-    delta_time = (cur_dwt_value - old_dwt_value) / 24;
+    delta_time = (cur_dwt_value - old_dwt_value) / 24;//24 MHz
     old_dwt_value = cur_dwt_value;
   
     result3 = process_captured_data((uint16_t*)adc_capture_buffer3);
@@ -138,7 +139,7 @@ ErrorStatus do_phase_calibration(void)
   measure_enabled = 1;
   
   Delay_ms(400);
-  switch_apd_voltage(80);
+  switch_apd_voltage(82);
   Delay_ms(100);
   do_single_adc_measurements();//measure temperature
 
@@ -174,7 +175,7 @@ ErrorStatus do_phase_calibration(void)
   return SUCCESS;
 }
 
-//try to find best voltage for calibration
+//Try to find best voltage for calibration
 ErrorStatus calibration_set_voltage(void)
 {
   AnalyseResultType tmp_result;
@@ -195,7 +196,7 @@ ErrorStatus calibration_set_voltage(void)
     tmp_result = do_capture();//measure signal
     if ((tmp_result.Amplitude < 5) || (tmp_result.Amplitude > 2200))
     {
-      switch_apd_voltage(80);//switch back to 80V
+      switch_apd_voltage(82);//switch back to 80V
     }
   }
   printf("Calib voltage:%d\r\n", APD_current_voltage);
@@ -203,7 +204,7 @@ ErrorStatus calibration_set_voltage(void)
   return SUCCESS;
 }
 
-//calibration measurement for single frequency
+//Calibration measurement for single frequency
 //result_phase - result value will be written at this pointer
 ErrorStatus single_freq_calibration(int16_t* result_phase)
 {
@@ -230,7 +231,7 @@ ErrorStatus single_freq_calibration(int16_t* result_phase)
   return SUCCESS;
 }
 
-//take 3 phases and calculate distance
+//Take 3 phases and calculate distance
 void do_distance_calculation(void)
 {
   //subtract zero phase offset
@@ -246,7 +247,7 @@ void do_distance_calculation(void)
   dist_resut = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
 }
 
-//phase measurement for single freqency
+//Phase measurement for single freqency
 AnalyseResultType do_capture(void)
 {
   dma_state = DMA_NO_DATA;
@@ -272,7 +273,7 @@ AnalyseResultType do_capture(void)
   {
     start_adc_capture((uint16_t*)adc_capture_buffer1);
     while(capture_done == 0) {}
-    signal_result = goertzel_analyse((uint16_t*)&adc_capture_buffer1[0]);//signal
+    signal_result    = goertzel_analyse((uint16_t*)&adc_capture_buffer1[0]);//signal
     reference_result = goertzel_analyse((uint16_t*)&adc_capture_buffer1[1]);//reference
     
     tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
@@ -302,7 +303,7 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
   AnalyseResultType reference_result = {0,0};
   int16_t tmp_phase = 0;
   
-  signal_result = goertzel_analyse(&captured_data[0]);//signal
+  signal_result    = goertzel_analyse(&captured_data[0]);//signal
   reference_result = goertzel_analyse(&captured_data[1]);//reference
   tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
   if (tmp_phase < 0) tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
@@ -316,12 +317,12 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
   return main_result;
 }
 
-//switching APD voltage by signal level
+//Switching APD voltage by signal level - AGC
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   switch (APD_current_voltage)
   {
-    case 80:
+    case 82:
     {
       if (current_amplitude < 3) return;//APD overload!
       if (current_amplitude < 150) switch_apd_voltage(98);//try to increase voltage
@@ -330,7 +331,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
     
     case 98:
     {
-      if (current_amplitude > 2200) {switch_apd_voltage(80);}//try to decrease voltage
+      if (current_amplitude > 2200) {switch_apd_voltage(82);}//try to decrease voltage
       break;
     }
     
@@ -338,7 +339,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
   }
 }
 
-//write calibratio data to flash
+//Write calibratio data to flash
 void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t calib_phase3)
 {
   uint32_t start_address = 0x8000000 + 1024*31;
@@ -351,7 +352,7 @@ void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t cal
   FLASH_Lock();
 }
 
-//read calibration data
+//Read calibration data
 void read_calib_data_from_flash(void)
 {
   uint32_t start_address = 0x8000000 + 1024*31;

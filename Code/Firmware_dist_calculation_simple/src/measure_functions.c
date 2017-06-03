@@ -44,7 +44,7 @@ ErrorStatus do_phase_calibration(void)
   measure_enabled = 1;
   
   Delay_ms(400);
-  switch_apd_voltage(80);
+  switch_apd_voltage(82);
   Delay_ms(100);
   do_single_adc_measurements();//measure temperature
 
@@ -102,7 +102,7 @@ ErrorStatus calibration_set_voltage(void)
     tmp_result = do_capture();//measure signal
     if ((tmp_result.Amplitude < 5) || (tmp_result.Amplitude > 2200))
     {
-      switch_apd_voltage(80);//switch back to 80V
+      switch_apd_voltage(82);//switch back to 80V
     }
   }
   printf("Calib voltage:%d\r\n", APD_current_voltage);
@@ -227,7 +227,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   switch (APD_current_voltage)
   {
-    case 80:
+    case 82:
     {
       if (current_amplitude < 3) return;//APD overload!
       if (current_amplitude < 150) switch_apd_voltage(95);//try to increase voltage
@@ -236,7 +236,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
     
     case 95:
     {
-      if (current_amplitude > 2200) {switch_apd_voltage(80);}//try to decrease voltage
+      if (current_amplitude > 2200) {switch_apd_voltage(82);}//try to decrease voltage
       break;
     }
     

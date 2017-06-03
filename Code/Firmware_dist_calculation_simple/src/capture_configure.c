@@ -136,7 +136,7 @@ void switch_apd_voltage(uint8_t new_voltage)
 {
   switch (new_voltage)
   {
-    case 80:
+    case 82:
     {
       DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_80V);
       APD_current_voltage = new_voltage;

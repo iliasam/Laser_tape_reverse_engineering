@@ -1,29 +1,22 @@
 //3 frequencies
 //This programm calculate distance to object in mm
+//Simultaneous data capture and data processing
+//UART baudrate - 256000
+//MCU - STM32F100C8T6
+//By ILIASAM
 
 #include "stm32f10x.h"
 #include "config_periph.h"
-#include "main.h"
 #include "pll_functions.h"
 #include "capture_configure.h"
 #include "i2c_functions.h"
-#include "pll_functions.h"
-#include "analyse.h"
-#include "delay_us_timer.h"
 #include "measure_functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-extern volatile uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];
-extern volatile uint8_t capture_done;
+#include "main.h"
 
 uint16_t APD_temperature_raw = 1000;//raw temperature value
-uint8_t  APD_current_voltage = 80;//value in volts
-
-
-extern AnalyseResultType result1;
-extern AnalyseResultType result2;
-extern AnalyseResultType result3;
+uint8_t  APD_current_voltage = 82;//value in volts
 
 uint8_t measure_enabled = 1;//auto distance measurement enabled flag
 uint8_t calibration_needed = 0;
@@ -52,8 +45,12 @@ int main()
   while(1) 
   {
     
-    auto_handle_capture();
-    auto_handle_data_processing();
+    if (measure_enabled == 1)
+    {
+        auto_handle_capture();
+        auto_handle_data_processing();
+    }
+
     
     if (calibration_needed == 1)
     {
@@ -67,31 +64,19 @@ void process_rx_data(uint8_t data)
 {
   switch (data)
   {
-      case (uint8_t)'E':
+      case (uint8_t)'E': //Enable laser and measurement process
       {
         enable_laser();
         measure_enabled = 1;
         break;
       }
-      case (uint8_t)'D':
+      case (uint8_t)'D': //Disable laser and measurement process
       {
         disable_laser();
         measure_enabled = 0;
         break;
       }
-      /*
-      case (uint8_t)'H':
-      {
-        switch_apd_voltage(98);
-        break;
-      }
-      case (uint8_t)'L':
-      {
-        switch_apd_voltage(80);
-        break;
-      }
-      */
-      case (uint8_t)'C':
+      case (uint8_t)'C'://Start calibration process
       {
         calibration_needed = 1;
         break;
@@ -122,19 +107,6 @@ void Delay_ms(uint32_t ms)
   RCC_GetClocksFreq (&RCC_Clocks);
   nCount=(RCC_Clocks.HCLK_Frequency/10000)*ms;
   for (; nCount!=0; nCount--);
-}
-
-//send bytes to UART
-void uart_send_data(uint8_t* data, uint16_t length)
-{
-  uint16_t i;
-  
-  for (i=0;i<length;i++)
-  {
-    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET) {} //while not empty
-    //Delay_ms(1);
-    USART_SendData(USART1, (uint8_t)data[i]);  
-  }
 }
 
 
