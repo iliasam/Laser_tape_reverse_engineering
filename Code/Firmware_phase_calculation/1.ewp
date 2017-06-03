@@ -728,7 +728,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>D:\MYPROGS\&#x420;&#x430;&#x437;&#x431;&#x438;&#x440;&#x430;&#x435;&#x43C;&#x43e;&#x435;\LASER_TAPE\code\las_tape_1\stm32f100_flash.icf</state>
+          <state>$PROJ_DIR$\stm32f100_flash.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
