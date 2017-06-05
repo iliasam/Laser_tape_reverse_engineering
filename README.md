@@ -11,8 +11,10 @@ Steps that I have done:
 - Main result: Write own firmware ('Firmware_dist_calculation_fast") that calculates distance to object.  
 - Write C# PC utilities to process and show pesults.
 
-Main parts of laser tape are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).
-
+Main parts of laser tape are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).  
+Laser tape structure schematic:  
+![Alt text](Schematic/schematic_structure.png?raw=true "Image")  
+  
 Loading firmware to laser tape's MCU.  
 Connect pins 7 and 8 at keyboard connector (or constantly press "S1" key). That needed to enable laser tape DC-DC converter.  
 You need any STM32 programmer that has NRST pin.  
@@ -25,11 +27,11 @@ Write needed firmware to SM32.
 
 
 UART data example ("Firmware_dist_calculation_fast"):  
-DIST;01574;AMP;0993;TEMP;1343;VOLT;082\r\n
+DIST;01574;AMP;0993;TEMP;1343;VOLT;082\r\n  
 DIST - distance to object in mm.  
 AMP  - signal amplitude. 
 TEMP - APD temperature (raw ADC value).  
-VOLT - APD voltage.
+VOLT - APD voltage. 
 String length is constant.  
 UART baudrate - 256000.  
 
