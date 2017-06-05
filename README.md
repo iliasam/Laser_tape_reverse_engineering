@@ -17,7 +17,7 @@ Loading firmware to laser tape's MCU.
 Connect pins 7 and 8 at keyboard connector (or constantly press "S1" key). That needed to enable laser tape DC-DC converter.
 You need any STM32 programmer that has NRST pin.
 Connect SWCLK, SWDIO, NRST, GND from laser tape to programmer.
-![Alt text]( PCB_photos/ PCB_top.jpg?raw=true "Image")
+![Alt text]( PCB_photos/PCB_top.jpg?raw=true "Image")
 Configure programmer to use "Connect under reset".
 Power on laser tape.
 Erase whole STM32 FLASH memory. WARNING: YOU WILL LOSE ORIGINAL LASER TAPE FIRWARE AT THIS STEP! You are doing it at your own risk!
