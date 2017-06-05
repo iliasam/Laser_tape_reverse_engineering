@@ -2,14 +2,14 @@
 
 This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.
 
-Steps that I have done:
--Fully reverse engineered schematic of laser tape.   
--Captured data packets at I2C bus with logic analyzer.  
--Decoded that packets and get values of laser modulation frequencies.  
--Write own firmware for that captures low frequency signal and send it to PC.  
--Write own firmware for that captures signal and processing if using Goertzel algorithm. Phase difference results are send to PC.  
--Main result: Write own firmware ('Firmware_dist_calculation_fast") that calculates distance to object.  
--Write C# PC utilities to process and show pesults.
+Steps that I have done:  
+- Fully reverse engineered schematic of laser tape.   
+- Captured data packets at I2C bus with logic analyzer.  
+- Decoded that packets and get values of laser modulation frequencies.  
+- Write own firmware for that captures low frequency signal and send it to PC.  
+- Write own firmware for that captures signal and processing if using Goertzel algorithm. Phase difference results are send to PC.  
+- Main result: Write own firmware ('Firmware_dist_calculation_fast") that calculates distance to object.  
+- Write C# PC utilities to process and show pesults.
 
 Main parts of laser tape are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).
 
@@ -25,11 +25,15 @@ Write needed firmware to SM32.
 
 
 UART data example ("Firmware_dist_calculation_fast"):  
-DIST;01574;AMP;0993;TEMP;1343;VOLT;080\r\n  
+DIST;01574;AMP;0993;TEMP;1343;VOLT;082\r\n
+DIST - distance to object in mm.  
+AMP  - signal amplitude. 
+TEMP - APD temperature (raw ADC value).  
+VOLT - APD voltage.
 String length is constant.  
 UART baudrate - 256000.  
-Distance measurement speed - near 60 Hz.  
 
+Distance measurement speed - near 60 Hz.  
 
 UART commands ("Firmware_dist_calculation_fast"):  
 "E" - enable laser and measurement process.  
