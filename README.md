@@ -1,6 +1,8 @@
 # laser_tape_reverse_engineering 
 
 This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.
+Article in Russan: https://habrahabr.ru/post/327642
+Video: https://youtu.be/bJaUrZ7ZMj4
 
 Steps that I have done:  
 - Fully reverse engineered schematic of laser tape.   
@@ -22,7 +24,7 @@ Connect SWCLK, SWDIO, NRST, GND from laser tape to programmer.
 ![Alt text](PCB_photos/PCB_top.JPG?raw=true "Image")
 Configure programmer to use "Connect under reset".  
 Power on laser tape.  
-Erase whole STM32 FLASH memory. WARNING: YOU WILL LOSE ORIGINAL LASER TAPE FIRWARE AT THIS STEP! You are doing it at your own risk!  
+Erase whole STM32 FLASH memory. WARNING: YOU WILL LOSE ORIGINAL LASER TAPE FIRMWARE AT THIS STEP! You are doing it at your own risk!  
 Write needed firmware to SM32.  
 
 
