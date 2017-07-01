@@ -1,7 +1,9 @@
 # laser_tape_reverse_engineering 
 
 This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.
+
 Article in Russan: https://habrahabr.ru/post/327642
+
 Video: https://youtu.be/bJaUrZ7ZMj4
 
 Steps that I have done:  
