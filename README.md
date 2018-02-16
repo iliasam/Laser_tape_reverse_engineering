@@ -13,7 +13,7 @@ Steps that I have done:
 - Write own firmware for that captures low frequency signal and send it to PC.  
 - Write own firmware for that captures signal and processing if using Goertzel algorithm. Phase difference results are send to PC.  
 - Main result: Write own firmware ('Firmware_dist_calculation_fast") that calculates distance to object.  
-- Write C# PC utilities to process and show pesults.
+- Write C# PC utilities to process and show results.
 
 Main parts of laser tape are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).  
 Laser tape structure schematic:  
@@ -44,7 +44,7 @@ Distance measurement speed - near 60 Hz.
 UART commands ("Firmware_dist_calculation_fast"):  
 "E" - enable laser and measurement process.  
 "D" - disable laser and measurement process.  
-"C" - start zero distance calibration. You need to run zero distance calibration at first start. Place any white object at distance > 10cm from laser tape before calibration.  
+"C" - start zero distance calibration. You need to run zero distance calibration at the first start. Place any white object at the distance > 10cm from the laser tape before calibration.  
 
 
 To get better results, small board with APD must be closed from external light.

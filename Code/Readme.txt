@@ -1,3 +1,5 @@
+Important notice - all this firmware has been tested only with 512A hardware!
+
 Firmware_dist_calculation_fast:  firmware for laser tape MCU.
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, 
 calculate distance in mm, send results to UART.
