@@ -52,7 +52,7 @@ void auto_handle_capture(void)
   
   if (dma_state == DMA_NO_DATA)
   {    
-    pll_change_freq(26, 0, 1, 1250);//162.5 + 162.505
+    pll_set_frequency_1();//162.5 + 162.505
     dwt_delay(SWITCH_DELAY);
     result_ptr = (uint16_t*)adc_capture_buffer1;
    
@@ -63,7 +63,7 @@ void auto_handle_capture(void)
   else if (dma_state == DMA_FREQ1_DONE)
   {
     //ready to switch to freq2
-    pll_change_freq(30, 800, 801, 1250);//191.5 + 191.505
+    pll_set_frequency_2();//191.5 + 191.505
     dwt_delay(SWITCH_DELAY);
     result_ptr = (uint16_t*)adc_capture_buffer2;
     
@@ -74,7 +74,7 @@ void auto_handle_capture(void)
   else if (dma_state == DMA_FREQ2_DONE)
   {
     //ready to switch to freq3
-    pll_change_freq(30, 1200, 1201, 1250);//193.5 + 193.505
+    pll_set_frequency_3();//193.5 + 193.505
     dwt_delay(SWITCH_DELAY);
     result_ptr = (uint16_t*)adc_capture_buffer3;
     
@@ -144,7 +144,7 @@ ErrorStatus do_phase_calibration(void)
   do_single_adc_measurements();//measure temperature
 
   //set freq1
-  pll_change_freq(26, 0, 1, 1250);//162.5 + 162.505
+  pll_set_frequency_1();//162.5 + 162.505
   Delay_ms(100);
   
   //try to find best voltage for calibration
@@ -154,13 +154,13 @@ ErrorStatus do_phase_calibration(void)
   printf("Zero Phase 1: %d\r\n", tmp_phase1);
   
   //set freq2
-  pll_change_freq(30, 800, 801, 1250);//191.5 + 191.505
+  pll_set_frequency_2();//191.5 + 191.505
   Delay_ms(100);
   if (single_freq_calibration(&tmp_phase2) == ERROR) return ERROR;
   printf("Zero Phase 2: %d\r\n", tmp_phase2);
   
   //set freq3
-  pll_change_freq(30, 1200, 1201, 1250);//193.5 + 193.505
+  pll_set_frequency_3();//193.5 + 193.505
   Delay_ms(100);
   if (single_freq_calibration(&tmp_phase3) == ERROR) return ERROR;
   printf("Zero Phase 3: %d\r\n", tmp_phase3);
