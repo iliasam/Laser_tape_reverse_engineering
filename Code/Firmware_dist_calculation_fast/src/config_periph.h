@@ -10,6 +10,19 @@
 #define APD_DAC2_98V (uint16_t)(1450) //~~95V
 //#define APD_DAC2_98V (uint16_t)(1400) //~~102V - not calibrated
 
+#define APD_LOW_VOLTAGE         80.6f
+#define APD_HIGH_VOLTAGE        98.6f
+
+
+
+#define DCDC_R_UP               5100000.0f //Ohm - upper - R37
+#define DCDC_R_DOWN             74000.0f //Ohm - down - R103
+#define DCDC_R_DAC              (float)(2100 + 46800) //Ohm - after dac - R38 + R39
+#define DCDC_VREF               1.27f //V - internal VREF voltage of the DC-DC
+
+#define AREF_VOLTAGE            3.32f //AREF voltage of the MCU
+
+#define DAC_MAXIUM              4095.0f
 
 
 //#define PLL_I2C_ADDRESS         (0xC0>>1)
@@ -30,6 +43,8 @@
 #define UART_RX_PIN             GPIO_Pin_7
 #define UART_TX_PIN             GPIO_Pin_6
 #define UART_PORT               GPIOB
+
+#define UART_BAUDRATE           256000
 
 #define PLL_I2C                 I2C2
 #define PLL_I2C_CLK             RCC_APB1Periph_I2C2
@@ -67,5 +82,7 @@ void enable_laser(void);
 void disable_laser(void);
 
 void start_apd_voltage(void);
+
+void set_apd_volatge(float new_voltage);
 
 #endif

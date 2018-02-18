@@ -19,7 +19,7 @@ AnalyseResultType result2;
 AnalyseResultType result3;
 
 extern uint16_t APD_temperature_raw ;//raw temperature value
-extern uint8_t  APD_current_voltage;//value in volts
+extern float  APD_current_voltage;//value in volts
 extern uint8_t  measure_enabled;//auto distance measurement enabled flag
 extern volatile uint8_t capture_done;
 
@@ -111,7 +111,7 @@ void auto_handle_data_processing(void)
     result3 = process_captured_data((uint16_t*)adc_capture_buffer3);
     do_distance_calculation();
     
-    result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, APD_current_voltage);
+    result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
     uart_dma_start_tx(result_str, result_length);//attention - new transmission interrupts previous one. 
     new_data_ready = 0;
   }
@@ -139,7 +139,7 @@ ErrorStatus do_phase_calibration(void)
   measure_enabled = 1;
   
   Delay_ms(400);
-  switch_apd_voltage(82);
+  set_apd_volatge(APD_LOW_VOLTAGE);
   Delay_ms(100);
   do_single_adc_measurements();//measure temperature
 
@@ -190,16 +190,16 @@ ErrorStatus calibration_set_voltage(void)
   if (tmp_result.Amplitude < 200) 
   {
     //try to increase voltage
-    switch_apd_voltage(98);
+    set_apd_volatge(APD_HIGH_VOLTAGE);
     Delay_ms(100);
     
     tmp_result = do_capture();//measure signal
     if ((tmp_result.Amplitude < 5) || (tmp_result.Amplitude > 2200))
     {
-      switch_apd_voltage(82);//switch back to 80V
+      set_apd_volatge(APD_LOW_VOLTAGE);//switch back to 80V
     }
   }
-  printf("Calib voltage:%d\r\n", APD_current_voltage);
+  printf("Calib voltage:%d\r\n", (uint8_t)APD_current_voltage);
   
   return SUCCESS;
 }
@@ -286,7 +286,7 @@ AnalyseResultType do_capture(void)
   main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
   
-  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, APD_current_voltage);
+  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
   //phase corretion can produce zero crossing
   //phase < 0 or > 360
   if (main_result.Phase < 0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
@@ -310,7 +310,7 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
   main_result.Phase = tmp_phase;
   main_result.Amplitude = signal_result.Amplitude;
   //calculate correction
-  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, APD_current_voltage);
+  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
   if (main_result.Phase < 0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
   else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
   
@@ -320,22 +320,18 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
 //Switching APD voltage by signal level - AGC
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
-  switch (APD_current_voltage)
+  if (APD_current_voltage < (APD_LOW_VOLTAGE + 2.0f))
   {
-    case 82:
-    {
-      if (current_amplitude < 3) return;//APD overload!
-      if (current_amplitude < 150) switch_apd_voltage(98);//try to increase voltage
-      break;
-    }
-    
-    case 98:
-    {
-      if (current_amplitude > 2200) {switch_apd_voltage(82);}//try to decrease voltage
-      break;
-    }
-    
-    default: break;
+    //LOW APD voltage now
+    if (current_amplitude < 3) return;//APD overload!
+    if (current_amplitude < 150) 
+      set_apd_volatge(APD_HIGH_VOLTAGE);//try to increase voltage
+  }
+  else
+  {
+    //HIGH APD voltage now
+    if (current_amplitude > 2200) 
+      set_apd_volatge(APD_LOW_VOLTAGE);//try to decrease voltage
   }
 }
 

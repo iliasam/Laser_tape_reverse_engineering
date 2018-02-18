@@ -8,6 +8,7 @@
 #include "delay_us_timer.h"
 
 extern uint16_t APD_temperature_raw;
+extern float  APD_current_voltage;//value in volts
 
 void init_all_hardware(void)
 {
@@ -103,6 +104,18 @@ void start_apd_voltage(void)
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_80V);//APD_DAC2_VALUE3 - 80V  
 }
 
+void set_apd_volatge(float new_voltage)
+{
+  float dac_voltage = 0.0f;
+  float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
+  
+  dac_voltage = DCDC_VREF - (new_voltage - tmp1) * (DCDC_R_DAC / DCDC_R_UP);
+  
+  float dac_value = dac_voltage * DAC_MAXIUM / AREF_VOLTAGE;
+  DAC_SetChannel2Data(DAC_Align_12b_R, (uint16_t)dac_value);
+  APD_current_voltage = new_voltage;
+}
+
 void init_sys_clock(void)
 {
   ErrorStatus HSEStartUpStatus;
@@ -154,7 +167,7 @@ void init_uart1(void)
   
   GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
   
-  USART_InitStructure.USART_BaudRate = 256000;   
+  USART_InitStructure.USART_BaudRate = UART_BAUDRATE;
   USART_InitStructure.USART_WordLength = USART_WordLength_8b;   
   USART_InitStructure.USART_StopBits = USART_StopBits_1;   
   USART_InitStructure.USART_Parity = USART_Parity_No ;   
@@ -170,7 +183,6 @@ void init_uart1(void)
   USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
   
   USART_Cmd(USART1, ENABLE);
-  
 }
 
 

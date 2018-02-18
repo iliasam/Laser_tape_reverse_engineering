@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=970394843
+Checksum=-315740553
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 0
@@ -55,7 +55,7 @@ Enabled=0
 ShowSource=1
 [StLinkDriver]
 CStepIntDis=_ 0
-stlinkserialNo=C0CCD28D
+stlinkserialNo=USB0
 stlinkfoundProbes=
 [SWOTraceHWSettings]
 OverrideDefaultClocks=0
@@ -74,10 +74,6 @@ ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
-[array_types]
-Fmt0=uint16_t[1024]	3	0
-[watch_formats]
-Fmt0={W}42:APD_current_voltage	3	0
 [Trace2]
 Enabled=0
 ShowSource=0
@@ -118,6 +114,16 @@ ShowTimeLog=1
 SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
+[DriverProfiling]
+Enabled=0
+Mode=3
+Graph=0
+Symbiont=0
+Exclusions=
+[array_types]
+Fmt0=uint16_t[1024]	3	0
+[watch_formats]
+Fmt0={W}42:APD_current_voltage	0	9
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -125,12 +131,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[DriverProfiling]
-Enabled=0
-Mode=3
-Graph=0
-Symbiont=0
-Exclusions=
 [CallStackLog]
 Enabled=0
 [CallStackStripe]
