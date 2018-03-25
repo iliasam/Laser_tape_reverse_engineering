@@ -102,6 +102,8 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 }
 
 //calctulase phase_correction value
+#ifdef MODULE_701A
+
 int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
 {
   int32_t tmp_value = 0;
@@ -128,6 +130,15 @@ int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8
   
   //return (int16_t)tmp_value;
 }
+
+#else
+
+int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
+{
+  return (int16_t)0;
+}
+
+#endif
 
 
 

@@ -159,7 +159,6 @@ AnalyseResultType do_capture(void)
   
   main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
-  //main_result.Phase = calculate_median_phase(phase_buffer, REPEAT_NUMBER); //do not show better results
 
   main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
     //phase < 0 or > 360
