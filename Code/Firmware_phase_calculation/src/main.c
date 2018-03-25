@@ -40,7 +40,7 @@ int main()
   configure_pll();
   Delay_ms(100);
   
-  pll_change_freq(26, 0, 1, 1250);//162.5 + 162.505
+  pll_set_frequency_1();
   
   while(1) 
   {
