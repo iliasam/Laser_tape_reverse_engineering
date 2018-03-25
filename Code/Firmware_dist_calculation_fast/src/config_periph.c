@@ -104,7 +104,7 @@ void start_apd_voltage(void)
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_80V);//APD_DAC2_VALUE3 - 80V  
 }
 
-void set_apd_volatge(float new_voltage)
+void set_apd_voltage(float new_voltage)
 {
   float dac_voltage = 0.0f;
   float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));

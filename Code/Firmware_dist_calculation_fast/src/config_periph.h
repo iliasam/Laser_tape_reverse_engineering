@@ -83,6 +83,6 @@ void disable_laser(void);
 
 void start_apd_voltage(void);
 
-void set_apd_volatge(float new_voltage);
+void set_apd_voltage(float new_voltage);
 
 #endif

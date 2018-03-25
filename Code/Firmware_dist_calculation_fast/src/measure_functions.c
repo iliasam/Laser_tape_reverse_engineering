@@ -139,7 +139,7 @@ ErrorStatus do_phase_calibration(void)
   measure_enabled = 1;
   
   Delay_ms(400);
-  set_apd_volatge(APD_LOW_VOLTAGE);
+  set_apd_voltage(APD_LOW_VOLTAGE);
   Delay_ms(100);
   do_single_adc_measurements();//measure temperature
 
@@ -190,13 +190,13 @@ ErrorStatus calibration_set_voltage(void)
   if (tmp_result.Amplitude < 200) 
   {
     //try to increase voltage
-    set_apd_volatge(APD_HIGH_VOLTAGE);
+    set_apd_voltage(APD_HIGH_VOLTAGE);
     Delay_ms(100);
     
     tmp_result = do_capture();//measure signal
     if ((tmp_result.Amplitude < 5) || (tmp_result.Amplitude > 2200))
     {
-      set_apd_volatge(APD_LOW_VOLTAGE);//switch back to 80V
+      set_apd_voltage(APD_LOW_VOLTAGE);//switch back to 80V
     }
   }
   printf("Calib voltage:%d\r\n", (uint8_t)APD_current_voltage);
@@ -269,7 +269,7 @@ AnalyseResultType do_capture(void)
   uint32_t amplitude_summ = 0;
   int16_t tmp_phase = 0;
   
-  for (i=0;i<REPEAT_NUMBER;i++)
+  for (i=0; i<REPEAT_NUMBER; i++)
   {
     start_adc_capture((uint16_t*)adc_capture_buffer1);
     while(capture_done == 0) {}
@@ -287,7 +287,7 @@ AnalyseResultType do_capture(void)
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
   
   main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
-  //phase corretion can produce zero crossing
+  //phase correction can produce zero crossing
   //phase < 0 or > 360
   if (main_result.Phase < 0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
   else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
@@ -325,17 +325,17 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
     //LOW APD voltage now
     if (current_amplitude < 3) return;//APD overload!
     if (current_amplitude < 150) 
-      set_apd_volatge(APD_HIGH_VOLTAGE);//try to increase voltage
+      set_apd_voltage(APD_HIGH_VOLTAGE);//try to increase voltage
   }
   else
   {
     //HIGH APD voltage now
     if (current_amplitude > 2200) 
-      set_apd_volatge(APD_LOW_VOLTAGE);//try to decrease voltage
+      set_apd_voltage(APD_LOW_VOLTAGE);//try to decrease voltage
   }
 }
 
-//Write calibratio data to flash
+//Write calibration data to flash
 void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t calib_phase3)
 {
   uint32_t start_address = 0x8000000 + 1024*31;

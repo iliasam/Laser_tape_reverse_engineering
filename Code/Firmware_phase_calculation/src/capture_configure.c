@@ -11,7 +11,7 @@ uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 extern uint8_t capture_done;
 
 extern uint16_t APD_temperature_raw;
-extern uint8_t  APD_current_voltage;
+extern float  APD_current_voltage;
 
 void init_adc_capture_timer(void);
 void init_adc_capture(void);
@@ -73,7 +73,7 @@ void init_adc_capture(void)
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
   
-  ADC_RegularChannelConfig(ADC1, ADC_SIGNAL_HIGH, 1, ADC_SampleTime_13Cycles5);
+  ADC_RegularChannelConfig(ADC1, ADC_SIGNAL, 1, ADC_SampleTime_13Cycles5);
   ADC_RegularChannelConfig(ADC1, ADC_REF_CHANNEL, 2, ADC_SampleTime_13Cycles5);
   
   ADC_ExternalTrigConvCmd(ADC1, ENABLE);
@@ -161,36 +161,13 @@ AnalyseResultType do_capture(void)
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
   //main_result.Phase = calculate_median_phase(phase_buffer, REPEAT_NUMBER); //do not show better results
 
-  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, APD_current_voltage);
+  main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
     //phase < 0 or > 360
   if (main_result.Phase < 0.0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
   else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
   
   
   return main_result;
-}
-
-void switch_apd_voltage(uint8_t new_voltage)
-{
-  switch (new_voltage)
-  {
-    case 80:
-    {
-      DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_80V);
-      APD_current_voltage = new_voltage;
-      break;
-    }
-    
-    case 95:
-    {
-      DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_95V);
-      APD_current_voltage = new_voltage;
-      break;
-    }
-    
-    default: break;
-  }
-  
 }
 
 

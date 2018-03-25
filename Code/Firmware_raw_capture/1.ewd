@@ -607,7 +607,7 @@
         </option>
         <option>
           <name>IjetCpuClockEdit</name>
-          <state>72.0</state>
+          <state>24.0</state>
         </option>
         <option>
           <name>IjetSwoPrescalerList</name>
@@ -1159,7 +1159,7 @@
         <debug>1</debug>
         <option>
           <name>OCDriverInfo</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCSTLinkInterfaceRadio</name>
@@ -1249,7 +1249,7 @@
         <option>
           <name>CCSTLinkJtagSpeedList</name>
           <version>0</version>
-          <state>0</state>
+          <state>5</state>
         </option>
       </data>
     </settings>

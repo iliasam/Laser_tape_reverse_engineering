@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=-1285090956
+Checksum=1225006074
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 0
@@ -55,7 +55,7 @@ Enabled=0
 ShowSource=1
 [StLinkDriver]
 CStepIntDis=_ 0
-stlinkserialNo=C0CCD28D
+stlinkserialNo=BBAD2C26
 stlinkfoundProbes=
 [SWOTraceHWSettings]
 OverrideDefaultClocks=0

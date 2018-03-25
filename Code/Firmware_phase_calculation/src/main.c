@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 uint16_t APD_temperature_raw = 0;//raw temperature value
-uint8_t  APD_current_voltage = 80;//value in volts
+float  APD_current_voltage = 80;//value in volts
 
 AnalyseResultType result1;
 AnalyseResultType result2;
@@ -50,12 +50,12 @@ int main()
     //Send results to UART
     printf("freqA_amp:%d\r\n",  result1.Amplitude);
     printf("APD temp:%d\r\n",   APD_temperature_raw);
-    printf("Volt:%d\r\n",       APD_current_voltage);
+    printf("Volt:%d\r\n",       (uint16_t)APD_current_voltage);
     printf("freqA_phase:%d\r\n", result1.Phase);
     printf("freqB_phase:%d\r\n", result2.Phase);
     printf("freqC_phase:%d\r\n", result3.Phase);
     
-    auto_switch_apd_voltage(result1.Amplitude);//if auto switch enabled, manual switching is not working
+    auto_switch_apd_voltage((uint16_t)result1.Amplitude);//if auto switch enabled, manual switching is not working
     
     //Delay_ms(100);
   }
@@ -65,15 +65,15 @@ int main()
 void do_triple_phase_measurement(void)
 {
     //set freq1
-    pll_change_freq(26, 0, 1, 1250);//162.5 + 162.505
+    pll_set_frequency_1();
     dwt_delay(SWITCH_DELAY);
     result1 = do_capture();
     
-    pll_change_freq(30, 800, 801, 1250);//191.5 + 191.505
+    pll_set_frequency_2();
     dwt_delay(SWITCH_DELAY);
     result2 = do_capture();
     
-    pll_change_freq(30, 1200, 1201, 1250);//193.5 + 193.505
+    pll_set_frequency_3();
     dwt_delay(SWITCH_DELAY);
     result3 = do_capture();
 }
@@ -94,40 +94,15 @@ void process_rx_data(uint8_t data)
       }
       case (uint8_t)'H': //Set APD high voltage
       {
-        switch_apd_voltage(95);
+        set_apd_voltage(APD_HIGH_VOLTAGE);
         break;
       }
       case (uint8_t)'L': //Set APD low voltage
       {
-        switch_apd_voltage(80);
+        set_apd_voltage(APD_LOW_VOLTAGE);
         break;
       }
     
-    default: break;
-  }
-}
-
-//Auto switching APD voltage depending on received signal amplitude
-void auto_switch_apd_voltage(uint16_t current_amplitude)
-{
-  switch (APD_current_voltage)
-  {
-    case 80:
-    {
-      if (current_amplitude < 3) 
-        return;//APD overload!
-      if (current_amplitude < 150) 
-        switch_apd_voltage(95);//try to increase voltage
-      break;
-    }
-    
-    case 95:
-    {
-      
-      if (current_amplitude > 2200) 
-        switch_apd_voltage(80);
-      break;
-    }
     default: break;
   }
 }

@@ -5,6 +5,7 @@
 //After capture is done, program send data to PC
 //UART baudrate - 256000
 //MCU - STM32F100C8T6 
+//Supported 512A / 701A board revisions - see "main.h"
 
 
 #include "stm32f10x.h"
@@ -21,7 +22,6 @@ extern uint8_t capture_done;
 void process_rx_data(uint8_t data);
 void sent_captured_data_to_pc(void);
 void uart_send_data(uint8_t* data, uint16_t length);
-
 
 int main()
 {
@@ -46,25 +46,18 @@ int main()
   configure_pll();
   Delay_ms(100);
   
-  set_pll_coeff(26, 0, 1250, MSNA_PLL_START_REG);//162.5
-  set_pll_coeff(26, 1,1250, MSNB_PLL_START_REG);//162.505
-  PLL_send_reset();
-  PLL_send_enable_output();
-
+  pll_set_frequency_1();
   
   prepare_capture();
   
   start_adc_capture();
   Delay_ms(2000);
   
-  
-  
   while(1) 
   {
     while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET){}
     rx_byte = USART_ReceiveData (USART1);
     process_rx_data(rx_byte);
-    
   }
 }
 
@@ -90,31 +83,34 @@ void process_rx_data(uint8_t data)
         sent_captured_data_to_pc();
         break;
       }
+      case (uint8_t)'S': //Set APD super high voltage
+      {
+        set_apd_voltage(APD_SHIGH_VOLTAGE);
+        break;
+      }
       case (uint8_t)'H': //Set APD high voltage
       {
-        DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE5);
+        set_apd_voltage(APD_HIGH_VOLTAGE);
         break;
       }
       case (uint8_t)'L'://Set APD low voltage
       {
-        DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE3);//APD_DAC2_VALUE3 - 80V
+        set_apd_voltage(APD_LOW_VOLTAGE);
         break;
       }
       case (uint8_t)'A'://Set PLL freq1
       {
-        set_pll_coeff(26, 0, 1250, MSNA_PLL_START_REG);//162.5
-        set_pll_coeff(26, 1,1250, MSNB_PLL_START_REG);//162.505
-        PLL_send_reset();
-        PLL_send_enable_output();
+        pll_set_frequency_1();
         break;
       }
       case (uint8_t)'B'://Set PLL freq2
       {
-        //set freq2
-        set_pll_coeff(26, 1200, 1250, MSNA_PLL_START_REG);//168.5
-        set_pll_coeff(26, 1201,1250, MSNB_PLL_START_REG);//168.505
-        PLL_send_reset();
-        PLL_send_enable_output();
+        pll_set_frequency_2();
+        break;
+      }
+      case (uint8_t)'C'://Set PLL freq4 - low
+      {
+        pll_set_frequency_4();
         break;
       }
     
@@ -140,7 +136,6 @@ void uart_send_data(uint8_t* data, uint16_t length)
   for (i=0;i<length;i++)
   {
     while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET) {} //while not empty
-    //Delay_ms(1);
     USART_SendData(USART1, (uint8_t)data[i]);  
   }
 }

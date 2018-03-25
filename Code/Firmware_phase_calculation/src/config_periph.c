@@ -8,6 +8,7 @@
 #include "delay_us_timer.h"
 
 extern uint16_t APD_temperature_raw;
+extern float  APD_current_voltage;//value in volts
 
 void init_all_hardware(void)
 {
@@ -100,6 +101,18 @@ void start_apd_voltage(void)
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE2);
   Delay_ms(20);
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_80V);//APD_DAC2_VALUE3 - 80V  
+}
+
+void set_apd_voltage(float new_voltage)
+{
+  float dac_voltage = 0.0f;
+  float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
+  
+  dac_voltage = DCDC_VREF - (new_voltage * APD_CORR_COEF - tmp1) * (DCDC_R_DAC / DCDC_R_UP);
+  
+  float dac_value = dac_voltage * DAC_MAXIUM / AREF_VOLTAGE;
+  DAC_SetChannel2Data(DAC_Align_12b_R, (uint16_t)dac_value);
+  APD_current_voltage = new_voltage;
 }
 
 void init_sys_clock(void)
@@ -251,5 +264,34 @@ void i2c_init(void)
     I2C_SoftwareResetCmd(PLL_I2C, DISABLE);
   }
 }
+
+//Switching APD voltage by signal level - AGC
+#ifdef MODULE_701A
+
+void auto_switch_apd_voltage(uint16_t current_amplitude)
+{
+  set_apd_voltage(APD_SHIGH_VOLTAGE);//testing only
+}
+
+#else
+
+void auto_switch_apd_voltage(uint16_t current_amplitude)
+{
+  if (APD_current_voltage < (APD_LOW_VOLTAGE + 2.0f))
+  {
+    //LOW APD voltage now
+    if (current_amplitude < 3) return;//APD overload!
+    if (current_amplitude < 150) 
+      set_apd_voltage(APD_HIGH_VOLTAGE);//try to increase voltage
+  }
+  else
+  {
+    //HIGH APD voltage now
+    if (current_amplitude > 2200) 
+      set_apd_voltage(APD_LOW_VOLTAGE);//try to decrease voltage
+  }
+}
+
+#endif
 
 

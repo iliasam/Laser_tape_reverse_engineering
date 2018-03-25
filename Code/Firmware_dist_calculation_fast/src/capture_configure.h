@@ -4,7 +4,7 @@
 #ifndef _CAPTURE_CONFIGURE_H
 #define _CAPTURE_CONFIGURE_H
 
-#define POINTS_TO_SAMPLE 250  //number of sampled points in single capture - key parameter of this program
+#define POINTS_TO_SAMPLE        250  //number of sampled points in single capture - key parameter of this program
 
 #define ADC_CAPURE_BUF_LENGTH (POINTS_TO_SAMPLE*2)//signal points + reference points
 

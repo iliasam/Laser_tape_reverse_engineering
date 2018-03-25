@@ -5,6 +5,8 @@
 #include "config_periph.h"
 #include "stm32f10x_i2c.h"
 
+float  APD_current_voltage;//value in volts
+
 void init_gpio(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
@@ -65,6 +67,18 @@ void init_dac(void)
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE1);
 }
 
+void set_apd_voltage(float new_voltage)
+{
+  float dac_voltage = 0.0f;
+  float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
+  
+  dac_voltage = DCDC_VREF - (new_voltage * APD_CORR_COEF - tmp1) * (DCDC_R_DAC / DCDC_R_UP);
+  
+  float dac_value = dac_voltage * DAC_MAXIUM / AREF_VOLTAGE;
+  DAC_SetChannel2Data(DAC_Align_12b_R, (uint16_t)dac_value);
+  APD_current_voltage = new_voltage;
+}
+
 void enable_laser(void)
 {
   LASER_PORT->ODR&= ~LASER_POWER_PIN;
@@ -75,7 +89,7 @@ void disable_laser(void)
   LASER_PORT->ODR|= LASER_POWER_PIN;
 }
 
-//create power sequence for APD
+//create power sequence for the APD
 void start_apd_voltage(void)
 {
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE2);
@@ -159,9 +173,6 @@ void i2c_init(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
   GPIO_Init(I2C_GPIO_PORT, &GPIO_InitStructure);
-  
-  //RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-  //GPIO_PinRemapConfig(GPIO_Remap_I2C1, ENABLE);//REMAP I2C1
   
   I2C_DeInit(PLL_I2C);
   I2C_StructInit(&I2C_InitStructure);

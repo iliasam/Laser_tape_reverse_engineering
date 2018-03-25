@@ -4,11 +4,11 @@
 #ifndef _CAPTURE_CONFIGURE_H
 #define _CAPTURE_CONFIGURE_H
 
-#define REPEAT_NUMBER 5 //number of averaging points
+#define REPEAT_NUMBER           1 //number of averaging points
 
-#define POINTS_TO_SAMPLE 250//number of sampled points in single capture
+#define POINTS_TO_SAMPLE        (250 * 3)//number of sampled points in single capture
 
-#define ADC_CAPURE_BUF_LENGTH (POINTS_TO_SAMPLE*2)//signal points + reference points
+#define ADC_CAPURE_BUF_LENGTH   (POINTS_TO_SAMPLE*2)//signal points + reference points
 
 #define TIMER1_FREQ             24000000 //Hz
 #define TIMER1_DIV              6
