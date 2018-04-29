@@ -17,6 +17,7 @@
 
 uint16_t APD_temperature_raw = 1000;//raw temperature value
 float  APD_current_voltage = APD_LOW_VOLTAGE;//value in volts
+extern float  APD_temperature = 0.0;//temperature value in deg
 
 uint8_t measure_enabled = 1;//auto distance measurement enabled flag
 uint8_t calibration_needed = 0;

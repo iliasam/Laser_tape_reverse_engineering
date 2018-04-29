@@ -9,6 +9,8 @@
 #define M_PI            3.1415926535 
 #endif
 
+extern float  APD_temperature;//temperature value in deg
+
 
 #define OMEGA ((2.0 * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
@@ -106,7 +108,10 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 
 int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
 {
-  return (int16_t)0;
+  //temperature compensation
+  float correction = 0.226974f * APD_temperature; //it is bad to use APD_temperature here
+  correction+= -0.0049827f * APD_temperature * APD_temperature;
+  return (int16_t)(-correction * PHASE_MULT);
 }
 
 #else
@@ -134,8 +139,6 @@ int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8
   
   tmp_value_d = (double)tmp_value * CORR_360_DEG;
   return (int16_t)tmp_value_d;
-  
-  //return (int16_t)tmp_value;
 }
 
 #endif

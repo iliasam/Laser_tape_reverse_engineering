@@ -8,6 +8,7 @@
 #include "delay_us_timer.h"
 
 extern uint16_t APD_temperature_raw;
+extern float  APD_temperature;//temperature value in deg
 extern float  APD_current_voltage;//value in volts
 
 void init_all_hardware(void)
@@ -186,7 +187,7 @@ void init_uart1(void)
 }
 
 
-//инициализация DMA для UART
+//Initialize DMA for the UART
 void uart_dma_init(void)
 {
   DMA_InitTypeDef           DMA_InitStructure;
@@ -264,9 +265,19 @@ void do_single_adc_measurements(void)
 {
   init_adc_single_measure();
   APD_temperature_raw = readADC1(ADC_TEMP_CHANNEL);
+  calculate_real_temperature(APD_temperature_raw);
   
   //init for main signal capture
   prepare_capture();
+}
+
+//Calculate temperature in degrees from raw ADC value
+void calculate_real_temperature(uint16_t raw_value)
+{
+  float result = 66.843f;
+  result+= -0.029572f * (float)raw_value;
+  result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
+  APD_temperature = result;
 }
 
 

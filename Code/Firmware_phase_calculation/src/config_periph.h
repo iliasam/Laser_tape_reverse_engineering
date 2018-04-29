@@ -82,4 +82,6 @@ void start_apd_voltage(void);
 void set_apd_voltage(float new_voltage);
 void auto_switch_apd_voltage(uint16_t current_amplitude);
 
+void calculate_real_temperature(uint16_t raw_value);
+
 #endif

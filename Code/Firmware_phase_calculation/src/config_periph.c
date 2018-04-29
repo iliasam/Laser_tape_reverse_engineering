@@ -8,7 +8,9 @@
 #include "delay_us_timer.h"
 
 extern uint16_t APD_temperature_raw;
-extern float  APD_current_voltage;//value in volts
+extern float  APD_temperature;//temperature value in deg
+extern float  APD_current_voltage ;//value in volts
+
 
 void init_all_hardware(void)
 {
@@ -223,12 +225,20 @@ void do_single_adc_measurements(void)
 {
   init_adc_single_measure();
   APD_temperature_raw = readADC1(ADC_TEMP_CHANNEL);
+  calculate_real_temperature(APD_temperature_raw);
   
   //init for main signal capture
   prepare_capture();
 }
 
-
+//Calculate temperature in degrees from raw ADC value
+void calculate_real_temperature(uint16_t raw_value)
+{
+  float result = 66.843f;
+  result+= -0.029572f * (float)raw_value;
+  result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
+  APD_temperature = result;
+}
 
 void i2c_init(void)
 {
@@ -270,7 +280,11 @@ void i2c_init(void)
 
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
-  set_apd_voltage(APD_SHIGH_VOLTAGE);//testing only
+  //APD voltage is depending only from a temperature
+  float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
+  if (voltage_to_set > 119.0f)
+    voltage_to_set = 119.0f;
+  set_apd_voltage(voltage_to_set);//testing only
 }
 
 #else

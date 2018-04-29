@@ -9,13 +9,12 @@
 #define M_PI            3.1415926535 
 #endif
 
-
 #define OMEGA ((2.0 * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
 float sin_coef = 0.0;
 float cos_coef = 0.0;
 float g_coef = 0.0;//goertzel coefficient
-
+extern float  APD_temperature;//temperature value in deg
 
 void init_goertzel(void)
 {
@@ -102,7 +101,19 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
   }
 }
 
-//calctulase phase_correction value
+// Calculate phase_correction value
+#ifdef MODULE_701A
+
+int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
+{
+  //temperature compensation
+  float correction = 0.226974f * APD_temperature; //it is bad to use APD_temperature here
+  correction+= -0.0049827f * APD_temperature * APD_temperature;
+  return (int16_t)(-correction * PHASE_MULT);
+}
+
+#else
+
 int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
 {
   int32_t tmp_value = 0;
@@ -125,9 +136,9 @@ int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8
     //TODO - use CORR_360_DEG for MAX_ANGLE != 360
   }
   return (int16_t)tmp_value_d;
-  
-  //return (int16_t)tmp_value;
 }
+
+#endif
 
 //return 1 if phase is close to zero
 uint8_t phase_close_to_zero(int16_t phase)

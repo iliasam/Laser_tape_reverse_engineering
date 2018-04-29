@@ -27,6 +27,8 @@ extern volatile uint16_t adc_capture_buffer1[ADC_CAPURE_BUF_LENGTH];//signal+ref
 extern volatile uint16_t adc_capture_buffer2[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 extern volatile uint16_t adc_capture_buffer3[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 
+extern float  APD_temperature;//temperature value in deg
+
 int16_t zero_phase1_calibration = 0;//phase value for zero distance
 int16_t zero_phase2_calibration = 0;//phase value for zero distance
 int16_t zero_phase3_calibration = 0;//phase value for zero distance
@@ -125,14 +127,24 @@ void auto_handle_data_processing(void)
     result2 = process_captured_data((uint16_t*)adc_capture_buffer2);
     new_data_ready = 0;
   }
-  
 }
+
 
 ErrorStatus do_phase_calibration(void)
 {
   int16_t tmp_phase1 = 0;
   int16_t tmp_phase2 = 0;
   int16_t tmp_phase3 = 0;
+  
+#ifdef MODULE_701A
+  printf("Calib Start 701A\r\n");
+  enable_laser();
+  measure_enabled = 1;
+  
+  Delay_ms(400);
+  do_single_adc_measurements();//measure temperature
+  auto_switch_apd_voltage(result1.Amplitude);
+#else
   
   printf("Calib Start\r\n");
   enable_laser();
@@ -142,6 +154,7 @@ ErrorStatus do_phase_calibration(void)
   set_apd_voltage(APD_LOW_VOLTAGE);
   Delay_ms(100);
   do_single_adc_measurements();//measure temperature
+#endif  
 
   //set freq1
   pll_set_frequency_1();//162.5 + 162.505
@@ -150,19 +163,22 @@ ErrorStatus do_phase_calibration(void)
   //try to find best voltage for calibration
   if (calibration_set_voltage() == ERROR) return ERROR;
   
-  if (single_freq_calibration(&tmp_phase1) == ERROR) return ERROR;
+  if (single_freq_calibration(&tmp_phase1) == ERROR) 
+    return ERROR;
   printf("Zero Phase 1: %d\r\n", tmp_phase1);
   
   //set freq2
   pll_set_frequency_2();//191.5 + 191.505
   Delay_ms(100);
-  if (single_freq_calibration(&tmp_phase2) == ERROR) return ERROR;
+  if (single_freq_calibration(&tmp_phase2) == ERROR) 
+    return ERROR;
   printf("Zero Phase 2: %d\r\n", tmp_phase2);
   
   //set freq3
   pll_set_frequency_3();//193.5 + 193.505
   Delay_ms(100);
-  if (single_freq_calibration(&tmp_phase3) == ERROR) return ERROR;
+  if (single_freq_calibration(&tmp_phase3) == ERROR) 
+    return ERROR;
   printf("Zero Phase 3: %d\r\n", tmp_phase3);
   
   zero_phase1_calibration = tmp_phase1;
@@ -187,6 +203,7 @@ ErrorStatus calibration_set_voltage(void)
     return ERROR;
   } 
   
+#ifndef MODULE_701A  //If module is MODULE_701A, needed voltage is set earlier
   if (tmp_result.Amplitude < 200) 
   {
     //try to increase voltage
@@ -199,6 +216,7 @@ ErrorStatus calibration_set_voltage(void)
       set_apd_voltage(APD_LOW_VOLTAGE);//switch back to 80V
     }
   }
+#endif
   printf("Calib voltage:%d\r\n", (uint8_t)APD_current_voltage);
   
   return SUCCESS;
@@ -217,7 +235,7 @@ ErrorStatus single_freq_calibration(int16_t* result_phase)
   {
     tmp_result = do_capture();//measure signal
     
-    if (tmp_result.Amplitude < 50)
+    if (tmp_result.Amplitude < CALIBRATION_MIN_AMPLITUDE)
     {
       printf("Calib FAIL: Low Signal\r\n");
       return ERROR;
@@ -236,13 +254,16 @@ void do_distance_calculation(void)
 {
   //subtract zero phase offset
   int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
-  if (tmp_phase1 < 0) tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
+  if (tmp_phase1 < 0) 
+    tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
   
   int16_t tmp_phase2 = result2.Phase - zero_phase2_calibration;
-  if (tmp_phase2 < 0) tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
+  if (tmp_phase2 < 0) 
+    tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
   
   int16_t tmp_phase3 = result3.Phase - zero_phase3_calibration;
-  if (tmp_phase3 < 0) tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
+  if (tmp_phase3 < 0) 
+    tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
   
   dist_resut = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
 }
@@ -277,7 +298,8 @@ AnalyseResultType do_capture(void)
     reference_result = goertzel_analyse((uint16_t*)&adc_capture_buffer1[1]);//reference
     
     tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
-    if (tmp_phase < 0) tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
+    if (tmp_phase < 0) 
+      tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
     
     amplitude_summ+= (uint32_t)signal_result.Amplitude;
     phase_buffer[i] = tmp_phase;
@@ -289,8 +311,10 @@ AnalyseResultType do_capture(void)
   main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
   //phase correction can produce zero crossing
   //phase < 0 or > 360
-  if (main_result.Phase < 0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
-  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
+  if (main_result.Phase < 0) 
+    main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
+  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) 
+    main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
   
   return main_result;
 #endif
@@ -306,18 +330,35 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
   signal_result    = goertzel_analyse(&captured_data[0]);//signal
   reference_result = goertzel_analyse(&captured_data[1]);//reference
   tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
-  if (tmp_phase < 0) tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
+  if (tmp_phase < 0) 
+    tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
   main_result.Phase = tmp_phase;
   main_result.Amplitude = signal_result.Amplitude;
+  
   //calculate correction
   main_result.Phase = main_result.Phase + calculate_correction(APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
-  if (main_result.Phase < 0) main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
-  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
+  if (main_result.Phase < 0) 
+    main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
+  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) 
+    main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
   
   return main_result;
 }
 
 //Switching APD voltage by signal level - AGC
+#ifdef MODULE_701A
+
+void auto_switch_apd_voltage(uint16_t current_amplitude)
+{
+  //APD voltage is depending only from a temperature
+  float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
+  if (voltage_to_set > 119.0f)
+    voltage_to_set = 119.0f;
+  set_apd_voltage(voltage_to_set);//testing only
+}
+
+#else
+
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   if (APD_current_voltage < (APD_LOW_VOLTAGE + 2.0f))
@@ -334,6 +375,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
       set_apd_voltage(APD_LOW_VOLTAGE);//try to decrease voltage
   }
 }
+#endif
 
 //Write calibration data to flash
 void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t calib_phase3)

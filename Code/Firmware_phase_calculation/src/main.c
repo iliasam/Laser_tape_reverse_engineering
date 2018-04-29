@@ -18,6 +18,7 @@
 #include <stdlib.h>
 
 uint16_t APD_temperature_raw = 0;//raw temperature value
+float  APD_temperature = 0.0;//temperature value in deg
 float  APD_current_voltage = 80;//value in volts
 
 AnalyseResultType result1;

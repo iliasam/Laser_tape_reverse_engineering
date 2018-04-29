@@ -1,8 +1,9 @@
 # laser_tape_reverse_engineering 
 
-This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.
+This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.  
+Supported module types are: "512A" and "701A".
 
-Article in Russan: https://habrahabr.ru/post/327642
+Article in Russian: https://habr.com/post/327642/
 
 Video: https://youtu.be/bJaUrZ7ZMj4
 
