@@ -4,6 +4,8 @@
 #ifndef _CAPTURE_CONFIGURE_H
 #define _CAPTURE_CONFIGURE_H
 
+//250 -> ~57Hz distance measurements per second
+//120 -> ~100Hz
 #define POINTS_TO_SAMPLE        250  //number of sampled points in single capture - key parameter of this program
 
 #define ADC_CAPURE_BUF_LENGTH   (POINTS_TO_SAMPLE * 2)//signal points + reference points

@@ -8,5 +8,10 @@ Simultaneous data capture and data processing is used.
 
 UART data example:
 DIST;01574;AMP;0993;TEMP;1343;VOLT;080\r\n
+DIST - distance in mm,  
+AMP - received signal amplitude  
+TEMP - raw temperature  
+VOLT - APD voltage
+
 String length is constant.
 UART baudrate - 256000.
