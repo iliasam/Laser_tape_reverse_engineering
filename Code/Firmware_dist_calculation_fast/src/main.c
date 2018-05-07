@@ -40,6 +40,8 @@ int main()
   configure_pll();
   Delay_ms(100);
   
+  //short_beep();
+  
   pll_set_frequency_1();//162.5 + 162.505
   
   printf("Start\r\n");
@@ -57,6 +59,11 @@ int main()
     {
       do_phase_calibration();
       calibration_needed = 0;
+    }
+    
+    if (check_calibration_button())
+    {
+      calibration_needed = 1;
     }
   }
 }

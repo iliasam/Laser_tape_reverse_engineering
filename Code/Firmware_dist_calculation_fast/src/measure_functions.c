@@ -136,6 +136,8 @@ ErrorStatus do_phase_calibration(void)
   int16_t tmp_phase2 = 0;
   int16_t tmp_phase3 = 0;
   
+  short_beep();
+  
 #ifdef MODULE_701A
   printf("Calib Start 701A\r\n");
   enable_laser();
@@ -186,6 +188,8 @@ ErrorStatus do_phase_calibration(void)
   zero_phase3_calibration = tmp_phase3;
   
   write_data_to_flash(tmp_phase1, tmp_phase2, tmp_phase3);
+  
+  short_beep();
   
   printf("Calib Done\r\n");
   return SUCCESS;

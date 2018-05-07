@@ -7,6 +7,11 @@
 #include "stm32f10x_i2c.h"
 #include "delay_us_timer.h"
 
+//In ms
+#define BEEP_DURATION   300
+//In us
+#define BEEP_PERIOD     500
+
 extern uint16_t APD_temperature_raw;
 extern float  APD_temperature;//temperature value in deg
 extern float  APD_current_voltage;//value in volts
@@ -32,11 +37,18 @@ void init_gpio(void)
    
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
   
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+  
   GPIO_InitStructure.GPIO_Pin   = BEEP_PIN;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
   GPIO_Init(BEEP_PORT, &GPIO_InitStructure);
   GPIO_ResetBits(BEEP_PORT, BEEP_PIN);
+  
+  //Connect to Vdd this line
+  GPIO_InitStructure.GPIO_Pin   = KEY_COM_PIN;
+  GPIO_Init(KEY_COM_PORT, &GPIO_InitStructure);
+  GPIO_SetBits(KEY_COM_PORT, KEY_COM_PIN);
   
   GPIO_SetBits(LASER_PORT, LASER_POWER_PIN);
   GPIO_InitStructure.GPIO_Pin   = LASER_POWER_PIN;
@@ -55,6 +67,10 @@ void init_gpio(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AIN;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
+  
+  GPIO_InitStructure.GPIO_Pin   = KEY_4_PIN;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPD;
+  GPIO_Init(KEY_4_PORT, &GPIO_InitStructure);
 }
 
 void init_dac(void)
@@ -315,6 +331,26 @@ void i2c_init(void)
     I2C_SoftwareResetCmd(PLL_I2C, ENABLE);
     I2C_SoftwareResetCmd(PLL_I2C, DISABLE);
   }
+}
+
+void short_beep(void)
+{
+  for (uint16_t i = 0; i < (1000 / BEEP_PERIOD * BEEP_DURATION); i++)
+  {
+    GPIO_SetBits(BEEP_PORT, BEEP_PIN);
+    dwt_delay(BEEP_PERIOD/2); 
+    GPIO_ResetBits(BEEP_PORT, BEEP_PIN);
+    dwt_delay(BEEP_PERIOD/2); 
+  }
+}
+
+// Return 1 if calibration key is pressed
+uint8_t check_calibration_button(void)
+{
+  if (GPIO_ReadInputDataBit(KEY_4_PORT, KEY_4_PIN) == (uint8_t)Bit_SET)
+    return 1;
+  else
+    return 0;
 }
 
 

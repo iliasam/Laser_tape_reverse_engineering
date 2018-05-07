@@ -2,6 +2,7 @@
 
 This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.  
 Supported module types are: "512A" and "701A".
+Module dimensions: 25x13x50 mm.  
 
 Article in Russian: https://habr.com/post/327642/
 

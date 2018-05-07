@@ -70,6 +70,12 @@
 #define ANALOG_POWER_PIN        GPIO_Pin_12//0 - enable analog power (APD, PLL)
 #define ANALOG_POWER_PORT       GPIOB
 
+#define KEY_COM_PIN             GPIO_Pin_8
+#define KEY_COM_PORT            GPIOA
+
+#define KEY_4_PIN               GPIO_Pin_15
+#define KEY_4_PORT              GPIOA
+
 void init_all_hardware(void);
 void init_gpio(void);
 void init_sys_clock(void);
@@ -90,5 +96,8 @@ void start_apd_voltage(void);
 
 void set_apd_voltage(float new_voltage);
 void calculate_real_temperature(uint16_t raw_value);
+
+void short_beep(void);
+uint8_t check_calibration_button(void);
 
 #endif
