@@ -1,6 +1,6 @@
 # laser_tape_reverse_engineering 
 
-This project describes my work about reverse engineering electronics of cheap "X-40" laser tape.  
+This project describes my work about reverse engineering electronics of cheap "X-40" laser tape measure.  
 Supported module types are: "512A" and "701A".
 Module dimensions: 25x13x50 mm.  
 
@@ -9,7 +9,7 @@ Article in Russian: https://habr.com/post/327642/
 Video: https://youtu.be/bJaUrZ7ZMj4
 
 Steps that I have done:  
-- Fully reverse engineered schematic of laser tape.   
+- Fully reverse engineered schematic of laser tape measure.   
 - Captured data packets at I2C bus with logic analyzer.  
 - Decoded that packets and get values of laser modulation frequencies.  
 - Write own firmware for that captures low frequency signal and send it to PC.  
@@ -17,11 +17,11 @@ Steps that I have done:
 - Main result: Write own firmware ('Firmware_dist_calculation_fast") that calculates distance to object.  
 - Write C# PC utilities to process and show results.
 
-Main parts of laser tape are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).  
-Laser tape structure schematic:  
+Main parts of laser tape measure are STM32F100C8T6 MCU, Si5351 dual PLL, APD (unknown type).  
+Laser tape measure structure schematic:  
 ![Alt text](Schematic/schematic_structure.png?raw=true "Image")  
   
-Loading firmware to laser tape's MCU.  
+Loading firmware to laser tape measure MCU.  
 Connect pins 7 and 8 at keyboard connector (or constantly press "S1" key). That needed to enable laser tape DC-DC converter.  
 You need any STM32 programmer that has NRST pin.  
 Connect SWCLK, SWDIO, NRST, GND from laser tape to programmer.  
@@ -48,6 +48,8 @@ UART commands ("Firmware_dist_calculation_fast"):
 "D" - disable laser and measurement process.  
 "C" - start zero distance calibration. You need to run zero distance calibration at the first start. Place any white object at the distance > 10cm from the laser tape before calibration.  
 
-
 To get better results, small board with APD must be closed from external light.
 
+Article about connecting laser rangefinder module to the Arduino:  
+https://create.arduino.cc/projecthub/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849?ref=user&ref_id=485160&offset=0  
+Video: https://youtu.be/FA4mfvgpOQQ  
