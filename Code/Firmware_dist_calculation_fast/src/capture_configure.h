@@ -1,8 +1,18 @@
 #include "stm32f10x.h"
+#include "main.h"
 #include "analyse.h"
+
 
 #ifndef _CAPTURE_CONFIGURE_H
 #define _CAPTURE_CONFIGURE_H
+
+#ifdef FAST_CAPTURE
+  #define ADC_TRIGGER_FREQ      250000//sampling frequency, Hz
+  #define ADC_SAMPLING_TIME     ADC_SampleTime_1Cycles5
+#else
+  #define ADC_TRIGGER_FREQ      50000//sampling frequency, Hz
+  #define ADC_SAMPLING_TIME     ADC_SampleTime_41Cycles5
+#endif
 
 //250 -> ~57Hz distance measurements per second
 //120 -> ~100Hz
@@ -12,7 +22,6 @@
 
 #define TIMER1_FREQ             24000000 //Hz
 #define TIMER1_DIV              6
-#define ADC_TRIGGER_FREQ        50000//sampling frequency, Hz
 #define TIMER1_PERIOD           (uint16_t)(TIMER1_FREQ / TIMER1_DIV / ADC_TRIGGER_FREQ)
 
 #define SIGNAL_FREQ             5000 //APD signal and reference signal frequency, Hz

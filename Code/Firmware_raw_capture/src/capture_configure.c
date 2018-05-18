@@ -64,8 +64,14 @@ void init_adc_capture(void)
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
   
+
+#ifdef FAST_CAPTURE
+  ADC_RegularChannelConfig(ADC1, ADC_SIGNAL, 1, ADC_SampleTime_1Cycles5);
+  ADC_RegularChannelConfig(ADC1, ADC_REF_CHANNEL, 2, ADC_SampleTime_1Cycles5);
+#else
   ADC_RegularChannelConfig(ADC1, ADC_SIGNAL, 1, ADC_SampleTime_13Cycles5);
   ADC_RegularChannelConfig(ADC1, ADC_REF_CHANNEL, 2, ADC_SampleTime_13Cycles5);
+#endif
   
   ADC_ExternalTrigConvCmd(ADC1, ENABLE);
   

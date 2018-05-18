@@ -17,7 +17,7 @@ void init_adc_capture(void);
 void init_adc_capture_dma(void);
 void init_adc_capture_timer(void);
 
-#define ADC_SAMPLING_TIME ADC_SampleTime_41Cycles5
+
 
 
 void prepare_capture(void)
@@ -74,6 +74,7 @@ void init_adc_capture(void)
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
   
+
   ADC_RegularChannelConfig(ADC1, ADC_SIGNAL, 1, ADC_SAMPLING_TIME);
   ADC_RegularChannelConfig(ADC1, ADC_REF_CHANNEL, 2, ADC_SAMPLING_TIME);
   

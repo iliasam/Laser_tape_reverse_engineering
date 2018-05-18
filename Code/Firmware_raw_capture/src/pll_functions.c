@@ -133,6 +133,13 @@ void pll_set_frequency_4(void)
   pll_change_freq(16, 0, 4, 1250);
 }
 
+
+void pll_set_frequency_5(void)
+{
+  pll_disable_divider();
+  pll_change_freq(30, 1200, 1203, 1250);
+}
+
 void pll_enable_divider(void)
 {
   //(DIV = 1) - 16 - div 16

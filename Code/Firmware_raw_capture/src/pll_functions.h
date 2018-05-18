@@ -15,5 +15,6 @@ void pll_set_frequency_1(void);
 void pll_set_frequency_2(void);
 void pll_set_frequency_3(void);
 void pll_set_frequency_4(void);
+void pll_set_frequency_5(void);
 
 #endif
