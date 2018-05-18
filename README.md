@@ -1,19 +1,21 @@
 # laser_tape_reverse_engineering 
 
-This project describes my work about reverse engineering electronics (laser rangrfinder module) of cheap "X-40" laser tape measure.  
-Supported rangefinder module types are: "512A" and "701A".  Moule "703A" is not tested (it's look similiar to "701A").  
+This project describes my work about reverse engineering electronics (laser rangefinder module) of a cheap "X-40" laser tape measure.  
+I create my own firmware that allow to use this module for DIY purposes.  
+Supported module types are: "512A" and "701A".  Module "703A" is not tested (it's look similar to a "701A").  
 Module dimensions: 25x13x50 mm.  
 
 Big article in Russian: https://habr.com/post/327642/  
+Google translated: [Link](http://translate.google.com/translate?sl=ru&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=https%3A%2F%2Fhabr.com%2Fpost%2F327642%2F&edit-text=).  
 Another project page: https://hackaday.io/project/25515-cheap-laser-tape-measure-reverse-engineering  
 
 Steps that I have done:  
-- Fully reverse engineered schematic of laser tape measure.   
+- Fully reverse engineered schematic of the laser tape measure.   
 - Captured data packets at I2C bus with logic analyzer.  
 - Decoded that packets and get values of laser modulation frequencies.  
 - Create my own firmware that captures low frequency signal and send it to PC.  
 - Create my own firmware that captures signal and processing if using Goertzel algorithm. Phase difference results are send to the PC.  
-- Main result: Create my own firmware ('Firmware_dist_calculation_fast") that calculates distance to the object.  
+- Main result: Create my own firmware ("Firmware_dist_calculation_fast") that calculates distance to the object.  
 - Write C# PC utilities to process and show results.  
 
 Video (testing rangefinder module): https://youtu.be/bJaUrZ7ZMj4  
@@ -23,7 +25,7 @@ Laser tape measure structure schematic:
 ![Alt text](Schematic/schematic_structure.png?raw=true "Image")  
   
 Article about connecting laser rangefinder module to the Arduino:  
-https://www.hackster.io/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849
+https://www.hackster.io/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849  
 Video: https://youtu.be/FA4mfvgpOQQ  
 
 
@@ -34,6 +36,7 @@ AMP  - signal amplitude.
 TEMP - APD temperature (raw ADC value).  
 VOLT - APD voltage. 
 String length is constant.  
+Distance data are transmitted continuously.  
 UART baudrate - 256000.  
 
 UART commands ("Firmware_dist_calculation_fast"):  
