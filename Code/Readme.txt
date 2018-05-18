@@ -1,21 +1,24 @@
-Important notice - all this firmware has been tested only with 512A hardware!
+Important notice - all this firmware has been tested only with 512A and 701A hardware!
+All this firmware is written for the STM32 MCU of the rangefindef module. 
 
-Firmware_dist_calculation_fast:  firmware for laser tape MCU.
+"Firmware_dist_calculation_fast":
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, 
-calculate distance in mm, send results to UART.
+calculate distance in mm, send results to the UART.
 
 **************************************************************************************************
 
-Firmware_dist_calculation_simple:  firmware for laser tape MCU.
+"Firmware_dist_calculation_simple":
+Only "512A" module is supported.
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, 
-calculate distance in mm, send results to UART.
+calculate distance in mm, send results to the UART.
 This program uses plain data capture algorithm, so it's not fast.
 
 **************************************************************************************************
 
-Firmware_raw_capture: firmware for laser tape MCU. Program captures data from ADC and send it to UART.
+"Firmware_raw_capture":
+Program captures data from ADC and send it to the UART.
 
 **************************************************************************************************
 
-Firmware_phase_calculation: firmware for laser tape MCU.
+"Firmware_phase_calculation":
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, send results to UART.
