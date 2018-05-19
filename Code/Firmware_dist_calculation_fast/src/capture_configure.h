@@ -9,14 +9,17 @@
 #ifdef FAST_CAPTURE
   #define ADC_TRIGGER_FREQ      250000//sampling frequency, Hz
   #define ADC_SAMPLING_TIME     ADC_SampleTime_1Cycles5
+  #define POINTS_TO_SAMPLE      150
 #else
   #define ADC_TRIGGER_FREQ      50000//sampling frequency, Hz
   #define ADC_SAMPLING_TIME     ADC_SampleTime_41Cycles5
+  
+  //250 -> ~57Hz distance measurements per second
+  //120 -> ~100Hz
+  #define POINTS_TO_SAMPLE      250  //number of sampled points in single capture - key parameter of this program
 #endif
 
-//250 -> ~57Hz distance measurements per second
-//120 -> ~100Hz
-#define POINTS_TO_SAMPLE        250  //number of sampled points in single capture - key parameter of this program
+#define SWITCH_DELAY            300 //time in uS to switch frequency
 
 #define ADC_CAPURE_BUF_LENGTH   (POINTS_TO_SAMPLE * 2)//signal points + reference points
 

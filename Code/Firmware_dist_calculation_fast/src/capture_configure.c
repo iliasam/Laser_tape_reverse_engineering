@@ -19,7 +19,6 @@ void init_adc_capture_timer(void);
 
 
 
-
 void prepare_capture(void)
 {
   init_adc_capture_timer();
@@ -134,6 +133,7 @@ void start_adc_capture(uint16_t* data_ptr)
   capture_done = 0;
   ADC_Cmd(ADC1, ENABLE);
   TIM_Cmd(TIM1, ENABLE);
+  //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
 }
 
 

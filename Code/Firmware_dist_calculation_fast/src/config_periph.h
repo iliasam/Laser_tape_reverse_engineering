@@ -76,6 +76,10 @@
 #define KEY_4_PIN               GPIO_Pin_15
 #define KEY_4_PORT              GPIOA
 
+//Now used as a out test pin
+#define KEY_3_PIN               GPIO_Pin_11
+#define KEY_3_PORT              GPIOA
+
 void init_all_hardware(void);
 void init_gpio(void);
 void init_sys_clock(void);

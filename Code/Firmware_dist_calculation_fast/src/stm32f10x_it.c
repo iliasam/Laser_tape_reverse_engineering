@@ -23,6 +23,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "main.h"
+#include "config_periph.h"
 #include "measure_functions.h"
 
 static __IO uint32_t uwTick;//taken from HAL
@@ -160,6 +161,7 @@ void DMA1_Channel1_IRQHandler(void)
   {
     DMA_ClearITPendingBit(DMA1_IT_TC1);
     capture_done = 1;
+    //GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     
     if (dma_state == DMA_FREQ1_CAPTURING) dma_state = DMA_FREQ1_DONE;
     else if (dma_state == DMA_FREQ2_CAPTURING) dma_state = DMA_FREQ2_DONE;

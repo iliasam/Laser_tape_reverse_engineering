@@ -50,6 +50,10 @@ void init_gpio(void)
   GPIO_Init(KEY_COM_PORT, &GPIO_InitStructure);
   GPIO_SetBits(KEY_COM_PORT, KEY_COM_PIN);
   
+  GPIO_InitStructure.GPIO_Pin   = KEY_3_PIN;
+  GPIO_Init(KEY_3_PORT, &GPIO_InitStructure);
+  GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
+  
   GPIO_SetBits(LASER_PORT, LASER_POWER_PIN);
   GPIO_InitStructure.GPIO_Pin   = LASER_POWER_PIN;
   GPIO_Init(LASER_PORT, &GPIO_InitStructure);
@@ -321,7 +325,11 @@ void i2c_init(void)
   I2C_InitStructure.I2C_OwnAddress1 = 0;
   I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
   I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+#ifdef FAST_CAPTURE
+  I2C_InitStructure.I2C_ClockSpeed = 1000000;//CAN BE NOT STABLE!
+#else
   I2C_InitStructure.I2C_ClockSpeed = 400000;
+#endif
   
   I2C_Cmd(PLL_I2C, ENABLE);
   I2C_Init(PLL_I2C, &I2C_InitStructure);
