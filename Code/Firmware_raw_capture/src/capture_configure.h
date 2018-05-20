@@ -11,7 +11,7 @@
 #define TIMER1_DIV              6
 
 #ifdef FAST_CAPTURE
-  #define ADC_TRIGGER_FREQ        250000
+  #define ADC_TRIGGER_FREQ        350000
 #else
   #define ADC_TRIGGER_FREQ        50000
 #endif

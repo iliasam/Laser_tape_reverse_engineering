@@ -1,0 +1,21 @@
+#include "stm32f10x.h"
+
+#ifndef _PLL_FUNC_H
+#define _PLL_FUNC_H
+
+#define MSNA_PLL_START_REG (26)
+#define MSNB_PLL_START_REG (34)
+
+void configure_pll(void);
+
+void PLL_send_reset(void);
+void PLL_send_enable_output(void);
+
+void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg);
+void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div);
+
+void pll_set_frequency_1(void);
+void pll_set_frequency_2(void);
+void pll_set_frequency_3(void);
+
+#endif

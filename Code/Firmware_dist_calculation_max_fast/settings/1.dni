@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=1008151777
+Checksum=-1925968622
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 0
@@ -76,6 +76,8 @@ ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
 [array_types]
 Fmt0=uint16_t[1024]	3	0
+[watch_formats]
+Fmt0={W}42:APD_current_voltage	0	9
 [Trace2]
 Enabled=0
 ShowSource=0
