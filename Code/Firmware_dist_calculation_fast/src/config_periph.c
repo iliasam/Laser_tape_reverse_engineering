@@ -50,9 +50,11 @@ void init_gpio(void)
   GPIO_Init(KEY_COM_PORT, &GPIO_InitStructure);
   GPIO_SetBits(KEY_COM_PORT, KEY_COM_PIN);
   
+#ifdef DEBUG_PIN
   GPIO_InitStructure.GPIO_Pin   = KEY_3_PIN;
   GPIO_Init(KEY_3_PORT, &GPIO_InitStructure);
   GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
+#endif
   
   GPIO_SetBits(LASER_PORT, LASER_POWER_PIN);
   GPIO_InitStructure.GPIO_Pin   = LASER_POWER_PIN;

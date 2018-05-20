@@ -137,7 +137,7 @@ void pll_set_frequency_4(void)
 void pll_set_frequency_5(void)
 {
   pll_disable_divider();
-  pll_change_freq(30, 1200, 1203, 1250);
+  pll_change_freq(30, 1200, 1202, 1250);
 }
 
 void pll_enable_divider(void)

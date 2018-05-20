@@ -130,9 +130,9 @@ void auto_handle_data_processing(void)
   }
   else if ((dma_state == DMA_FREQ2_CAPTURING) || (dma_state == DMA_FREQ2_DONE)) 
   {
-    GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
+    //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
     result1 = process_captured_data((uint16_t*)adc_capture_buffer1);
-    GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
+    //GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     new_data_ready = 0;
   }
   else if ((dma_state == DMA_FREQ3_CAPTURING) || (dma_state == DMA_FREQ3_DONE)) 
