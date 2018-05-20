@@ -73,7 +73,9 @@ void auto_handle_capture(void)
   }
   else if (dma_state == DMA_FREQ1_DONE)
   {
+    GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
     pll_set_frequency_2();
+    GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     dwt_delay(SWITCH_DELAY);
     captured_data_t* tmp_data_p = switch_to_next_buffer();
     tmp_data_p->frequency_code = 2;
@@ -120,10 +122,10 @@ void auto_handle_data_processing(void)
   }
   else if (dma_state == DMA_FREQ2_CAPTURING) 
   {
-    GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
+    //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
     uint16_t* tmp_buf = get_freq_1_data();
     result1 = process_captured_data(tmp_buf);
-    GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
+    //GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     new_data_ready = 0;
   }
 }

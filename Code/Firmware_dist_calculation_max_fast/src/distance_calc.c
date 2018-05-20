@@ -7,7 +7,7 @@
 
 #define DIST_MULT       32 //resulting distance is multiplyed to this walue
 
-#define WAVE_L1         55293 //wavelength for 173.5Mhz in mm * 32
+#define WAVE_L1         54897 //wavelength for 174.75Mhz in mm * 32
 #define WAVE_L2         49578 //wavelength for 193.5Mhz in mm * 32
 
 #define BRUTFOCRCE_STEPS    6

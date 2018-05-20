@@ -17,5 +17,6 @@ void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, 
 void pll_set_frequency_1(void);
 void pll_set_frequency_2(void);
 void pll_set_frequency_3(void);
+void pll_set_full_frequency_1(void);
 
 #endif

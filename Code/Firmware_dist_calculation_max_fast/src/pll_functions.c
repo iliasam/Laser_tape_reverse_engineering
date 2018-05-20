@@ -11,6 +11,9 @@ void PLL_send_fanout_enable(void);
 void PLL_send_reset(void);
 void PLL_send_data1(void);
 
+void set_particle_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg);
+void pll_particle_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div);
+
 const uint8_t pll_data_array_dis_output[2] = {3, 0xff};//0-enable
 const uint8_t pll_data_array_en_output[2] =  {3, 0xFA};
 
@@ -75,6 +78,31 @@ void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
   PLL_send_data2(config_reg, params, 8);
 }
 
+//config_reg - number, from which configuration starts
+//for maximizing speed
+void set_particle_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
+{
+  uint32_t p1, p2, p3;
+  uint8_t params[8];
+  memset(params, 0, 8);
+  
+  //capculate "p" coefficuents
+  p3  = c;
+  p2  = (128 * b) % c;
+  p1  = 128 * a;
+  p1 += (128 * b / c);
+  p1 -= 512;
+  
+  //0-2 not changed
+  params[3] = (uint8_t)((p1 >> 8) & 0xFF);//MSN_P1[15:8]
+  params[4] = (uint8_t)( p1  & 0xFF);//MSN_P1[7:0]
+  params[5] = (uint8_t)((p3 >> 12) & 0xF0) + (uint8_t)((p2 >> 16) & 0x0F);//MSN_P3[19:16] + MSN_P2[19:16]
+  params[6] = (uint8_t)((p2 >> 8) & 0xFF);//MSN_P2[15:8]
+  params[7] = (uint8_t)( p2  & 0xFF);//MSN_P2[7:0]
+  
+  PLL_send_data2(config_reg + 3, &params[3], (8-3));
+}
+
 //pll_mult - A
 //plla_coef/pllb_coef - B
 //pll_div - C
@@ -82,22 +110,35 @@ void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, 
 {
     set_pll_coeff(pll_mult, plla_coef, pll_div, MSNA_PLL_START_REG);
     set_pll_coeff(pll_mult, pllb_coef, pll_div, MSNB_PLL_START_REG);
-    //PLL_send_reset();
-    //PLL_send_enable_output();
+}
+
+//for maximizing speed
+void pll_particle_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div)
+{
+    set_particle_pll_coeff(pll_mult, plla_coef, pll_div, MSNA_PLL_START_REG);
+    set_particle_pll_coeff(pll_mult, pllb_coef, pll_div, MSNB_PLL_START_REG);
 }
 
 #ifdef DUAL_FREQUENCY
 
-//173.5 + 173.51
+//Called at startup
+void pll_set_full_frequency_1(void)
+{
+  pll_change_freq(27, 1200, 1202, 1250);//174.75 + 174.76
+}
+
+//174.75 + 174.76
 void pll_set_frequency_1(void)
 {
-  pll_change_freq(27, 950, 952, 1250);
+  //pll_change_freq(27, 1200, 1202, 1250);//174.75 + 174.76
+  pll_particle_change_freq(27, 1200, 1202, 1250);//174.75 + 174.76
 }
 
 //193.5 + 193.51
 void pll_set_frequency_2(void)
 {
-  pll_change_freq(30, 1200, 1202, 1250);
+  //pll_change_freq(30, 1200, 1202, 1250);
+  pll_particle_change_freq(30, 1200, 1202, 1250);
 }
 
 #else

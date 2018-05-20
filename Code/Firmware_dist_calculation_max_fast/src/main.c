@@ -41,7 +41,7 @@ int main()
   
   //short_beep();
   
-  pll_set_frequency_1();//162.5 + 162.505
+  pll_set_full_frequency_1();
   
   printf("Start\r\n");
   while(1) 
