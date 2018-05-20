@@ -7,9 +7,8 @@
 
 #define DIST_MULT       32 //resulting distance is multiplyed to this walue
 
-#define WAVE_L1         59036 //wavelength for 162.5Mhz in mm * 32
-#define WAVE_L2         50095 //wavelength for 191.5Mhz in mm * 32
-#define WAVE_L3         49578 //wavelength for 193.5Mhz in mm * 32
+#define WAVE_L1         55293 //wavelength for 173.5Mhz in mm * 32
+#define WAVE_L2         49578 //wavelength for 193.5Mhz in mm * 32
 
 #define BRUTFOCRCE_STEPS    6
 
@@ -24,14 +23,15 @@ int32_t dual_N_distance_calculation(int16_t phaseA, int16_t phaseB, int32_t wave
 int32_t brutforce_dist_calculation(int16_t phaseA, int16_t phaseB, int32_t wavelengthA,  int32_t wavelengthB, int16_t startN, int16_t stopN);
 uint8_t check_table_values(int16_t A, int16_t B, int16_t startN);
 
-int32_t triple_dist_calculaton(int16_t phase1, int16_t phase2, int16_t phase3)
+//Caclulate dastance from phase
+int32_t dual_dist_calculaton(int16_t phase1, int16_t phase2)
 {
   int32_t result_dist = 0;
   
-  if (phase_close_to_zero(phase1) && phase_close_to_zero(phase2) && phase_close_to_zero(phase3))
+  if (phase_close_to_zero(phase1) && phase_close_to_zero(phase2))
   {
     //printf("Zero mode\r\n");
-    int32_t dist1, dist2, dist3;
+    int32_t dist1, dist2;
     //close to zero
     if (phase1 < (HMAX_ANGLE * PHASE_MULT))
       dist1 = calculate_distance(phase1, WAVE_L1, 0);
@@ -43,23 +43,20 @@ int32_t triple_dist_calculaton(int16_t phase1, int16_t phase2, int16_t phase3)
     else
       dist2 = calculate_distance(phase2, WAVE_L2, -1);
     
-    if (phase3 < (HMAX_ANGLE * PHASE_MULT))
-      dist3 = calculate_distance(phase3, WAVE_L3, 0);
-    else
-      dist3 = calculate_distance(phase3, WAVE_L3, -1);
-    
-    result_dist = (dist1 + dist2 + dist3)/ (3 * DIST_MULT * 2);
+    result_dist = (dist1 + dist2)/ (2 * DIST_MULT * 2);
     
     return result_dist;
   }
   
+  /*
   int32_t coarse_dist = dual_N_distance_calculation(phase2, phase3, WAVE_L2,  WAVE_L3);
   //calculate bounds for period number for freq1
   int16_t startN = (int)(coarse_dist / WAVE_L1) - 3;
   if (startN < 0) startN = 0;
   int16_t stopN = startN + BRUTFOCRCE_STEPS;
+  */
   
-  result_dist = brutforce_dist_calculation(phase1, phase2, WAVE_L1,  WAVE_L2, startN, stopN) / (DIST_MULT * 2);// /2- double wave path
+  result_dist = brutforce_dist_calculation(phase1, phase2, WAVE_L1,  WAVE_L2, 0, 5) / (DIST_MULT * 2);// /2- double wave path
   
   return result_dist;
 }

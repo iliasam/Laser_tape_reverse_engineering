@@ -111,7 +111,7 @@ void auto_handle_data_processing(void)
     
     uint16_t* tmp_buf = get_freq_2_data();
     result2 = process_captured_data(tmp_buf);
-    //do_distance_calculation();
+    do_distance_calculation();
     
     result_length = sprintf(result_str, "%05d;%04d\r\n", dist_resut, result1.Amplitude);
 
@@ -302,7 +302,7 @@ ErrorStatus single_freq_calibration(int16_t* result_phase)
   return SUCCESS;
 }
 
-//Take 3 phases and calculate distance
+//Take 2 phases and calculate distance
 void do_distance_calculation(void)
 {
   //subtract zero phase offset
@@ -314,7 +314,7 @@ void do_distance_calculation(void)
   if (tmp_phase2 < 0) 
     tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
   
-  //dist_resut = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
+  dist_resut = dual_dist_calculaton(tmp_phase1, tmp_phase2);
 }
 
 //Phase measurement for a single freqency
