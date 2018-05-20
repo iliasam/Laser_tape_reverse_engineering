@@ -4,6 +4,9 @@
 //512A board revision if not selected
 #define MODULE_701A
 
+//Testing
+//#define FAST_CAPTURE
+
 void Delay_ms(uint32_t ms);
 void uart_send_data(uint8_t* data, uint16_t length);
 

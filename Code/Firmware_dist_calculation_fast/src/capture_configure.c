@@ -17,7 +17,6 @@ void init_adc_capture(void);
 void init_adc_capture_dma(void);
 void init_adc_capture_timer(void);
 
-#define ADC_SAMPLING_TIME ADC_SampleTime_41Cycles5
 
 
 void prepare_capture(void)
@@ -74,6 +73,7 @@ void init_adc_capture(void)
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
   
+
   ADC_RegularChannelConfig(ADC1, ADC_SIGNAL, 1, ADC_SAMPLING_TIME);
   ADC_RegularChannelConfig(ADC1, ADC_REF_CHANNEL, 2, ADC_SAMPLING_TIME);
   
@@ -133,6 +133,7 @@ void start_adc_capture(uint16_t* data_ptr)
   capture_done = 0;
   ADC_Cmd(ADC1, ENABLE);
   TIM_Cmd(TIM1, ENABLE);
+  //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
 }
 
 

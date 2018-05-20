@@ -9,7 +9,13 @@
 
 #define TIMER1_FREQ             24000000
 #define TIMER1_DIV              6
-#define ADC_TRIGGER_FREQ        50000
+
+#ifdef FAST_CAPTURE
+  #define ADC_TRIGGER_FREQ        250000
+#else
+  #define ADC_TRIGGER_FREQ        50000
+#endif
+
 #define TIMER1_PERIOD           (uint16_t)(TIMER1_FREQ / TIMER1_DIV / ADC_TRIGGER_FREQ)
 
 void prepare_capture(void);

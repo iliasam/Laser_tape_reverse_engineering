@@ -12,7 +12,7 @@
 
 #define CALIBRATION_REPEAT_NUMBER       64  //number of averaging points for calibration - for single freqency
 #define REPEAT_NUMBER                   3   //number of averaging points
-#define SWITCH_DELAY                    300 //time in uS to switch frequency
+
 
 AnalyseResultType result1;
 AnalyseResultType result2;
@@ -48,9 +48,10 @@ volatile uint32_t delta_time = 0;
 //Auto switch capture process
 void auto_handle_capture(void)
 {
-  static uint16_t* result_ptr;//pointer to data array (adc_capture_bufferX) with data to be processed
+  static uint16_t* result_ptr;//pointer to the data array (adc_capture_bufferX) with data to be processed
   
-  if (new_data_ready == 1) return;//don't allowed to switch capture when previous data not processed
+  if (new_data_ready == 1) 
+    return;//it's not allowed to switch capture when previous data are not processed
   
   if (dma_state == DMA_NO_DATA)
   {    
@@ -65,8 +66,11 @@ void auto_handle_capture(void)
   else if (dma_state == DMA_FREQ1_DONE)
   {
     //ready to switch to freq2
+    //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
     pll_set_frequency_2();//191.5 + 191.505
+    //GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     dwt_delay(SWITCH_DELAY);
+    
     result_ptr = (uint16_t*)adc_capture_buffer2;
     
     start_adc_capture(result_ptr);//freq2
@@ -113,13 +117,22 @@ void auto_handle_data_processing(void)
     result3 = process_captured_data((uint16_t*)adc_capture_buffer3);
     do_distance_calculation();
     
-    result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
+#ifdef FAST_CAPTURE
+  //result_length = sprintf(result_str, "DIST;%05d;AMP;%04d\r\n", dist_resut, result1.Amplitude);
+    result_length = sprintf(result_str, "%05d;%04d\r\n", dist_resut, result1.Amplitude);
+#else
+  result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
+#endif
+    
+
     uart_dma_start_tx(result_str, result_length);//attention - new transmission interrupts previous one. 
     new_data_ready = 0;
   }
   else if ((dma_state == DMA_FREQ2_CAPTURING) || (dma_state == DMA_FREQ2_DONE)) 
   {
+    //GPIO_SetBits(KEY_3_PORT, KEY_3_PIN);
     result1 = process_captured_data((uint16_t*)adc_capture_buffer1);
+    //GPIO_ResetBits(KEY_3_PORT, KEY_3_PIN);
     new_data_ready = 0;
   }
   else if ((dma_state == DMA_FREQ3_CAPTURING) || (dma_state == DMA_FREQ3_DONE)) 

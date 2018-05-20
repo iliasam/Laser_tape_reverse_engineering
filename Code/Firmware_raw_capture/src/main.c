@@ -113,6 +113,11 @@ void process_rx_data(uint8_t data)
         pll_set_frequency_4();
         break;
       }
+      case (uint8_t)'1'://Set PLL freq4 - high modulation
+      {
+        pll_set_frequency_5();
+        break;
+      }
     
     default: break;
   }

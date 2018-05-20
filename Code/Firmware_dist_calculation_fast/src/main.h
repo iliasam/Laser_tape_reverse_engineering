@@ -3,6 +3,14 @@
 
 #define MODULE_701A
 
+//#define FAST_CAPTURE
+
+//10 KHz mode
+//#define DUAL_FREQUENCY
+
+//Use key3 pin as output
+//#define DEBUG_PIN
+
 void Delay_ms(uint32_t ms);
 
 void process_rx_data(uint8_t data);

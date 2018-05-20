@@ -285,6 +285,7 @@ void auto_switch_apd_voltage(uint16_t current_amplitude)
   if (voltage_to_set > 119.0f)
     voltage_to_set = 119.0f;
   set_apd_voltage(voltage_to_set);//testing only
+  //set_apd_voltage(APD_current_voltage);//testing only
 }
 
 #else

@@ -25,6 +25,8 @@ AnalyseResultType result1;
 AnalyseResultType result2;
 AnalyseResultType result3;
 
+
+
 int main()
 {
   init_all_hardware();

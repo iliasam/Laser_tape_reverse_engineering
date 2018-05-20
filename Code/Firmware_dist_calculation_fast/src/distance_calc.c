@@ -13,12 +13,16 @@
 
 #define BRUTFOCRCE_STEPS    6
 
+#define TABLE_A_SIZE    BRUTFOCRCE_STEPS
+#define TABLE_B_SIZE    (BRUTFOCRCE_STEPS + 4)
+
 int32_t calculate_distance(int16_t phase, int32_t wavelength, int16_t N);
 int16_t find_best_n(int16_t N1, int16_t Nadd);
 int16_t calculate_pnum(int16_t phaseA, int16_t phaseB, int32_t wavelengthA, int32_t wavelengthB);
 int16_t calculate_pnum_add(int16_t phaseA, int16_t phaseB, int32_t wavelengthA, int32_t wavelengthB);
 int32_t dual_N_distance_calculation(int16_t phaseA, int16_t phaseB, int32_t wavelengthA,  int32_t wavelengthB);
 int32_t brutforce_dist_calculation(int16_t phaseA, int16_t phaseB, int32_t wavelengthA,  int32_t wavelengthB, int16_t startN, int16_t stopN);
+uint8_t check_table_values(int16_t A, int16_t B, int16_t startN);
 
 int32_t triple_dist_calculaton(int16_t phase1, int16_t phase2, int16_t phase3)
 {
@@ -67,8 +71,8 @@ int32_t brutforce_dist_calculation(int16_t phaseA, int16_t phaseB, int32_t wavel
   int16_t min_NB = 0;
   int16_t stopNB = stopN + 4;
   
-  int32_t distA_table[BRUTFOCRCE_STEPS];
-  int32_t distB_table[BRUTFOCRCE_STEPS + 4];
+  int32_t distA_table[TABLE_A_SIZE];
+  int32_t distB_table[TABLE_B_SIZE];
   int32_t cur_diff;
   int32_t min_diff = 1000000;
   int32_t tmp_dist_value;
@@ -93,6 +97,9 @@ int32_t brutforce_dist_calculation(int16_t phaseA, int16_t phaseB, int32_t wavel
   {
     for (NB = startN; NB < stopNB; NB++)
     {
+      if (check_table_values(NA, NB, startN) == 0)
+        break;
+      
       cur_diff = abs(distA_table[NA - startN] - distB_table[NB - startN]);
       if (cur_diff < min_diff)
       {
@@ -103,9 +110,30 @@ int32_t brutforce_dist_calculation(int16_t phaseA, int16_t phaseB, int32_t wavel
     }
   }
   
+  if (check_table_values(min_NA, min_NB, startN) == 0)
+        return -1;
+  
   tmp_dist_value = (distA_table[min_NA - startN] + distB_table[min_NB - startN]) / 2;
   
   return tmp_dist_value;
+}
+
+//check if values ara suitable for tables
+uint8_t check_table_values(int16_t A, int16_t B, int16_t startN)
+{
+  int16_t tmp_a = A - startN;
+  int16_t tmp_b = B - startN;
+  
+  if ( (tmp_a < 0) || (tmp_b < 0) || \
+       (tmp_a > (TABLE_A_SIZE - 1)) || \
+       (tmp_b > (TABLE_B_SIZE - 1)) )
+  {
+    return 0;//error
+  }
+  else
+  {
+    return 1;
+  }
 }
 
 

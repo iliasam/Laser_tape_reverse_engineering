@@ -2,6 +2,7 @@
 #include "pll_functions.h"
 #include "stm32f10x_it.h"
 #include "config_periph.h"
+#include "main.h"
 #include <string.h>
 
 void PLL_send_enable_output(void);
@@ -85,6 +86,28 @@ void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, 
     //PLL_send_enable_output();
 }
 
+#ifdef DUAL_FREQUENCY
+
+//162.5 + 162.51
+void pll_set_frequency_1(void)
+{
+  pll_change_freq(26, 0, 2, 1250);
+}
+
+//191.5 + 191.51
+void pll_set_frequency_2(void)
+{
+  pll_change_freq(30, 800, 802, 1250);
+}
+
+//193.5 + 193.51
+void pll_set_frequency_3(void)
+{
+  pll_change_freq(30, 1200, 1202, 1250);
+}
+
+#else
+
 //162.5 + 162.505
 void pll_set_frequency_1(void)
 {
@@ -102,6 +125,8 @@ void pll_set_frequency_3(void)
 {
   pll_change_freq(30, 1200, 1201, 1250);
 }
+
+#endif
 
 void configure_pll(void)
 {
