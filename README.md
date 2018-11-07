@@ -2,7 +2,7 @@
 
 This project describes my work about reverse engineering electronics (laser rangefinder module) of a cheap "X-40" laser tape measure.  
 I create my own firmware that allow to use this module for DIY purposes.  
-Supported module types are: "512A" and "701A".  Module "703A" is not tested (it's look similar to a "701A").  
+Supported module types are: "512A" and "701A". Working of "703A" is confirmed by "Damian" here: [Link](https://www.hackster.io/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849).  
 Module dimensions: 25x13x50 mm.  
 
 Big article in Russian: https://habr.com/post/327642/  
