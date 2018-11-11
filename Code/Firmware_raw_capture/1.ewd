@@ -1159,7 +1159,7 @@
         <debug>1</debug>
         <option>
           <name>OCDriverInfo</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCSTLinkInterfaceRadio</name>
@@ -1249,7 +1249,7 @@
         <option>
           <name>CCSTLinkJtagSpeedList</name>
           <version>0</version>
-          <state>5</state>
+          <state>4</state>
         </option>
       </data>
     </settings>
