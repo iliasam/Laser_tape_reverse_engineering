@@ -67,8 +67,12 @@ void init_dac(void)
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE1);
 }
 
+//new_voltage - target APD voltage in volts
 void set_apd_voltage(float new_voltage)
 {
+  if ((new_voltage > 115.0f) || (new_voltage < 70.0f))
+    return;
+  
   float dac_voltage = 0.0f;
   float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
   
@@ -89,7 +93,7 @@ void disable_laser(void)
   LASER_PORT->ODR|= LASER_POWER_PIN;
 }
 
-//create power sequence for the APD
+// Create power sequence for the APD
 void start_apd_voltage(void)
 {
   DAC_SetChannel2Data(DAC_Align_12b_R, APD_DAC2_VALUE2);

@@ -19,6 +19,8 @@
 extern uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];
 extern uint8_t capture_done;
 
+uint8_t set_fine_voltage_flag = 0;
+
 void process_rx_data(uint8_t data);
 void sent_captured_data_to_pc(void);
 void uart_send_data(uint8_t* data, uint16_t length);
@@ -64,6 +66,13 @@ int main()
 //Process data byte, received by MCU
 void process_rx_data(uint8_t data)
 {
+  if (set_fine_voltage_flag != 0)
+  {
+    set_apd_voltage((float)data);
+    set_fine_voltage_flag = 0;
+    return;
+  }
+  
   switch (data)
   {
       case (uint8_t)'E': //Enable laser
@@ -113,14 +122,19 @@ void process_rx_data(uint8_t data)
         pll_set_frequency_4();
         break;
       }
-      case (uint8_t)'1'://Set PLL freq4 - high modulation
+      case (uint8_t)'1'://'one' - Set PLL freq4 - high modulation
       {
         pll_set_frequency_5();
         break;
       }
-    
     default: break;
   }
+  
+  if (data == 'V') //Set fine APD voltage
+    set_fine_voltage_flag = 1;
+  else
+    set_fine_voltage_flag = 0;
+  
 }
 
 
