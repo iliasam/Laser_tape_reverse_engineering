@@ -13,6 +13,12 @@
 #define CALIBRATION_REPEAT_NUMBER       64  //number of averaging points for calibration - for single freqency
 #define REPEAT_NUMBER                   3   //number of averaging points
 
+//Starting amplitude, ADC points
+#define ENHANCED_CALIBADION_START_AMPL  200
+
+//Stop amplitude, ADC points
+#define ENHANCED_CALIBADION_STOP_AMPL   5
+
 
 AnalyseResultType result1;
 AnalyseResultType result2;
@@ -35,15 +41,22 @@ int16_t zero_phase3_calibration = 0;//phase value for zero distance
 
 int32_t dist_resut = 0;
 
-//local functions
-ErrorStatus calibration_set_voltage(void);
-AnalyseResultType process_captured_data(uint16_t* captured_data);
-
 volatile dma_state_type dma_state = DMA_NO_DATA;
 uint8_t new_data_ready = 0;//new data ready to be processed
 
+float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
+float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
+uint32_t apt_agc_timer = 0;
+
 //debug only
 volatile uint32_t delta_time = 0;
+
+// Local functions ************************************************************
+ErrorStatus calibration_set_voltage(void);
+AnalyseResultType process_captured_data(uint16_t* captured_data);
+void enhanced_apd_calibration(void);
+
+
 
 //Auto switch capture process
 void auto_handle_capture(void)
@@ -118,7 +131,7 @@ void auto_handle_data_processing(void)
     do_distance_calculation();
     
 #ifdef FAST_CAPTURE
-  //result_length = sprintf(result_str, "DIST;%05d;AMP;%04d\r\n", dist_resut, result1.Amplitude);
+    //Less information
     result_length = sprintf(result_str, "%05d;%04d\r\n", dist_resut, result1.Amplitude);
 #else
   result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
@@ -156,6 +169,8 @@ ErrorStatus do_phase_calibration(void)
   enable_laser();
   measure_enabled = 1;
   
+  enhanced_apd_calibration();
+  
   Delay_ms(400);
   do_single_adc_measurements();//measure temperature
   auto_switch_apd_voltage(result1.Amplitude);
@@ -164,6 +179,8 @@ ErrorStatus do_phase_calibration(void)
   printf("Calib Start\r\n");
   enable_laser();
   measure_enabled = 1;
+  
+  enhanced_apd_calibration();
   
   Delay_ms(400);
   set_apd_voltage(APD_LOW_VOLTAGE);
@@ -237,6 +254,43 @@ ErrorStatus calibration_set_voltage(void)
   printf("Calib voltage:%d\r\n", (uint8_t)APD_current_voltage);
   
   return SUCCESS;
+}
+
+// Try to find APD saturation voltage
+void enhanced_apd_calibration(void)
+{
+#ifdef ENHANCED_APD_CALIBADION
+  
+  float apd_calibration_voltage = APD_START_CALIB_VOLTAGE;
+  AnalyseResultType tmp_result;
+  uint8_t signal_detected_flag = 0;
+  
+  Delay_ms(300);
+  
+  set_apd_voltage(apd_calibration_voltage);
+  Delay_ms(200);
+  
+  while (apd_calibration_voltage < APD_STOP_CALIB_VOLTAGE)
+  {
+    tmp_result = do_capture();//measure signal
+    if (tmp_result.Amplitude > ENHANCED_CALIBADION_START_AMPL)
+      signal_detected_flag = 1; //Signal detected
+    
+    if ((signal_detected_flag == 1) && (tmp_result.Amplitude < ENHANCED_CALIBADION_STOP_AMPL))
+    {
+      //Get APD voltage range
+      apd_saturation_voltage = apd_calibration_voltage - 5.0f;
+      apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+      break;
+    }
+    
+    apd_calibration_voltage += 1.0f;
+    set_apd_voltage(apd_calibration_voltage);
+    Delay_ms(200);
+  }
+  printf("APD Saturation Voltage: %.1f\r\n", apd_saturation_voltage);
+  
+#endif
 }
 
 //Calibration measurement for single frequency
@@ -362,20 +416,42 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
   return main_result;
 }
 
-//Switching APD voltage by signal level - AGC
-#ifdef MODULE_701A
 
+#if defined(MODULE_701A) || defined(ENHANCED_APD_CALIBADION)
+
+//Switch APD voltage by temperature + aplitude
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   //APD voltage is depending only from a temperature
+  //APD  temperature value in deg
+#ifndef ENHANCED_APD_CALIBADION
   float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
-  if (voltage_to_set > 119.0f)
-    voltage_to_set = 119.0f;
-  set_apd_voltage(voltage_to_set);//testing only
+  set_apd_voltage(voltage_to_set);
+#else
+  float voltage_to_set = 
+      (APD_VOLTAGE_RANGE / APD_MAX_TEMP) * APD_temperature + apd_min_voltage;
+  if (voltage_to_set >= apd_saturation_voltage)
+    voltage_to_set = apd_saturation_voltage;
+    
+  if (current_amplitude > 2200)
+  {
+    if (TIMER_ELAPSED(apt_agc_timer))
+    {
+      set_apd_voltage(APD_current_voltage - 1.0);//try to decrease voltage
+      START_TIMER(apt_agc_timer, 500);
+    }
+    return;
+  }
+  else if (current_amplitude < 2000)
+    set_apd_voltage(voltage_to_set);  
+
+#endif
+
 }
 
 #else
 
+//Switching APD voltage by signal level - AGC
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   if (APD_current_voltage < (APD_LOW_VOLTAGE + 2.0f))
@@ -404,6 +480,7 @@ void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t cal
   FLASH_ProgramHalfWord(start_address+2, (uint16_t)calib_phase1); //phase
   FLASH_ProgramHalfWord(start_address+4, (uint16_t)calib_phase2); //phase
   FLASH_ProgramHalfWord(start_address+6, (uint16_t)calib_phase3); //phase
+  FLASH_ProgramHalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
   FLASH_Lock();
 }
 
@@ -418,4 +495,10 @@ void read_calib_data_from_flash(void)
   zero_phase1_calibration = (*(__IO int16_t*)(start_address + 2));
   zero_phase2_calibration = (*(__IO int16_t*)(start_address + 4));
   zero_phase3_calibration = (*(__IO int16_t*)(start_address + 6));
+  
+  uint16_t tmp_value = (*(__IO uint16_t*)(start_address + 8));//voltage
+  if ((tmp_value < 50) || (tmp_value > 150)) //apd voltage
+    return;
+  apd_saturation_voltage = (float)tmp_value;
+  apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
 }

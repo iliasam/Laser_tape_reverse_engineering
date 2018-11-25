@@ -129,6 +129,9 @@ void start_apd_voltage(void)
 
 void set_apd_voltage(float new_voltage)
 {
+  if (new_voltage > 119.0f)
+    new_voltage = 119.0f;
+    
   float dac_voltage = 0.0f;
   float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
   

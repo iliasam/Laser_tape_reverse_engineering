@@ -8,12 +8,15 @@
 #define APD_DAC2_VALUE1 (uint16_t)(2010) //1.62v/3.3v*4096
 #define APD_DAC2_VALUE2 (uint16_t)(1588) //1.28v/3.3v*4096
 #define APD_DAC2_80V (uint16_t)(1663) //1.34v/3.3v*4096 - ~~81V
-#define APD_DAC2_93V (uint16_t)(1514) //1.22v/3.3v*4096 - ~~93V
-#define APD_DAC2_98V (uint16_t)(1450) //~~95V
-//#define APD_DAC2_98V (uint16_t)(1400) //~~102V - not calibrated
 
-#define APD_LOW_VOLTAGE         80.6f
-#define APD_HIGH_VOLTAGE        98.6f
+#define APD_LOW_VOLTAGE                 80.6f
+#define APD_HIGH_VOLTAGE                98.6f
+
+//Constants for "ENHANCED_APD_CALIBADION"
+#define APD_START_CALIB_VOLTAGE         70.0f
+#define APD_STOP_CALIB_VOLTAGE          123.0f
+#define APD_VOLTAGE_RANGE               20.0f
+#define APD_MAX_TEMP                    45.0f//Degrees - max temperature
 
 
 #define DCDC_R_UP               5100000.0f //Ohm - upper - R37
@@ -26,11 +29,13 @@
   #define ADC_SIGNAL              ADC_Channel_6 //PA6
   #define APD_CORR_COEF           1.0236f
   #define CALIBRATION_MIN_AMPLITUDE     10
+  #define APD_DEFAULT_SATURATIION_VOLT  115.0f
 #else
   #define AREF_VOLTAGE            3.32f //AREF voltage of the MCU
   #define ADC_SIGNAL              ADC_Channel_3 //PA3
   #define APD_CORR_COEF           1.0f
   #define CALIBRATION_MIN_AMPLITUDE     50
+  #define APD_DEFAULT_SATURATIION_VOLT  105.0f
 #endif
 
 #define DAC_MAXIUM              4095.0f

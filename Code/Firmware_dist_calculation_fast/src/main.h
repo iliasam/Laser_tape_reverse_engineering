@@ -1,7 +1,12 @@
 #ifndef _MAIN_H
 #define _MAIN_H
 
+extern volatile uint32_t uwTick;
+
 #define MODULE_701A
+//There are exists confirmations that 703A module works with MODULE_701A firmware
+
+//if MODULE_701A not defined, that means that module 501A us used
 
 //#define FAST_CAPTURE
 
@@ -10,6 +15,12 @@
 
 //Use key3 pin as output
 //#define DEBUG_PIN
+
+#define ENHANCED_APD_CALIBADION
+
+/* Exported macro ------------------------------------------------------------*/
+#define START_TIMER(x, duration)  (x = (uwTick + duration))
+#define TIMER_ELAPSED(x)  ((uwTick > x) ? 1 : 0)
 
 void Delay_ms(uint32_t ms);
 

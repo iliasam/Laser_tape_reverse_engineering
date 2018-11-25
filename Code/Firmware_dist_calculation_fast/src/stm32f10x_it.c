@@ -26,7 +26,7 @@
 #include "config_periph.h"
 #include "measure_functions.h"
 
-static __IO uint32_t uwTick;//taken from HAL
+volatile uint32_t uwTick;//taken from HAL
 
 volatile uint8_t capture_done = 0;//show that DMA done transfer
 extern volatile dma_state_type dma_state;
