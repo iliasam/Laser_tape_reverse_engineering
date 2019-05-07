@@ -20,14 +20,14 @@
 #define ENHANCED_CALIBADION_STOP_AMPL   5
 
 
-AnalyseResultType result1;
+AnalyseResultType result1;//phase and amplitude values for frequency 1
 AnalyseResultType result2;
 AnalyseResultType result3;
 
 extern uint16_t APD_temperature_raw ;//raw temperature value
 extern float  APD_current_voltage;//value in volts
 extern uint8_t  measure_enabled;//auto distance measurement enabled flag
-extern volatile uint8_t capture_done;
+extern volatile uint8_t capture_done;//capture done flag
 
 extern volatile uint16_t adc_capture_buffer1[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 extern volatile uint16_t adc_capture_buffer2[ADC_CAPURE_BUF_LENGTH];//signal+reference points
@@ -39,7 +39,7 @@ int16_t zero_phase1_calibration = 0;//phase value for zero distance
 int16_t zero_phase2_calibration = 0;//phase value for zero distance
 int16_t zero_phase3_calibration = 0;//phase value for zero distance
 
-int32_t dist_resut = 0;
+int32_t dist_result = 0;//distance in mm
 
 volatile dma_state_type dma_state = DMA_NO_DATA;
 uint8_t new_data_ready = 0;//new data ready to be processed
@@ -117,8 +117,8 @@ void auto_handle_data_processing(void)
   static char result_str[64];
   uint16_t result_length;
 
-    
-  if (new_data_ready == 0) return; //nothing to process
+  if (new_data_ready == 0) 
+    return; //nothing to process
   
   if ((dma_state == DMA_FREQ1_CAPTURING) || (dma_state == DMA_FREQ1_DONE))
   {
@@ -131,10 +131,13 @@ void auto_handle_data_processing(void)
     do_distance_calculation();
     
 #ifdef FAST_CAPTURE
-    //Less information
-    result_length = sprintf(result_str, "%05d;%04d\r\n", dist_resut, result1.Amplitude);
+  //Less information
+  result_length = sprintf(
+      result_str, "%05d;%04d\r\n", dist_result, result1.Amplitude);
 #else
-  result_length = sprintf(result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_resut, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
+  result_length = sprintf(
+      result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", 
+      dist_result, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
 #endif
     
 
@@ -336,7 +339,7 @@ void do_distance_calculation(void)
   if (tmp_phase3 < 0) 
     tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
   
-  dist_resut = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
+  dist_result = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
 }
 
 //Phase measurement for single freqency

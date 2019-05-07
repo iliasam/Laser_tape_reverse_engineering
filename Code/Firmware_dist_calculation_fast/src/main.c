@@ -3,7 +3,9 @@
 //Simultaneous data capture and data processing
 //UART baudrate - 256000
 //MCU - STM32F100C8T6
+//IAR 7.50
 //By ILIASAM
+
 
 #include "stm32f10x.h"
 #include "config_periph.h"
