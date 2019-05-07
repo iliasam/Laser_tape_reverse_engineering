@@ -1,5 +1,5 @@
 Important notice - all this firmware has been tested only with 512A and 701A hardware!
-All this firmware is written for the STM32 MCU of the rangefindef module. 
+All this firmware is written for the STM32 MCU of the rangefinder module.  
 Used IDE - IAR 7.50.  
 
 "Firmware_dist_calculation_fast":
