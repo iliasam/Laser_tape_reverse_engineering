@@ -78,6 +78,7 @@
 #define KEY_COM_PIN             GPIO_Pin_8
 #define KEY_COM_PORT            GPIOA
 
+// Used for zero calibration
 #define KEY_4_PIN               GPIO_Pin_15
 #define KEY_4_PORT              GPIOA
 
