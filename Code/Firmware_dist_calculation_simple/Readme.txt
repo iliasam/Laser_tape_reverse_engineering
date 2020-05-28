@@ -5,6 +5,7 @@ This program captures data from ADC, calculate phase difference using Goertzel a
 All this done sequentially for 3 frequencies. 
 After this program calculate distance in mm, send results to UART.
 This program uses plain data capture algorithm, so it's not fast.
+Only 512A module is supported!  
 
 UART data example:
 DIST;01574;AMP;0993;TEMP;1343;VOLT;080\r\n
