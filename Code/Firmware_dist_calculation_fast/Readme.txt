@@ -6,7 +6,7 @@ All this done sequentially for 3 frequencies.
 After this program calculate distance in mm, send results to UART.
 Simultaneous data capture and data processing is used.
 
-"Firmware_701A_enh.h" - firmware with enhanced APD voltage calibraion mode enabled.
+"Firmware_701A_enh.h" - firmware with enhanced APD voltage calibraion mode enabled (tested with 703A module).  
 
 UART data example:
 DIST;01574;AMP;0993;TEMP;1343;VOLT;080\r\n
