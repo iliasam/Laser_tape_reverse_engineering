@@ -97,7 +97,7 @@ void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
 //pll_mult - A
 //plla_coef/pllb_coef - B
 //pll_div - C
-//freqA = 25mhz*(MULT + A/DIV) / 4
+//freqA = 25mhz*(A + B/C) / 4
 void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div)
 {
     set_pll_coeff(pll_mult, plla_coef, pll_div, MSNA_PLL_START_REG);
@@ -137,7 +137,12 @@ void pll_set_frequency_4(void)
 void pll_set_frequency_5(void)
 {
   pll_disable_divider();
-  pll_change_freq(30, 1200, 1202, 1250);
+  //pll_change_freq(30, 1200, 1202, 1250); //10 khz
+  pll_change_freq(8, 0, 1, 1250);
+  //pll_change_freq(8, 0, 1, 1024);//big noise
+ // pll_change_freq(6, 0, 1, 1250); //very bad
+  //pll_change_freq(8, 0, 1, 1500);//big noise
+  
 }
 
 void pll_enable_divider(void)
