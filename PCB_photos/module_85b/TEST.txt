@@ -1,0 +1,47 @@
+stm32f038?
+
+PA14 - TX - SWCLK
+PA15 - RX
+
+PA9 - SCL
+PA10 - SDA
+
+PA1 - MCU_APD_CTRL - PWM - 100 khz. -1.5V. - TIM2_CH2
+PA2 - LASER_POWER_PWM -  100 khz 40% duty. - TIM2_CH3
+
+PA4 - ADC_IN4 - MCU_ref_sig
+PA5 - ADC_IN5 - MCU_apd_signal
+PB0 - ADC_IN8 - APD_TEMP
+
+PA7 - beeper
+
+PA12 - SW4
+PA11 - SW3/SW1
+PA6 - SW1
+
+PA8 - MCU_power -> pull low to enable power
+PA0 - MCU_key1
+PF1 - APD power enable? 1 - on
+
+PB1 - что-то аналоговое, вроде не батарея - нет сигнала, пока выключено. Не подсветка. Не связано с лазером.
+PA6 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
+PA3 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
+PF0 - при включении подтянуто к 1. Не подсветка. Не связано с лазером.
+
+PB2 - LCD backlight
+
+До стирания
+Захватить i2c.
+Померять напряжение фотодиода +
+Найти, как управляется питание - вход, выход контролера.
+Найти управление лазером - две линии.
+
+
+74.5В - спящий режим, 1.46 - упр - 48%
+107В - рабочее напряжение. 1.16 - упр - 29.8%
+
+/* Connect PA14 to USART2_Tx */
+GPIO_PinAFConfig(GPIOA, GPIO_PinSource14, GPIO_AF_2);
+/* Connect PA15 to USART2_Rx*/
+GPIO_PinAFConfig(GPIOA, GPIO_PinSource15, GPIO_AF_2);
+

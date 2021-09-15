@@ -1,0 +1,348 @@
+###############################################################################
+#
+# IAR ELF Linker V7.50.2.10312/W32 for ARM                15/Sep/2021  20:41:10
+# Copyright 2007-2015 IAR Systems AB.
+#
+#    Output file  =  
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Exe\Project.out
+#    Map file     =  
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\List\Project.map
+#    Command line =  
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\config_periph.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\i2c_functions.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\main.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\pll_functions.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\startup_stm32f030.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_adc.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_dbgmcu.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_dma.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_exti.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_flash.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_gpio.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_i2c.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_it.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_iwdg.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_misc.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_pwr.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_rcc.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_syscfg.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_tim.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\stm32f0xx_usart.o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj\system_stm32f0xx.o
+#        --redirect _Printf=_PrintfSmall --redirect _Scanf=_ScanfSmall -o
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Exe\Project.out
+#        --map
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\List\Project.map
+#        --config
+#        D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\stm32f030F4P6.icf
+#        --semihosting --entry __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x08003fff] { ro };
+"P2":  place in [from 0x20000000 to 0x20000fff] { rw, block CSTACK, block HEAP };
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A1":                                       0xb4
+  .intvec            ro code  0x08000000    0xb4  startup_stm32f030.o [1]
+                            - 0x080000b4    0xb4
+
+"P1":                                     0x12e1
+  .text              ro code  0x080000b4   0x314  config_periph.o [1]
+  .text              ro code  0x080003c8   0x2c0  stm32f0xx_rcc.o [1]
+  .text              ro code  0x08000688    0xae  I32DivModFast.o [5]
+  .text              ro code  0x08000736     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08000738    0x92  stm32f0xx_gpio.o [1]
+  .text              ro code  0x080007ca     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x080007cc    0x28  FltCmpGe.o [4]
+  .text              ro code  0x080007f4    0x26  FltCmpLe.o [4]
+  .text              ro code  0x0800081a    0xb0  FltMul.o [4]
+  .text              ro code  0x080008ca   0x120  FltAddSub.o [4]
+  .text              ro code  0x080009ea    0xaa  FltDiv.o [4]
+  .text              ro code  0x08000a94    0x3a  FltToS32.o [4]
+  .text              ro code  0x08000ace     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08000ad0   0x2d0  stm32f0xx_tim.o [1]
+  .text              ro code  0x08000da0    0x2c  stm32f0xx_flash.o [1]
+  .text              ro code  0x08000dcc   0x11a  stm32f0xx_i2c.o [1]
+  .text              ro code  0x08000ee6     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08000ee8     0x2  IntDivZer.o [5]
+  .text              ro code  0x08000eea     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08000eec   0x158  pll_functions.o [1]
+  .text              ro code  0x08001044    0xcc  i2c_functions.o [1]
+  .text              ro code  0x08001110    0x20  stm32f0xx_it.o [1]
+  .text              ro code  0x08001130    0xf0  system_stm32f0xx.o [1]
+  .text              ro code  0x08001220    0x40  main.o [1]
+  .text              ro code  0x08001260    0x3c  startup_stm32f030.o [1]
+  .text              ro code  0x0800129c    0x3c  packbits_init_single.o [5]
+  .text              ro code  0x080012d8    0x28  data_init.o [5]
+  .iar.init_table    const    0x08001300    0x10  - Linker created -
+  .text              ro code  0x08001310    0x1a  cmain.o [5]
+  .text              ro code  0x0800132a     0x4  low_level_init.o [3]
+  .text              ro code  0x0800132e     0x8  exit.o [3]
+  .text              ro code  0x08001336     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001338     0xa  cexit.o [5]
+  .text              ro code  0x08001342     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001344    0x14  exit.o [6]
+  .text              ro code  0x08001358     0xc  cstartup_M.o [5]
+  .text              ro code  0x08001364     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001366     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001368     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800136a     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800136c     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800136e     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001370     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001372     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001374     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001376     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001378     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800137a     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800137c     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x0800137e     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001380     0x2  startup_stm32f030.o [1]
+  .text              ro code  0x08001382     0x2  startup_stm32f030.o [1]
+  .rodata            const    0x08001384     0x0  packbits_init_single.o [5]
+  Initializer bytes  const    0x08001384    0x11  <for P2-1>
+                            - 0x08001395  0x12e1
+
+"P2", part 1 of 2:                          0x19
+  P2-1                        0x20000000    0x19  <Init block>
+    .data            inited   0x20000000    0x10  stm32f0xx_rcc.o [1]
+    .bss             inited   0x20000010     0x4  config_periph.o [1]
+    .bss             inited   0x20000014     0x4  stm32f0xx_it.o [1]
+    .bss             inited   0x20000018     0x1  i2c_functions.o [1]
+                            - 0x20000019    0x19
+
+"P2", part 2 of 2:                         0x400
+  CSTACK                      0x20000020   0x400  <Block>
+    CSTACK           uninit   0x20000020   0x400  <Block tail>
+                            - 0x20000420   0x400
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x11 (68% of destination):
+          0x08001384  0x11
+    1 destination range, total size 0x19:
+          0x20000000  0x19
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj: [1]
+    config_periph.o             788        3        4
+    i2c_functions.o             204        1        1
+    main.o                       64
+    pll_functions.o             344
+    startup_stm32f030.o         286
+    stm32f0xx_flash.o            44
+    stm32f0xx_gpio.o            146
+    stm32f0xx_i2c.o             282
+    stm32f0xx_it.o               32        3        4
+    stm32f0xx_rcc.o             704       10       16
+    stm32f0xx_tim.o             720
+    system_stm32f0xx.o          240
+    -------------------------------------------------
+    Total:                    3 854       17       25
+
+command line: [2]
+    -------------------------------------------------
+    Total:
+
+dl6M_tlf.a: [3]
+    exit.o                        8
+    low_level_init.o              4
+    -------------------------------------------------
+    Total:                       12
+
+m6M_tl.a: [4]
+    FltAddSub.o                 288
+    FltCmpGe.o                   40
+    FltCmpLe.o                   38
+    FltDiv.o                    170
+    FltMul.o                    176
+    FltToS32.o                   58
+    -------------------------------------------------
+    Total:                      770
+
+rt6M_tl.a: [5]
+    I32DivModFast.o             174
+    IntDivZer.o                   2
+    cexit.o                      10
+    cmain.o                      26
+    cstartup_M.o                 12
+    data_init.o                  40
+    packbits_init_single.o       60
+    -------------------------------------------------
+    Total:                      324
+
+shb_l.a: [6]
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
+
+    Linker created                        16    1 024
+-----------------------------------------------------
+    Grand Total:              4 980       33    1 049
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+.iar.init_table$$Base   0x08001300          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x08001310          --   Gb  - Linker created -
+?main                   0x08001311         Code  Gb  cmain.o [5]
+APBAHBPrescTable        0x20000000   0x10  Data  Lc  stm32f0xx_rcc.o [1]
+APD_current_voltage     0x20000010    0x4  Data  Gb  config_periph.o [1]
+CSTACK$$Base            0x20000020          --   Gb  - Linker created -
+CSTACK$$Limit           0x20000420          --   Gb  - Linker created -
+DMA1_Channel1_IRQHandler
+                        0x08001123    0x2  Code  Gb  stm32f0xx_it.o [1]
+FLASH_PrefetchBufferCmd
+                        0x08000daf   0x18  Code  Gb  stm32f0xx_flash.o [1]
+FLASH_SetLatency        0x08000da1    0xe  Code  Gb  stm32f0xx_flash.o [1]
+GPIO_Init               0x08000739   0x6a  Code  Gb  stm32f0xx_gpio.o [1]
+GPIO_PinAFConfig        0x080007ab   0x20  Code  Gb  stm32f0xx_gpio.o [1]
+GPIO_ResetBits          0x080007a7    0x4  Code  Gb  stm32f0xx_gpio.o [1]
+GPIO_SetBits            0x080007a3    0x4  Code  Gb  stm32f0xx_gpio.o [1]
+HAL_GetTick             0x08001125    0x6  Code  Gb  stm32f0xx_it.o [1]
+HardFault_Handler       0x08001113    0x2  Code  Gb  stm32f0xx_it.o [1]
+I2C_ClearFlag           0x08000ee3    0x4  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_Cmd                 0x08000e5f   0x16  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_DeInit              0x08000dcd   0x24  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_GenerateSTOP        0x08000e87   0x16  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_GetFlagStatus       0x08000ed5    0xe  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_Init                0x08000df1   0x58  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_SendData            0x08000ed1    0x4  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_SoftwareResetCmd    0x08000e75   0x12  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_StructInit          0x08000e49   0x16  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_TransferHandling    0x08000e9d   0x1c  Code  Gb  stm32f0xx_i2c.o [1]
+I2C_WriteData           0x08001095   0x1a  Code  Gb  i2c_functions.o [1]
+NMI_Handler             0x08001111    0x2  Code  Gb  stm32f0xx_it.o [1]
+PLL_send_data           0x08001045   0x24  Code  Gb  i2c_functions.o [1]
+PLL_send_data2          0x08001069   0x2c  Code  Gb  i2c_functions.o [1]
+PendSV_Handler          0x08001117    0x2  Code  Gb  stm32f0xx_it.o [1]
+RCC_AHBPeriphClockCmd   0x080005e1   0x14  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_APB1PeriphClockCmd  0x080005f5   0x14  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_APB1PeriphResetCmd  0x08000621   0x14  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_APB2PeriphResetCmd  0x08000609   0x14  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_DeInit              0x080003c9   0x48  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_GetClocksFreq       0x08000489  0x14a  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_GetFlagStatus       0x08000635   0x2a  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_GetSYSCLKSource     0x0800044f    0xa  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_HCLKConfig          0x08000459    0xa  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_PCLKConfig          0x08000463    0xe  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_PLLCmd              0x0800042d   0x18  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_PLLConfig           0x08000417   0x16  Code  Gb  stm32f0xx_rcc.o [1]
+RCC_SYSCLKConfig        0x08000445    0xa  Code  Gb  stm32f0xx_rcc.o [1]
+Region$$Table$$Base     0x08001300          --   Gb  - Linker created -
+Region$$Table$$Limit    0x08001310          --   Gb  - Linker created -
+SVC_Handler             0x08001115    0x2  Code  Gb  stm32f0xx_it.o [1]
+SysTick_Handler         0x08001119    0xa  Code  Gb  stm32f0xx_it.o [1]
+SystemInit              0x08001131   0xd0  Code  Gb  system_stm32f0xx.o [1]
+TIM_ARRPreloadConfig    0x08000be7   0x14  Code  Gb  stm32f0xx_tim.o [1]
+TIM_Cmd                 0x08000bfb   0x14  Code  Gb  stm32f0xx_tim.o [1]
+TIM_CtrlPWMOutputs      0x08000c15   0x22  Code  Gb  stm32f0xx_tim.o [1]
+TIM_DeInit              0x08000ad1   0xac  Code  Gb  stm32f0xx_tim.o [1]
+TIM_OC2Init             0x08000c51   0x6c  Code  Gb  stm32f0xx_tim.o [1]
+TIM_OC2PreloadConfig    0x08000d45    0x4  Code  Gb  stm32f0xx_tim.o [1]
+TIM_OC3Init             0x08000cc5   0x5a  Code  Gb  stm32f0xx_tim.o [1]
+TIM_OC3PreloadConfig    0x08000d53    0x8  Code  Gb  stm32f0xx_tim.o [1]
+TIM_OCStructInit        0x08000d25   0x14  Code  Gb  stm32f0xx_tim.o [1]
+TIM_SetCompare2         0x08000d39    0x4  Code  Gb  stm32f0xx_tim.o [1]
+TIM_SetCompare3         0x08000d3d    0x4  Code  Gb  stm32f0xx_tim.o [1]
+TIM_TimeBaseInit        0x08000b7d   0x58  Code  Gb  stm32f0xx_tim.o [1]
+TIM_TimeBaseStructInit  0x08000bd5   0x12  Code  Gb  stm32f0xx_tim.o [1]
+__ICFEDIT_region_RAM_end__ {Abs}
+                        0x20000fff          --   Gb  command line/config [2]
+__ICFEDIT_region_RAM_start__ {Abs}
+                        0x20000000          --   Gb  command line/config [2]
+__aeabi_cfcmple         0x080007f5         Code  Gb  FltCmpLe.o [4]
+__aeabi_cfrcmple        0x080007cd         Code  Gb  FltCmpGe.o [4]
+__aeabi_f2iz            0x08000a95         Code  Gb  FltToS32.o [4]
+__aeabi_fadd            0x080008cb         Code  Gb  FltAddSub.o [4]
+__aeabi_fdiv            0x080009eb         Code  Gb  FltDiv.o [4]
+__aeabi_fmul            0x0800081b         Code  Gb  FltMul.o [4]
+__aeabi_fsub            0x0800093b         Code  Gb  FltAddSub.o [4]
+__aeabi_idiv0           0x08000ee9         Code  Gb  IntDivZer.o [5]
+__aeabi_uidiv           0x08000689         Code  Gb  I32DivModFast.o [5]
+__aeabi_uidivmod        0x08000689         Code  Gb  I32DivModFast.o [5]
+__cmain                 0x08001311         Code  Gb  cmain.o [5]
+__exit                  0x08001345   0x14  Code  Gb  exit.o [6]
+__iar_data_init3        0x080012d9   0x28  Code  Gb  data_init.o [5]
+__iar_packbits_init_single3
+                        0x0800129d   0x3c  Code  Gb  packbits_init_single.o [5]
+__iar_program_start     0x08001359         Code  Gb  cstartup_M.o [5]
+__low_level_init        0x0800132b    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000         Data  Gb  startup_stm32f030.o [1]
+_call_main              0x0800131d         Code  Gb  cmain.o [5]
+_exit                   0x08001339         Code  Gb  cexit.o [5]
+_main                   0x08001327         Code  Gb  cmain.o [5]
+configure_pll           0x08000eed   0x24  Code  Gb  pll_functions.o [1]
+delay_ms                0x08000363   0x28  Code  Gb  config_periph.o [1]
+enable_laser            0x080001f9    0x6  Code  Gb  config_periph.o [1]
+exit                    0x0800132f    0x8  Code  Gb  exit.o [3]
+i2c_end_transmission    0x080010af   0x1e  Code  Gb  i2c_functions.o [1]
+i2c_err_flag            0x20000018    0x1  Data  Gb  i2c_functions.o [1]
+i2c_start_transmission  0x080010cd   0x3c  Code  Gb  i2c_functions.o [1]
+init_all_hardware       0x080000b5   0x56  Code  Gb  config_periph.o [1]
+init_gpio               0x0800010b   0x9e  Code  Gb  config_periph.o [1]
+init_i2c                0x080002e3   0x80  Code  Gb  config_periph.o [1]
+init_sys_clock          0x08000209   0x48  Code  Gb  config_periph.o [1]
+init_volt_pwm_timer     0x08000251   0x92  Code  Gb  config_periph.o [1]
+main                    0x08001221   0x40  Code  Gb  main.o [1]
+pll_change_freq         0x08000f7d   0x30  Code  Gb  pll_functions.o [1]
+pll_data_array1         0x08001010   0x34  Data  Gb  pll_functions.o [1]
+pll_data_array_dis_output
+                        0x08001000    0x2  Data  Gb  pll_functions.o [1]
+pll_data_array_en_fanout
+                        0x08001008    0x2  Data  Gb  pll_functions.o [1]
+pll_data_array_en_output
+                        0x08001004    0x2  Data  Gb  pll_functions.o [1]
+pll_data_array_reset    0x0800100c    0x2  Data  Gb  pll_functions.o [1]
+pll_disable_divider     0x08000fd1   0x12  Code  Gb  pll_functions.o [1]
+pll_set_frequency_1     0x08000fad   0x10  Code  Gb  pll_functions.o [1]
+set_apd_voltage         0x080001a9   0x50  Code  Gb  config_periph.o [1]
+set_pll_coeff           0x08000f1d   0x5e  Code  Gb  pll_functions.o [1]
+uwTick                  0x20000014    0x4  Data  Gb  stm32f0xx_it.o [1]
+
+
+[1] = D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_raw_capture\EWARM\Output\Obj
+[2] = command line
+[3] = dl6M_tlf.a
+[4] = m6M_tl.a
+[5] = rt6M_tl.a
+[6] = shb_l.a
+
+  4 980 bytes of readonly  code memory
+     33 bytes of readonly  data memory
+  1 049 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
