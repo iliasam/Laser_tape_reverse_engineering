@@ -3,7 +3,11 @@
 *.s
 *.bat
 *.pbi
+*.map
+*.pdb
+*.out
 /Debug
 Code/Firmware_phase_calculation/Debug/
 Code/Firmware_raw_capture/Debug/
 Code/Firmware_dist_calculation_fast/Debug/
+Code/CortexM0/Firmware_dist_calculation_fast/Debug/

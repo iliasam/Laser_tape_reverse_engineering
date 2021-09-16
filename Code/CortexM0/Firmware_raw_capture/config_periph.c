@@ -11,6 +11,7 @@
 /* Private variables ---------------------------------------------------------*/
 float  APD_current_voltage;//value in volts
 
+uint8_t uart_disabled_flag = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void init_sys_clock(void);
@@ -31,9 +32,8 @@ void init_all_hardware(void)
   
   init_gpio();
   init_volt_pwm_timer();
-  //init_uart1();
+  init_uart1();
   delay_ms(20);
-  init_i2c();
 }
 
 void init_gpio(void)
@@ -77,6 +77,49 @@ void init_gpio(void)
   GPIO_PinAFConfig(
     VOLT_PWM_TIMER_LASER_CTRL_PORT, VOLT_PWM_TIMER_LASER_CTRL_SRC, 
     VOLT_PWM_TIMER_LASER_CTRL_AF);//timer2
+}
+
+void init_uart1(void)
+{
+  GPIO_InitTypeDef  GPIO_InitStructure;
+  USART_InitTypeDef USART_InitStructure;
+  
+  // Enable GPIO clock
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+  RCC_USARTCLKConfig(RCC_USART1CLK_SYSCLK);
+  
+  
+  
+  // Configure USART1 Tx as alternate function push-pull
+  GPIO_StructInit(&GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Pin = UART_RX_PIN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;//to detect external pullup
+  GPIO_Init(UART_PORT, &GPIO_InitStructure);
+  GPIO_PinAFConfig(UART_PORT, UART_RX_PIN_SRC, UART_GPIO_AF); //GPIO_AF_1 - uart1
+  
+  if ((UART_PORT->IDR & UART_RX_PIN) == 0)
+  {
+    //no external pull up, debugger mode
+    uart_disabled_flag = 1;
+    return;
+  }
+  
+  GPIO_InitStructure.GPIO_Pin = UART_TX_PIN;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(UART_PORT, &GPIO_InitStructure);
+  GPIO_PinAFConfig(UART_PORT, UART_TX_PIN_SRC, UART_GPIO_AF); //GPIO_AF_1 - uart1
+  
+  USART_InitStructure.USART_BaudRate    = UART_BAURDATE;
+  USART_InitStructure.USART_WordLength  = USART_WordLength_8b;
+  USART_InitStructure.USART_StopBits    = USART_StopBits_1;
+  USART_InitStructure.USART_Parity      = USART_Parity_No;
+  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  USART_InitStructure.USART_Mode        = USART_Mode_Tx | USART_Mode_Rx;
+  
+  USART_Init(USART1, &USART_InitStructure);  
+  USART_Cmd(USART1, ENABLE);
 }
 
 
@@ -125,11 +168,6 @@ void init_sys_clock(void)
   while (RCC_GetSYSCLKSource() != 0x08){}/* Wait till PLL is used as system clock source */
 }
 
-void init_uart1(void)
-{
-
-  
-}
 
 void init_volt_pwm_timer(void)
 {
@@ -170,38 +208,7 @@ void init_volt_pwm_timer(void)
   TIM_Cmd(VOLT_PWM_TIMER_NAME, ENABLE);
 }
 
-void init_i2c(void)
-{
-  I2C_InitTypeDef  I2C_InitStructure;
-  GPIO_InitTypeDef  GPIO_InitStructure;
-  RCC_APB1PeriphClockCmd(PLL_I2C_CLK, ENABLE);
-  
-  GPIO_InitStructure.GPIO_Pin = I2C_SCL_PIN | I2C_SDA_PIN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_Init(I2C_GPIO_PORT, &GPIO_InitStructure);
-  GPIO_PinAFConfig(I2C_GPIO_PORT, I2C_SDA_AF_SRC, I2C_GPIO_AF);//i2c
-  GPIO_PinAFConfig(I2C_GPIO_PORT, I2C_SCL_AF_SRC, I2C_GPIO_AF);//i2c
-  
-  I2C_DeInit(PLL_I2C);
-  I2C_StructInit(&I2C_InitStructure);
-  
-  I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
-  I2C_InitStructure.I2C_OwnAddress1 = 0;
-  I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
-  I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-  I2C_InitStructure.I2C_Timing = 0x0000020B;//from cube
-  
-  I2C_Cmd(PLL_I2C, ENABLE);
-  I2C_Init(PLL_I2C, &I2C_InitStructure);
-  
-  if (I2C_GetFlagStatus(PLL_I2C,I2C_FLAG_BUSY)) 
-  {
-    // Reset the I2C block
-    I2C_SoftwareResetCmd(PLL_I2C);
-  }
-}
+
 
 void delay_ms(uint32_t ms)
 {

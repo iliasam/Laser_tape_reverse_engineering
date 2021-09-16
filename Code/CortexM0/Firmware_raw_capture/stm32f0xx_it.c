@@ -31,7 +31,7 @@
 #include "stm32f0xx_it.h"
 #include "stm32f0xx.h"
 
-volatile uint8_t capture_done_flag = 0;
+volatile uint8_t capture_done = 0;
 volatile uint32_t uwTick;//taken from HAL
 
 /** @addtogroup Template_Project
@@ -105,10 +105,31 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f0xx.s).                                            */
 /******************************************************************************/
-//connected to ADC
+/**
+  * @brief  This function handles DMA interrupt request. Connected to ADC
+  * @param  None
+  * @retval : None
+  */
 void DMA1_Channel1_IRQHandler(void)
-{  
-
+{
+  if (DMA_GetITStatus(DMA1_IT_HT1))
+  {
+    /* Clear DMA1 Channel1 half transfer interrupt pending bits */
+    DMA_ClearITPendingBit(DMA1_IT_HT1);
+  }
+  else  if(DMA_GetITStatus(DMA1_IT_TC1))
+  {
+    /* Clear DMA1 Channel1 transfer complete interrupt pending bits */
+    DMA_ClearITPendingBit(DMA1_IT_TC1);
+    capture_done = 1;
+  }
+  else
+  if(DMA_GetITStatus(DMA1_IT_TE1))
+  {
+    /* Clear DMA1 Channel1 transfer error interrupt pending bits */
+    DMA_ClearITPendingBit(DMA1_IT_TE1);
+  }
+  
 }
 
 

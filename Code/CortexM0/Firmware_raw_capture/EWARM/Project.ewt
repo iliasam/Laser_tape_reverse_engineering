@@ -1105,10 +1105,10 @@
   <group>
     <name>User</name>
     <file>
-      <name>$PROJ_DIR$\..\config_periph.c</name>
+      <name>$PROJ_DIR$\..\capture_configure.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\config_periph.h</name>
+      <name>$PROJ_DIR$\..\config_periph.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\i2c_functions.c</name>

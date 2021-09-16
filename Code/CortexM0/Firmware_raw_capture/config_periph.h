@@ -36,6 +36,10 @@
 #define UART_RX_PIN             GPIO_Pin_15
 #define UART_TX_PIN             GPIO_Pin_14
 #define UART_PORT               GPIOA
+#define UART_GPIO_AF            GPIO_AF_1
+#define UART_RX_PIN_SRC         GPIO_PinSource15
+#define UART_TX_PIN_SRC         GPIO_PinSource14
+#define UART_BAURDATE           256000
 
 #define PLL_I2C                 I2C1
 #define PLL_I2C_CLK             RCC_APB1Periph_I2C1
@@ -60,11 +64,11 @@
 
 // PWM for APD and laser controlling
 
-#define VOLT_PWM_TIMER_RCC_CMD  RCC_APB1PeriphClockCmd
-#define VOLT_PWM_TIMER_RCC      RCC_APB1Periph_TIM2
-#define VOLT_PWM_TIMER_NAME     TIM2
-#define VOLT_PWM_TIMER_PRESCALER   (0)
-#define VOLT_PWM_TIMER_PERIOD   (480) //48M / 480 = 100khz
+#define VOLT_PWM_TIMER_RCC_CMD          RCC_APB1PeriphClockCmd
+#define VOLT_PWM_TIMER_RCC              RCC_APB1Periph_TIM2
+#define VOLT_PWM_TIMER_NAME             TIM2
+#define VOLT_PWM_TIMER_PRESCALER        (0)
+#define VOLT_PWM_TIMER_PERIOD           (480) //48M / 480 = 100khz
 
 //MCU_APD_CTRL 
 #define VOLT_PWM_TIMER_APD_CTRL_PIN     GPIO_Pin_1
