@@ -1,6 +1,5 @@
 *.o
 *.cout
-*.s
 *.bat
 *.pbi
 *.map
@@ -11,3 +10,5 @@ Code/Firmware_phase_calculation/Debug/
 Code/Firmware_raw_capture/Debug/
 Code/Firmware_dist_calculation_fast/Debug/
 Code/CortexM0/Firmware_dist_calculation_fast/Debug/
+Code/CortexM0/Firmware_phase_calculation/EWARM/Output/
+Code/CortexM0/Firmware_phase_calculation/EWARM/STM32F030/BrowseInfo/
