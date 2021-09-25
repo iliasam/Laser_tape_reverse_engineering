@@ -6,11 +6,11 @@
 
 "-p" 
 
-"C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\CONFIG\debugger\ST\STM32F030K6.ddf" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\CONFIG\debugger\ST\STM32F030x6.ddf" 
 
 "--semihosting" 
 
-"--device=STM32F030K6" 
+"--device=STM32F030x6" 
 
 "--drv_interface=SWD" 
 
@@ -20,7 +20,7 @@
 
 "--drv_catch_exceptions=0x000" 
 
-"--drv_debug_ap=0" 
+"--drv_interface_speed=240" 
 
 
 

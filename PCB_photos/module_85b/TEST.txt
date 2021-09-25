@@ -43,4 +43,9 @@ PB2 - LCD backlight
 0x444:
 STM32F030x4
 STM32F030x6
+is STM32F0x0 Value Line
+Programmer
+16:01:11 : Device ID:0x444 
+16:01:11 : Device flash Size : 32KBytes
+16:01:11 : Device family :STM32F03x
 

@@ -33,7 +33,7 @@ void init_all_hardware(void)
   RCC_ClocksTypeDef RCC_Clocks;
   init_sys_clock();
   RCC_GetClocksFreq (&RCC_Clocks);
-  if (SysTick_Config (RCC_Clocks.SYSCLK_Frequency/1000)) { /* Setup SysTick for 1 msec interrupts */;while (1);}
+  if (SysTick_Config (RCC_Clocks.SYSCLK_Frequency / 1000)) { /* Setup SysTick for 1 msec interrupts */;while (1);}
   
   init_gpio();
   init_volt_pwm_timer();
@@ -130,9 +130,12 @@ void init_uart1(void)
 
 //new_voltage - target APD voltage in volts
 void set_apd_voltage(float new_voltage)
-{
-  if ((new_voltage > 115.0f) || (new_voltage < 70.0f))
-    return;
+{   
+  if (new_voltage > 115.0f)
+      new_voltage = 115;
+  
+  if (new_voltage < 70.0f)
+    new_voltage = 70.0f;
   
   float dac_voltage = 0.0f;
   float tmp1 = DCDC_VREF * (1 + (DCDC_R_UP / DCDC_R_DOWN));
@@ -233,9 +236,9 @@ void calculate_real_temperature(uint16_t raw_value)
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   //APD voltage is depending only from a temperature
-  float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
+  //float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
+  float voltage_to_set = 0.4866667f * APD_temperature + 94.0f;
   set_apd_voltage(voltage_to_set);//testing only
-  //set_apd_voltage(APD_current_voltage);//testing only
 }
 
 

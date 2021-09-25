@@ -73,6 +73,7 @@ void capture_init_adc(void)
   
   /* ADC1 configuration ------------------------------------------------------*/
   
+  ADC_DeInit(ADC1);
     // ADC1 configuration  
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
   ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;//repeat endless
@@ -234,7 +235,4 @@ void capture_do_single_adc_measurements(void)
   capture_init_adc_single_measure();
   APD_temperature_raw = capture_read_adc1(ADC_TEMP_CHANNEL);
   calculate_real_temperature(APD_temperature_raw);
-  
-  //init for main signal capture
-  prepare_capture();
 }

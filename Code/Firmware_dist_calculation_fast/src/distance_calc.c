@@ -48,7 +48,7 @@ int32_t triple_dist_calculaton(int16_t phase1, int16_t phase2, int16_t phase3)
     else
       dist3 = calculate_distance(phase3, WAVE_L3, -1);
     
-    result_dist = (dist1 + dist2 + dist3)/ (3 * DIST_MULT * 2);
+    result_dist = (dist1 + dist2 + dist3)/ (3 * DIST_MULT * 2);// 2 - double wave path
     
     return result_dist;
   }

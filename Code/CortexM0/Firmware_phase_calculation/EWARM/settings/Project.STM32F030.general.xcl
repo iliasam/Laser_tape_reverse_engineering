@@ -1,14 +1,14 @@
-"C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\bin\armPROC.dll" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\bin\armproc.dll" 
 
-"C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\bin\armSTLINK.dll" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\bin\armstlink2.dll" 
 
-"F:\GITHUB\LaserTape\Code\CortexM0\Firmware_phase_calculation\EWARM\Output\Exe\Project.out" 
+"D:\GITHUB\Laser_tape_reverce\Code\CortexM0\Firmware_phase_calculation\EWARM\Output\Exe\Project.out" 
 
---plugin="C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\bin\armbat.dll" 
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\bin\armbat.dll" 
 
---device_macro="C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\config\debugger\ST\STM32F0xx.dmac" 
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\config\debugger\ST\STM32F05xxx_06xxx.dmac" 
 
---flash_loader="C:\Program Files\IAR Systems\Embedded Workbench 9.0\arm\config\flashloader\ST\FlashSTM32F03xx6.board" 
+--flash_loader "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\config\flashloader\ST\FlashSTM32F03xx6.board" 
 
 
 

@@ -30,6 +30,7 @@ AnalyseResultType result3;
 
 /* Private function prototypes -----------------------------------------------*/
 void do_triple_phase_measurement(void);
+void process_rx_data(uint8_t data);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -37,6 +38,7 @@ int main(void)
 {
   delay_ms(1000);
   init_all_hardware();
+  init_goertzel();
   init_i2c();
   delay_ms(200);
   
@@ -54,9 +56,10 @@ int main(void)
   
   while (1)
   {
-    //capture_do_single_adc_measurements();//measure temperature
+    capture_do_single_adc_measurements();//measure temperature
     do_triple_phase_measurement();
     
+
     //Send results to UART
     printf("freqA_amp:%d\r\n",  result1.Amplitude);
     printf("APD temp:%d\r\n",   APD_temperature_raw);
@@ -66,7 +69,7 @@ int main(void)
     printf("freqC_phase:%d\r\n", result3.Phase);
     
     //if auto switch enabled, manual switching is not working
-    //auto_switch_apd_voltage((uint16_t)result1.Amplitude);
+    auto_switch_apd_voltage((uint16_t)result1.Amplitude);
     
     //Delay_ms(100);
   }
@@ -75,6 +78,9 @@ int main(void)
 //Measure phase shifts for three frequencies
 void do_triple_phase_measurement(void)
 {
+    //init for main signal capture
+    prepare_capture();
+    
     //set freq1
     pll_set_frequency_1();
     //dwt_delay(SWITCH_DELAY);
