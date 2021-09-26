@@ -109,8 +109,25 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage)
 {
   //temperature compensation
-  float correction = 0.226974f * APD_temperature; //it is bad to use APD_temperature here
+  //it is bad to use APD_temperature here
+  /// correction -  deg
+  float correction = 0.226974f * APD_temperature; 
   correction+= -0.0049827f * APD_temperature * APD_temperature;
+  
+  float a0 = 9.118f;
+  float a1 = -0.01941f;
+  float a2 = 9.60068e-06;
+  float x = (float)amplitude;
+  float amp_correction = a0+ a1 * x + a2 * x * x;
+  
+  if (amplitude > 750)
+    amp_correction = 0.0f;
+  else if (amplitude < 25)
+    amp_correction = 9.0f;
+  amp_correction = 0.0f;
+  
+  correction += amp_correction;
+  
   return (int16_t)(-correction * PHASE_MULT);
 }
 

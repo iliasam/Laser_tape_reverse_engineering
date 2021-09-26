@@ -965,7 +965,7 @@
   <group>
     <name>CMSIS</name>
     <file>
-      <name>$PROJ_DIR$\..\startup_stm32f030.s</name>
+      <name>$PROJ_DIR$\..\startup_stm32f0xx.s</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\system_stm32f0xx.c</name>
