@@ -27,6 +27,7 @@ AnalyseResultType do_result_conversion(float real, float imag);
 int16_t calculate_avr_phase(int16_t* data, uint16_t length);
 
 int16_t calculate_median_phase(int16_t* data, uint16_t length);
-int16_t calculate_correction(uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage);
+int16_t calculate_correction(
+  uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase);
 
 #endif

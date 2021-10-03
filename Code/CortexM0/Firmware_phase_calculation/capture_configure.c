@@ -207,8 +207,8 @@ AnalyseResultType do_capture(void)
   main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
 
-  main_result.Phase = main_result.Phase + calculate_correction(
-    APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage);
+  main_result.Phase = calculate_correction(
+    APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
     //phase < 0 or > 360
   if (main_result.Phase < 0) 
     main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
