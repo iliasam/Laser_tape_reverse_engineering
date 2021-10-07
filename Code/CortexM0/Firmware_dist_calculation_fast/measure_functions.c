@@ -5,6 +5,7 @@
 #include "measure_functions.h"
 #include "delay_us_timer.h"
 #include "distance_calc.h"
+#include "uart_handler.h"
 #include "stdlib.h"
 #include "main.h"
 #include <stdio.h>
@@ -168,6 +169,9 @@ void do_triple_phase_measurement(void)
 
 void do_distance_calculation(void)
 {
+  static char result_str[64];
+  uint16_t result_length;
+  
   //subtract zero phase offset
   int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
   if (tmp_phase1 < 0) 
@@ -182,9 +186,14 @@ void do_distance_calculation(void)
     tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
   
   dist_result_mm = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
-  uint16_t tmp_volt = (uint16_t)APD_current_voltage;
-  printf("DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_result_mm, result1.Amplitude, APD_temperature_raw, tmp_volt);
+  //printf("DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_result_mm, result1.Amplitude, APD_temperature_raw, (uint16_t)APD_current_voltage);
+  
+  result_length = sprintf(
+      result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", 
+      dist_result_mm, result1.Amplitude, APD_temperature_raw, (uint16_t)APD_current_voltage);
+  uart_dma_start_tx((uint8_t*)result_str, result_length);//attention - new transmission interrupts previous one. 
 }
+
 
 //phase measurement for single freqency
 AnalyseResultType do_capture(void)

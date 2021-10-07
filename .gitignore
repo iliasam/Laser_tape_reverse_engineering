@@ -15,3 +15,5 @@ Code/CortexM0/Firmware_phase_calculation/EWARM/STM32F030/BrowseInfo/
 Code/CortexM0/Firmware_raw_capture/EWARM/Output/
 Code/CortexM0/Firmware_dist_calculation_simple/EWARM/Output/
 Code/CortexM0/Firmware_dist_calculation_simple/EWARM/settings/
+Code/CortexM0/Firmware_dist_calculation_fast/EWARM/Output/
+Code/CortexM0/Firmware_dist_calculation_fast/EWARM/settings/
