@@ -5,8 +5,10 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-int16_t phase_buffer[REPEAT_NUMBER];
-uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];//signal+reference points
+//signal+reference points - freq1
+volatile uint16_t adc_capture_buffer0[ADC_CAPURE_BUF_LENGTH];
+volatile uint16_t adc_capture_buffer1[ADC_CAPURE_BUF_LENGTH];
+
 
 extern uint8_t capture_done;
 extern uint16_t APD_temperature_raw;
@@ -105,7 +107,7 @@ void capture_init_adc_dma(void)
   
   DMA_DeInit(DMA1_Channel1);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&ADC1->DR;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)adc_capture_buffer;
+  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)adc_capture_buffer1;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
   DMA_InitStructure.DMA_BufferSize = ADC_CAPURE_BUF_LENGTH;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
@@ -158,7 +160,7 @@ void capture_init_adc_single_measure(void)
   while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_ADRDY));
 }
 
-void start_adc_capture(void)
+void start_adc_capture(volatile uint16_t* data_ptr)
 {
   //Start TIM1 -> ADC -> DMA -> RAM
   
@@ -166,7 +168,7 @@ void start_adc_capture(void)
   ADC_Cmd(ADC1, DISABLE);
   
   DMA_Cmd(DMA1_Channel1, DISABLE);
-  DMA1_Channel1->CMAR = (uint32_t)adc_capture_buffer;
+  DMA1_Channel1->CMAR = (uint32_t)data_ptr;
   DMA1_Channel1->CNDTR = ADC_CAPURE_BUF_LENGTH;
   DMA_Cmd(DMA1_Channel1, ENABLE);
   capture_done = 0;

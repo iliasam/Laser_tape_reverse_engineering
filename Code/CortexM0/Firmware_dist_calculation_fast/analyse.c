@@ -86,7 +86,8 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
   if (zero_cross_flag == 0) //no zero cross 
   {
     //simple avarege calculation
-    for (i = 0; i < length; i++) {tmp_val+= (int32_t)data[i];}
+    for (i = 0; i < length; i++) 
+      tmp_val+= (int32_t)data[i];
     tmp_val = tmp_val / length;
     return (uint16_t)tmp_val;
   }
@@ -105,9 +106,8 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
   }
 }
 
-
-
 //phase is deg * 10
+//take "phase" and calculate corrected phase, which would be returned
 int16_t calculate_true_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase)
 {

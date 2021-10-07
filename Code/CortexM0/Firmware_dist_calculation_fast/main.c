@@ -28,9 +28,6 @@ float  APD_current_voltage = 80;//value in volts
 uint8_t measure_enabled = 1;//auto distance measurement enabled flag
 uint8_t calibration_needed = 0;//1- calibration needed flag
 
-//for testing purposes
-volatile uint32_t delta_time = 0;
-
 extern uint8_t uart_disabled_flag;
 extern AnalyseResultType result1;
 
@@ -60,7 +57,6 @@ int main(void)
   delay_ms(100);
   
   prepare_capture();
-  start_adc_capture();
   
   printf("Start\r\n");
   
@@ -69,11 +65,8 @@ int main(void)
     
     if (measure_enabled == 1)
     {
-      capture_do_single_adc_measurements();//measure temperature
-      do_triple_phase_measurement();
-      do_distance_calculation();
-      //if auto switch enabled, manual switching is not working
-      auto_switch_apd_voltage(result1.Amplitude);
+        auto_handle_capture();
+        auto_handle_data_processing();
     }
     
     if (calibration_needed == 1)

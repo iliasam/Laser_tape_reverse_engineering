@@ -31,10 +31,13 @@
 #include "stm32f0xx_it.h"
 #include "stm32f0xx.h"
 #include "config_periph.h"
+#include "measure_functions.h"
 #include "main.h"
     
 volatile uint8_t capture_done = 0;
 volatile uint32_t uwTick;//taken from HAL
+
+extern volatile dma_state_type dma_state;
 
 void USART1_IRQHandler(void);
 
@@ -126,6 +129,15 @@ void DMA1_Channel1_IRQHandler(void)
     /* Clear DMA1 Channel1 transfer complete interrupt pending bits */
     DMA_ClearITPendingBit(DMA1_IT_TC1);
     capture_done = 1;
+    
+    if (dma_state == DMA_FREQ1_CAPTURING) 
+      dma_state = DMA_FREQ1_DONE;
+    else if (dma_state == DMA_FREQ2_CAPTURING) 
+      dma_state = DMA_FREQ2_DONE;
+    else if (dma_state == DMA_FREQ3_CAPTURING) 
+      dma_state = DMA_FREQ3_DONE;
+    else 
+      dma_state = DMA_NO_DATA;//error
   }
   else
   if(DMA_GetITStatus(DMA1_IT_TE1))

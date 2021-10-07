@@ -37,11 +37,25 @@ extern uint8_t  measure_enabled;//auto distance measurement enabled flag
 extern volatile uint8_t capture_done;
 extern volatile uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 
+volatile dma_state_type dma_state = DMA_NO_DATA;
+uint8_t new_data_captured = 0;//new data ready to be processed
+
 int16_t zero_phase1_calibration = 0;//phase value for zero distance
 int16_t zero_phase2_calibration = 0;//phase value for zero distance
 int16_t zero_phase3_calibration = 0;//phase value for zero distance
 
+//signal+reference points
+extern volatile uint16_t adc_capture_buffer0[ADC_CAPURE_BUF_LENGTH];
+extern volatile uint16_t adc_capture_buffer1[ADC_CAPURE_BUF_LENGTH];
+
+volatile uint16_t *capture_ptr = adc_capture_buffer0;
+volatile uint16_t *process_ptr = adc_capture_buffer1;
+
+
 int32_t dist_result_mm = 0;
+
+//debug only - in us
+volatile uint16_t delta_time = 0;
 
 float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
 float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
@@ -49,8 +63,131 @@ float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
 /* Private functions ---------------------------------------------------------*/
 void enhanced_apd_calibration(void);
 ErrorStatus calibration_set_voltage(void);
+AnalyseResultType process_captured_data(uint16_t* captured_data);
+void measure_swap_adc_buffers(void);
 
 /* Private functions ---------------------------------------------------------*/
+
+void measure_swap_adc_buffers(void)
+{
+  if (capture_ptr == adc_capture_buffer0)
+  {
+    capture_ptr = adc_capture_buffer1;
+    process_ptr = adc_capture_buffer0;
+  }
+  else
+  {
+    capture_ptr = adc_capture_buffer0;
+    process_ptr = adc_capture_buffer1;
+  }
+}
+
+//Auto switch capture process
+void auto_handle_capture(void)
+{  
+  if (new_data_captured == 1) 
+    return;//it's not allowed to switch capture when previous data are not processed
+  
+  if (dma_state == DMA_NO_DATA)
+  {    
+    pll_set_frequency_1();//162.5 + 162.505
+    dwt_delay(SWITCH_DELAY);
+    measure_swap_adc_buffers();
+    start_adc_capture(capture_ptr);
+    dma_state = DMA_FREQ1_CAPTURING;
+    new_data_captured = 1;//data3 ready
+  }
+  else if (dma_state == DMA_FREQ1_DONE)
+  {
+    //ready to switch to freq2
+    pll_set_frequency_2();//191.5 + 191.505
+    dwt_delay(SWITCH_DELAY);
+    measure_swap_adc_buffers();    
+    start_adc_capture(capture_ptr);
+    dma_state = DMA_FREQ2_CAPTURING;
+    new_data_captured = 1;//data1 ready
+  }
+  else if (dma_state == DMA_FREQ2_DONE)
+  {
+    //ready to switch to freq3
+    pll_set_frequency_3();//193.5 + 193.505
+    dwt_delay(SWITCH_DELAY);
+    measure_swap_adc_buffers();
+    start_adc_capture(capture_ptr);
+    dma_state = DMA_FREQ3_CAPTURING;
+    new_data_captured = 1;//data2 ready
+  }
+  else if (dma_state == DMA_FREQ3_DONE)
+  {
+    //all data captured now
+    dma_state = DMA_NO_DATA;
+    
+    capture_do_single_adc_measurements();//measure temperature
+    auto_switch_apd_voltage(result1.Amplitude);//if auto switch enabled, manual switching is not working
+  }
+}
+
+void auto_handle_data_processing(void)
+{
+  static uint16_t old_dwt_value = 0;
+  static char result_str[64];
+  uint16_t result_length;
+
+  if (new_data_captured == 0) 
+    return; //nothing to process
+  
+  if ((dma_state == DMA_FREQ1_CAPTURING) || (dma_state == DMA_FREQ1_DONE))
+  {
+    //debug functions
+    uint16_t cur_dwt_value = get_dwt_value();
+    delta_time = cur_dwt_value - old_dwt_value;
+    old_dwt_value = cur_dwt_value;
+  
+    result3 = process_captured_data((uint16_t*)process_ptr);
+    do_distance_calculation();
+    
+#ifdef FAST_CAPTURE
+  //Less information
+  result_length = sprintf(
+      result_str, "%05d;%04d\r\n", dist_result_mm, result1.Amplitude);
+#else
+  result_length = sprintf(
+      result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", 
+      dist_result_mm, result1.Amplitude, APD_temperature_raw, (uint8_t)APD_current_voltage);
+#endif
+    
+    uart_dma_start_tx((uint8_t*)result_str, result_length);//attention - new transmission interrupts previous one. 
+    new_data_captured = 0;
+  }
+  else if ((dma_state == DMA_FREQ2_CAPTURING) || (dma_state == DMA_FREQ2_DONE)) 
+  {
+    result1 = process_captured_data((uint16_t*)process_ptr);
+    new_data_captured = 0;
+  }
+  else if ((dma_state == DMA_FREQ3_CAPTURING) || (dma_state == DMA_FREQ3_DONE)) 
+  {
+    result2 = process_captured_data((uint16_t*)process_ptr);
+    new_data_captured = 0;
+  }
+}
+
+void do_distance_calculation(void)
+{  
+  //subtract zero phase offset
+  int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
+  if (tmp_phase1 < 0) 
+    tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
+  
+  int16_t tmp_phase2 = result2.Phase - zero_phase2_calibration;
+  if (tmp_phase2 < 0) 
+    tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
+  
+  int16_t tmp_phase3 = result3.Phase - zero_phase3_calibration;
+  if (tmp_phase3 < 0) 
+    tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
+  
+  dist_result_mm = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
+}
 
 ErrorStatus do_phase_calibration(void)
 {
@@ -152,85 +289,43 @@ ErrorStatus single_freq_calibration(int16_t* result_phase)
   return SUCCESS;
 }
 
-void do_triple_phase_measurement(void)
-{
-    pll_set_frequency_1();
-    dwt_delay(SWITCH_DELAY);
-    result1 = do_capture();
-    
-    pll_set_frequency_2();
-    dwt_delay(SWITCH_DELAY);
-    result2 = do_capture();
-    
-    pll_set_frequency_3();
-    dwt_delay(SWITCH_DELAY);
-    result3 = do_capture();
-}
 
-void do_distance_calculation(void)
-{
-  static char result_str[64];
-  uint16_t result_length;
-  
-  //subtract zero phase offset
-  int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
-  if (tmp_phase1 < 0) 
-    tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
-  
-  int16_t tmp_phase2 = result2.Phase - zero_phase2_calibration;
-  if (tmp_phase2 < 0) 
-    tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
-  
-  int16_t tmp_phase3 = result3.Phase - zero_phase3_calibration;
-  if (tmp_phase3 < 0) 
-    tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
-  
-  dist_result_mm = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
-  //printf("DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", dist_result_mm, result1.Amplitude, APD_temperature_raw, (uint16_t)APD_current_voltage);
-  
-  result_length = sprintf(
-      result_str, "DIST;%05d;AMP;%04d;TEMP;%04d;VOLT;%03d\r\n", 
-      dist_result_mm, result1.Amplitude, APD_temperature_raw, (uint16_t)APD_current_voltage);
-  uart_dma_start_tx((uint8_t*)result_str, result_length);//attention - new transmission interrupts previous one. 
-}
+
+
+
 
 
 //phase measurement for single freqency
+//used for calibration
 AnalyseResultType do_capture(void)
 {
-  AnalyseResultType main_result = {0,0};
-  AnalyseResultType signal_result = {0,0};
-  AnalyseResultType reference_result = {0,0};
-
-  int16_t tmp_phase = 0;
+  dma_state = DMA_NO_DATA;
+  new_data_captured = 0;
   
 #if (REPEAT_NUMBER == 1)
   
-  start_adc_capture();
+  start_adc_capture((uint16_t*)adc_capture_buffer0);
   while(capture_done == 0) {}
-  signal_result = goertzel_analyse((uint16_t*)&adc_capture_buffer[0]);//signal
-  reference_result = goertzel_analyse((uint16_t*)&adc_capture_buffer[1]);//reference
-  //difference between signal and reference phase
-  tmp_phase = signal_result.Phase - reference_result.Phase;
-  if (tmp_phase < 0) 
-    tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
-  main_result.Phase = tmp_phase;
-  main_result.Amplitude = signal_result.Amplitude;
+  return process_captured_data((uint16_t*)adc_capture_buffer0);
 
 #else
+  
+  AnalyseResultType main_result = {0,0};
+  AnalyseResultType signal_result = {0,0};
+  AnalyseResultType reference_result = {0,0};
   uint8_t i;
   int16_t phase_buffer[REPEAT_NUMBER];
   uint32_t amplitude_summ = 0;
+  int16_t tmp_phase = 0;
   
-  for (i=0; i < REPEAT_NUMBER; i++)
+  for (i = 0; i < REPEAT_NUMBER; i++)
   {
-    start_adc_capture();
+    start_adc_capture((uint16_t*)adc_capture_buffer0);
     while(capture_done == 0) {}
-    signal_result = goertzel_analyse((uint16_t*)&adc_capture_buffer[0]);//signal
-    reference_result = goertzel_analyse((uint16_t*)&adc_capture_buffer[1]);//reference
+    signal_result = goertzel_analyse((uint16_t*)&adc_capture_buffer0[0]);//signal
+    reference_result = goertzel_analyse((uint16_t*)&adc_capture_buffer0[1]);//reference
     
-    //difference between signal and reference phase
-    tmp_phase = signal_result.Phase - reference_result.Phase;
+    tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
     if (tmp_phase < 0) 
       tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
     
@@ -241,13 +336,38 @@ AnalyseResultType do_capture(void)
   main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
   
-#endif  
-
   main_result.Phase = calculate_true_phase(
     APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
-  //phase corretion can produce zero crossing
+  //phase correction can produce zero crossing
   //phase < 0 or > 360
-  if (main_result.Phase < 0.0) 
+  if (main_result.Phase < 0) 
+    main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
+  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) 
+    main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
+  
+  return main_result;
+#endif
+}
+
+AnalyseResultType process_captured_data(uint16_t* captured_data)
+{
+  AnalyseResultType main_result = {0,0};
+  AnalyseResultType signal_result = {0,0};
+  AnalyseResultType reference_result = {0,0};
+  int16_t tmp_phase = 0;
+  
+  signal_result    = goertzel_analyse(&captured_data[0]);//signal
+  reference_result = goertzel_analyse(&captured_data[1]);//reference
+  tmp_phase = signal_result.Phase - reference_result.Phase;//difference between signal and reference phase
+  if (tmp_phase < 0) 
+    tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
+  main_result.Phase = tmp_phase;
+  main_result.Amplitude = signal_result.Amplitude;
+  
+  //calculate correction
+  main_result.Phase = calculate_true_phase(
+    APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
+  if (main_result.Phase < 0) 
     main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
   else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT)) 
     main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;

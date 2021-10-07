@@ -25,8 +25,7 @@
 #define TIMER1_PERIOD           (uint16_t)(TIMER1_FREQ / TIMER1_DIV / ADC_TRIGGER_FREQ_HZ)
 
 void prepare_capture(void);
-void start_adc_capture(void);
-void sort_captured_data(void);
+void start_adc_capture(volatile uint16_t* data_ptr);
 void capture_init_adc_single_measure(void);
 void capture_do_single_adc_measurements(void);
 
