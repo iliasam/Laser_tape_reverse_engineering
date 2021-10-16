@@ -1,56 +1,58 @@
+/* Includes ------------------------------------------------------------------*/
+
 #include "stm32f0xx_it.h"
 #include "config_periph.h"
 #include "capture_configure.h"
 #include "math.h"
 #include "analyse.h"
+#include "analyse_table.h" //generated with python script, constants must be coped to that script before running it
 #include "stdlib.h"
 
+/* Private typedef -----------------------------------------------------------*/
 #ifndef M_PI
 #define M_PI            3.1415926535f
 #endif
 
-extern float  APD_temperature;//temperature value in deg
+#define INT_COEF        1024.0f
+#define SCALING         ((float)POINTS_TO_SAMPLE / 2.0f)
+#define OMEGA           ((2.0f * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
-#define OMEGA ((2.0 * M_PI * K_COEF) / POINTS_TO_SAMPLE)
-
-float sin_coef = 0.0;
-float cos_coef = 0.0;
-float g_coef = 0.0;//goertzel coefficient
-
+/* Private variables ---------------------------------------------------------*/
+extern float  APD_temperature_deg;//temperature value in deg
 float calc_phase_offset_small(float a, float b, float start, float stop, float step);
 float calc_phase_offset(float a, float b);
 
-
 void init_goertzel(void)
 {
-  sin_coef = sin(OMEGA);
-  cos_coef = cos(OMEGA);
-  g_coef = 2.0 * cos_coef;
+  /*
+  uint16_t i;
+  for (i=0; i<POINTS_TO_SAMPLE; i++)
+  {
+    sin_buf[i] = (int32_t)(sin(i * OMEGA) * INT_COEF);
+    cos_buf[i] = (int32_t)(cos(i * OMEGA) * INT_COEF);
+  }
+  */
 }
 
 //data goes like data[used] + data[not used] + data[used] ...
 AnalyseResultType goertzel_analyse(uint16_t* data)
 {
   uint16_t i;
-  float q0, q1, q2;
-  float real, imag;
-  float   scalingFactor = (float)POINTS_TO_SAMPLE / 2.0;
+  int32_t real = 0; //integers!
+  int32_t imag = 0;
+  
   AnalyseResultType result;
   
-  q0=0;
-  q1=0;//n-1
-  q2=0;//n-2
-  
-  for(i=0; i<POINTS_TO_SAMPLE; i++)
+  for(i=0; i < POINTS_TO_SAMPLE; i++)
   {
-    q0 = g_coef * q1 - q2 + (float)data[i*2];
-    q2 = q1;
-    q1 = q0;
+    real+= analyse_sin_table[i] * (int32_t)data[i * 2];
+    imag+= analyse_cos_table[i] * (int32_t)data[i * 2];
   }
   
-  real = (q1 - q2 * cos_coef)/ scalingFactor;
-  imag = (q2 * sin_coef)/ scalingFactor;
-  result = do_result_conversion(real, imag);
+  real = real / (int32_t)SCALING;
+  imag = imag / (int32_t)SCALING;
+  
+  result = do_result_conversion((float)real, (float)imag);
   return result;
 }
 
@@ -58,11 +60,13 @@ AnalyseResultType goertzel_analyse(uint16_t* data)
 AnalyseResultType do_result_conversion(float real, float imag)
 {
   AnalyseResultType result;
-  float amplitude = imag * imag + real*real;
-  result.Amplitude = (uint32_t)sqrt(amplitude);
   
-  float phase = atan2(imag, real);
-  phase = phase * (float)(PHASE_MULT * MAX_ANGLE / 2) / M_PI;
+  float amplitude = imag * imag + real * real;
+  amplitude = sqrtf(amplitude);
+  result.Amplitude = (uint16_t)(amplitude / INT_COEF);
+  
+  float phase = atan2f(imag, real);
+  phase = phase * (float)(PHASE_MULT * HMAX_ANGLE) / M_PI;
   result.Phase = (int16_t)(phase);
   
   return result;
@@ -78,9 +82,10 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
   int32_t tmp_val = 0;
   
   //test for zero cross
-  for (i=0; i < length; i++)
+  for (i = 0; i < length; i++)
   {
-    if ((data[i] < (ZERO_ANGLE1 * PHASE_MULT)) || (data[i] > (ZERO_ANGLE2 * PHASE_MULT))) zero_cross_flag = 1;
+    if ((data[i] < (ZERO_ANGLE1 * PHASE_MULT)) || (data[i] > (ZERO_ANGLE2 * PHASE_MULT))) 
+      zero_cross_flag = 1;
   }
   
   if (zero_cross_flag == 0) //no zero cross 
@@ -112,15 +117,15 @@ int16_t calculate_true_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase)
 {
   //temperature compensation
-  //it is bad to use APD_temperature here
-  /// correction -  deg
-  float correction_t = 0.226974f * APD_temperature; 
-  correction_t+= -0.0049827f * APD_temperature * APD_temperature;
+  //it is bad to use APD_temperature_deg here
+  // correction -  deg
+  float correction_t = 0.226974f * APD_temperature_deg; 
+  correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
   
   float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
   float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
   
-  float phase_rad = phase * 0.1 * M_PI / 180.0f;
+  float phase_rad = phase * 0.1f * M_PI / 180.0f;
   
   //Corrected phase, not offset
   float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
@@ -131,7 +136,7 @@ int16_t calculate_true_phase(
   return (int16_t)(corr_deg * PHASE_MULT);
 }
 
-//equation sin(x)=(x-b)/a
+//equation sin(x)=(x-b)/a. We need to find x
 float calc_phase_offset_small(float a, float b, float start, float stop, float step)
 {
   float min_error = 1;
@@ -174,8 +179,10 @@ float calc_phase_offset(float a, float b)
 //return 1 if phase is close to zero
 uint8_t phase_close_to_zero(int16_t phase)
 {
-  if (phase < (ZERO_ANGLE1 * PHASE_MULT)) return 1;
-  if (phase > (ZERO_ANGLE2 * PHASE_MULT)) return 1;
+  if (phase < (ZERO_ANGLE1 * PHASE_MULT)) 
+    return 1;
+  if (phase > (ZERO_ANGLE2 * PHASE_MULT)) 
+    return 1;
   return 0;
 }
 

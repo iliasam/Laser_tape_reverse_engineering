@@ -22,8 +22,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint16_t APD_temperature_raw = 0;//raw temperature value
-float  APD_temperature = 0.0;//temperature value in deg
-float  APD_current_voltage = 80;//value in volts
+float  APD_temperature_deg = 0.0f;//temperature value in deg
+float  APD_current_voltage = 80.0f;//value in volts
 
 uint8_t measure_enabled = 1;//auto distance measurement enabled flag
 uint8_t calibration_needed = 0;//1- calibration needed flag
@@ -57,16 +57,14 @@ int main(void)
   delay_ms(100);
   
   prepare_capture();
-  
   printf("Start\r\n");
   
   while (1)
   {
-    
     if (measure_enabled == 1)
     {
-        auto_handle_capture();
-        auto_handle_data_processing();
+      auto_handle_capture();
+      auto_handle_data_processing();
     }
     
     if (calibration_needed == 1)
@@ -83,37 +81,25 @@ void process_rx_data(uint8_t data)
 {
   switch (data)
   {
-      case (uint8_t)'E': //Enable laser
-      {
-        enable_laser();
-        measure_enabled = 1;
-        break;
-      }
-      case (uint8_t)'D': //Disable laser
-      {
-        disable_laser();
-        measure_enabled = 0;
-        break;
-      }
-      /*
-      case (uint8_t)'H': //Set APD high voltage
-      {
-        set_apd_voltage(APD_HIGH_VOLTAGE);
-        break;
-      }
-      case (uint8_t)'L': //Set APD low voltage
-      {
-        set_apd_voltage(APD_LOW_VOLTAGE);
-        break;
-      }
-      */
-      case (uint8_t)'C'://Start calibration process
-      {
-        calibration_needed = 1;
-        break;
-      }
+  case (uint8_t)'E': //Enable laser
+    {
+      enable_laser();
+      measure_enabled = 1;
+      break;
+    }
+  case (uint8_t)'D': //Disable laser
+    {
+      disable_laser();
+      measure_enabled = 0;
+      break;
+    }
+  case (uint8_t)'C'://Start calibration process
+    {
+      calibration_needed = 1;
+      break;
+    }
     
-    default: break;
+  default: break;
   }
 }
 

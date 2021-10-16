@@ -12,15 +12,13 @@
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_current_voltage;//value in volts
 extern uint16_t APD_temperature_raw;
-extern float  APD_temperature;
+extern float APD_temperature_deg;
 
 /* Private function prototypes -----------------------------------------------*/
 void init_sys_clock(void);
 void init_gpio(void);
 void init_volt_pwm_timer(void);
 void init_i2c(void);
-
-
 
 
 /* Private functions ---------------------------------------------------------*/
@@ -186,19 +184,19 @@ void calculate_real_temperature(uint16_t raw_value)
   float result = 66.843f;
   result+= -0.029572f * (float)raw_value;
   result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
-  APD_temperature = result;
+  APD_temperature_deg = result;
 }
 
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
 //APD voltage is depending only from a temperature ?
-//"APD_temperature" value in deg
+//"APD_temperature_deg" value in deg
 #ifndef ENHANCED_APD_CALIBADION
-  float voltage_to_set = 0.4866667f * APD_temperature + 94.0f;
+  float voltage_to_set = 0.4866667f * APD_temperature_deg + 94.0f;
   set_apd_voltage(voltage_to_set);
 #else
   float voltage_to_set = 
-      (APD_VOLTAGE_RANGE / APD_MAX_TEMP) * APD_temperature + apd_min_voltage;
+      (APD_VOLTAGE_RANGE / APD_MAX_TEMP) * APD_temperature_deg + apd_min_voltage;
   if (voltage_to_set >= apd_saturation_voltage)
     voltage_to_set = apd_saturation_voltage;
     
