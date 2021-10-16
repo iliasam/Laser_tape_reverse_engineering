@@ -1,4 +1,14 @@
-MCU is STM32F030x6
+MCU is QFN32 marked as NM001.
+
+Programmer output:
+16:01:11 : Device ID:0x444 
+16:01:11 : Device flash Size : 32KBytes
+16:01:11 : Device family :STM32F03x
+Chip ID 0x444:
+STM32F030x4
+STM32F030x6
+is STM32F0x0 Value Line
+But STM32F030 do not have QFN32 package!
 
 PA14 - TX - SWCLK
 PA15 - RX
@@ -34,12 +44,5 @@ APD voltage:
 74.5В - sleep mode, 1.46V - PWM(PA1) - 48%
 107В - working voltage, 1.16V - PWM(PA1) - 29.8%
 
-0x444:
-STM32F030x4
-STM32F030x6
-is STM32F0x0 Value Line
-Programmer
-16:01:11 : Device ID:0x444 
-16:01:11 : Device flash Size : 32KBytes
-16:01:11 : Device family :STM32F03x
+
 
