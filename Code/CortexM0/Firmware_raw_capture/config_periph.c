@@ -87,10 +87,8 @@ void init_uart1(void)
   // Enable GPIO clock
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
   RCC_USARTCLKConfig(RCC_USART1CLK_SYSCLK);
-  
-  
-  
-  // Configure USART1 Tx as alternate function push-pull
+
+  // Configure USART1 Rx as alternate function push-pull
   GPIO_StructInit(&GPIO_InitStructure);
   GPIO_InitStructure.GPIO_Pin = UART_RX_PIN;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
@@ -207,8 +205,6 @@ void init_volt_pwm_timer(void)
   TIM_CtrlPWMOutputs(VOLT_PWM_TIMER_NAME, ENABLE);
   TIM_Cmd(VOLT_PWM_TIMER_NAME, ENABLE);
 }
-
-
 
 void delay_ms(uint32_t ms)
 {

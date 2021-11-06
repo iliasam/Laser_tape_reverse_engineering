@@ -95,7 +95,7 @@ void init_uart1(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
   RCC_USARTCLKConfig(RCC_USART1CLK_SYSCLK);
   
-  // Configure USART1 Tx as alternate function push-pull
+  // Configure USART1 Rx as alternate function push-pull
   GPIO_StructInit(&GPIO_InitStructure);
   GPIO_InitStructure.GPIO_Pin = UART_RX_PIN;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;

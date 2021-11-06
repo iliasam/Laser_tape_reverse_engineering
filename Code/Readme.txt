@@ -2,6 +2,8 @@ Important notice - all this firmware has been tested only with 512A and 701A har
 All this firmware is written for the STM32 MCU of the rangefinder module.  
 Used IDE - IAR 7.50.  
 
+"CortexM0" - folder with fimware for "U85B" modules.  
+  
 "Firmware_dist_calculation_fast":
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, 
 calculate distance in mm, send results to the UART.
