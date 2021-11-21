@@ -135,6 +135,7 @@ int16_t calculate_correction(
 }
 
 //equation sin(x)=(x-b)/a
+//return x
 float calc_phase_offset_small(float a, float b, float start, float stop, float step)
 {
   float min_error = 1;
@@ -155,7 +156,7 @@ float calc_phase_offset_small(float a, float b, float start, float stop, float s
   return best_x;
 }
 
-//a is amplitude corection
+//a is amplitude correction
 //b is measured phase
 //result is true phase
 float calc_phase_offset(float a, float b)

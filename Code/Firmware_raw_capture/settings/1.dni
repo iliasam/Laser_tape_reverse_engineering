@@ -8,6 +8,8 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
+[StLinkDriver]
+CStepIntDis=_ 0
 [Disassemble mode]
 mode=0
 [Breakpoints2]
@@ -15,5 +17,3 @@ Count=0
 [Aliases]
 Count=0
 SuppressDialog=0
-[StLinkDriver]
-CStepIntDis=_ 0

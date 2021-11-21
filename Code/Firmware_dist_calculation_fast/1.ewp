@@ -317,7 +317,7 @@
         <option>
           <name>CCIncludePath2</name>
           <state>.\inc</state>
-          <state>..\inc</state>
+          <state>$PROJ_DIR$\src\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
