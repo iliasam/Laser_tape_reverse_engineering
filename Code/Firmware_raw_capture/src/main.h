@@ -1,7 +1,7 @@
 #ifndef _MAIN_H
 #define _MAIN_H
 
-//512A board revision if not selected
+//512A board revision is selected if MODULE_701A not defined
 #define MODULE_701A
 
 //Testing

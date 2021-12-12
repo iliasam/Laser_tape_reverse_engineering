@@ -1,4 +1,5 @@
 Important notice - all this firmware has been tested only with 512A and 701A hardware!
+512A board revision is selected if MODULE_701A not defined is "main.h" file.  
 All this firmware is written for the STM32 MCU of the rangefinder module.  
 Used IDE - IAR 7.50.  
 
@@ -11,7 +12,7 @@ calculate distance in mm, send results to the UART.
 **************************************************************************************************
 
 "Firmware_dist_calculation_simple":
-Only "512A" module is supported.
+Only "512A" module is supported!!!!  
 This program captures data from ADC, calculate phase difference using Goertzel algorithm, 
 calculate distance in mm, send results to the UART.
 This program uses plain data capture algorithm, so it's not fast.
