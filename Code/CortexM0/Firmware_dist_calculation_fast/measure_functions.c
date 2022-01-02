@@ -60,6 +60,8 @@ volatile uint16_t delta_time = 0;
 float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
 float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
 
+uint8_t debug_freq_num = 0;
+
 /* Private functions ---------------------------------------------------------*/
 void enhanced_apd_calibration(void);
 ErrorStatus calibration_set_voltage(void);
@@ -143,6 +145,7 @@ void auto_handle_data_processing(void)
     delta_time = cur_dwt_value - old_dwt_value;
     old_dwt_value = cur_dwt_value;
   
+    debug_freq_num = 3;
     result3 = process_captured_data((uint16_t*)process_ptr);
     do_distance_calculation();
     
@@ -161,11 +164,13 @@ void auto_handle_data_processing(void)
   }
   else if ((dma_state == DMA_FREQ2_CAPTURING) || (dma_state == DMA_FREQ2_DONE)) 
   {
+    debug_freq_num = 1;
     result1 = process_captured_data((uint16_t*)process_ptr);
     new_data_captured = 0;
   }
   else if ((dma_state == DMA_FREQ3_CAPTURING) || (dma_state == DMA_FREQ3_DONE)) 
   {
+    debug_freq_num = 2;
     result2 = process_captured_data((uint16_t*)process_ptr);
     new_data_captured = 0;
   }
@@ -174,19 +179,20 @@ void auto_handle_data_processing(void)
 void do_distance_calculation(void)
 {  
   //subtract zero phase offset
-  int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
-  if (tmp_phase1 < 0) 
-    tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
+  result1.CalibPhase = result1.Phase - zero_phase1_calibration;
+  if (result1.CalibPhase < 0) 
+    result1.CalibPhase = MAX_ANGLE * PHASE_MULT + result1.CalibPhase;
   
-  int16_t tmp_phase2 = result2.Phase - zero_phase2_calibration;
-  if (tmp_phase2 < 0) 
-    tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
+  result2.CalibPhase = result2.Phase - zero_phase2_calibration;
+  if (result2.CalibPhase < 0) 
+    result2.CalibPhase = MAX_ANGLE * PHASE_MULT + result2.CalibPhase;
   
-  int16_t tmp_phase3 = result3.Phase - zero_phase3_calibration;
-  if (tmp_phase3 < 0) 
-    tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
+  result3.CalibPhase = result3.Phase - zero_phase3_calibration;
+  if (result3.CalibPhase < 0) 
+    result3.CalibPhase = MAX_ANGLE * PHASE_MULT + result3.CalibPhase;
   
-  dist_result_mm = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
+  dist_result_mm = triple_dist_calculaton(
+    result1.CalibPhase, result2.CalibPhase, result3.CalibPhase);
 }
 
 ErrorStatus do_phase_calibration(void)
@@ -335,6 +341,7 @@ AnalyseResultType do_capture(void)
   
   main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
   main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
+  main_result.RawPhase = main_result.Phase;
   
   main_result.Phase = calculate_true_phase(
     APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
@@ -363,6 +370,7 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
     tmp_phase = MAX_ANGLE * PHASE_MULT + tmp_phase;
   main_result.Phase = tmp_phase;
   main_result.Amplitude = signal_result.Amplitude;
+  main_result.RawPhase = main_result.Phase;
   
   //calculate correction
   main_result.Phase = calculate_true_phase(

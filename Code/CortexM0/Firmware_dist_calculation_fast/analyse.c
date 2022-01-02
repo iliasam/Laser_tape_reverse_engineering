@@ -17,6 +17,9 @@
 #define SCALING         ((float)POINTS_TO_SAMPLE / 2.0f)
 #define OMEGA           ((2.0f * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
+int debug_raw_freq = 0;
+extern uint8_t debug_freq_num;
+
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_temperature_deg;//temperature value in deg
 float calc_phase_offset_small(float a, float b, float start, float stop, float step);
@@ -122,7 +125,26 @@ int16_t calculate_true_phase(
   float correction_t = 0.226974f * APD_temperature_deg; 
   correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
   
-  float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
+  if (debug_freq_num == 1)
+  {
+    debug_raw_freq = (int)(phase / 10);
+  }
+  
+  float amp_corr_deg;
+  if (amplitude < 15)
+    amp_corr_deg = -22;//deg
+  else if (amplitude < 100)
+  {
+    float a0  = -25.77460f;
+    float a1  = 0.2833150f;
+    float a2  = -0.001258f;
+    amp_corr_deg = a0 + a1 * amplitude + a2*amplitude*amplitude;
+  }
+  else if (amplitude < 700)
+    amp_corr_deg = 0.05f * amplitude - 14.8f;//deg
+  else
+    amp_corr_deg = 0.03f * amplitude + 2.0f;//deg
+  
   float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
   
   float phase_rad = phase * 0.1f * M_PI / 180.0f;
@@ -131,11 +153,13 @@ int16_t calculate_true_phase(
   float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
   float corr_deg = corr_rad * 180.0f / M_PI;
   
-  corr_deg = corr_deg - correction_t;
+ // corr_deg = corr_deg - correction_t;
   
   return (int16_t)(corr_deg * PHASE_MULT);
 }
 
+//a is amplitude corection
+//b is measured phase, rad
 //equation sin(x)=(x-b)/a. We need to find x
 float calc_phase_offset_small(float a, float b, float start, float stop, float step)
 {
@@ -158,7 +182,7 @@ float calc_phase_offset_small(float a, float b, float start, float stop, float s
 }
 
 //a is amplitude corection
-//b is measured phase
+//b is measured phase, rad
 //result is true phase
 float calc_phase_offset(float a, float b)
 {

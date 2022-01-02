@@ -9,12 +9,13 @@
 #define M_PI            3.1415926535f
 #endif
 
-extern float  APD_temperature;//temperature value in deg
-
-
-
-
 #define OMEGA ((2.0 * M_PI * K_COEF) / POINTS_TO_SAMPLE)
+
+extern float  APD_temperature;//temperature value in deg
+extern int gebug_curr_freq_num;
+
+int gebug_amp_corr = 0;
+int debug_raw_phase_deg = 0;
 
 float sin_coef = 0.0;
 float cos_coef = 0.0;
@@ -81,7 +82,7 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
   int32_t tmp_val = 0;
   
   //test for zero cross
-  for (i=0; i < length; i++)
+  for (i = 0; i < length; i++)
   {
     if ((data[i] < (ZERO_ANGLE1 * PHASE_MULT)) || (data[i] > (ZERO_ANGLE2 * PHASE_MULT))) zero_cross_flag = 1;
   }
@@ -120,10 +121,32 @@ int16_t calculate_correction(
   float correction_t = 0.226974f * APD_temperature; 
   correction_t+= -0.0049827f * APD_temperature * APD_temperature;
   
-  float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
+  //float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
+  float amp_corr_deg;
+  
+  if (amplitude < 15)
+    amp_corr_deg = -22;//deg
+  else if (amplitude < 100)
+  {
+    float a0  = -25.77460f;
+    float a1  = 0.2833150f;
+    float a2  = -0.001258f;
+    amp_corr_deg = a0 + a1 * amplitude + a2*amplitude*amplitude;
+  }
+  else if (amplitude < 700)
+    amp_corr_deg = 0.05f * amplitude - 14.8f;//deg
+  else
+    amp_corr_deg = 0.03f * amplitude + 2.0f;//deg
+  
   float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
   
   float phase_rad = phase * 0.1 * M_PI / 180.0f;
+  
+  if (gebug_curr_freq_num == 1) //freq1
+  {
+    gebug_amp_corr = (int)amp_corr_deg;
+    debug_raw_phase_deg = (int)(phase / 10);
+  }
   
   //Corrected phase, not offset
   float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
@@ -134,6 +157,8 @@ int16_t calculate_correction(
   return (int16_t)(corr_deg * PHASE_MULT);
 }
 
+//a is amplitude correction
+//b is measured phase, rad
 //equation sin(x)=(x-b)/a
 //return x
 float calc_phase_offset_small(float a, float b, float start, float stop, float step)
@@ -157,7 +182,7 @@ float calc_phase_offset_small(float a, float b, float start, float stop, float s
 }
 
 //a is amplitude correction
-//b is measured phase
+//b is measured phase, rad
 //result is true phase
 float calc_phase_offset(float a, float b)
 {

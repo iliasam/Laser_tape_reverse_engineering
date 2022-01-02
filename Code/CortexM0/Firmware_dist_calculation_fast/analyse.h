@@ -18,6 +18,8 @@ typedef struct
 {
    uint16_t Amplitude;
    int16_t Phase;//deg*10
+   int16_t RawPhase;//deg*10
+   int16_t CalibPhase;//deg*10 - calibratd to zero dist
 } AnalyseResultType;
 
 void init_goertzel(void);
