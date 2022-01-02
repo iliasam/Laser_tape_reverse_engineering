@@ -4,10 +4,7 @@ This project describes my work about reverse engineering electronics (laser rang
 I create my own firmware that allow to use this module for DIY purposes.  
 Supported module types are: "512A" and "701A". Working of "703A" is confirmed by "Damian" here: [Link](https://www.hackster.io/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849).  
 UPD 11/2019: Attention: It was found that newer "x-40" laser tape measures come with "M88B" modules. Marking is "88B" at the PCB near MCU. That modules are based on STM32F0 MCU (it has QFN-32 package). That modules are not supported by my firmware!  
-Module dimensions: 25x13x50 mm.  
-  
-**UPD 10/2021: Added support for "U85B" modules that are used in modern lasr tape measures!**  
-See: https://github.com/iliasam/Laser_tape_reverse_engineering/wiki/U85B-laser-rangefinder-modules  
+Module dimensions: 25x13x50 mm.   
   
 Big article in Russian: https://habr.com/post/327642/  
 Google translated: [Link](http://translate.google.com/translate?sl=ru&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=https%3A%2F%2Fhabr.com%2Fpost%2F327642%2F&edit-text=).  
