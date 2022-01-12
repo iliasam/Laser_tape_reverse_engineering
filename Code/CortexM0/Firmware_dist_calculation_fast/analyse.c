@@ -130,6 +130,7 @@ int16_t calculate_true_phase(
     debug_raw_freq = (int)(phase / 10);
   }
   
+  /*
   float amp_corr_deg;
   if (amplitude < 15)
     amp_corr_deg = -22;//deg
@@ -152,8 +153,9 @@ int16_t calculate_true_phase(
   //Corrected phase, not offset
   float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
   float corr_deg = corr_rad * 180.0f / M_PI;
+  */
   
- // corr_deg = corr_deg - correction_t;
+  float corr_deg = (float)phase / (float)PHASE_MULT - correction_t;
   
   return (int16_t)(corr_deg * PHASE_MULT);
 }

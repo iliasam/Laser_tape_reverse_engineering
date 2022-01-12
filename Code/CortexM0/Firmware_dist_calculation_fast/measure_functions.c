@@ -23,7 +23,7 @@
 //Stop amplitude, ADC points
 #define ENHANCED_CALIBADION_STOP_AMPL   5
 
-#define ENHANCED_APD_CALIBADION
+#define ENHANCED_APD_CALIBADION         1
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -51,14 +51,18 @@ extern volatile uint16_t adc_capture_buffer1[ADC_CAPURE_BUF_LENGTH];
 volatile uint16_t *capture_ptr = adc_capture_buffer0;
 volatile uint16_t *process_ptr = adc_capture_buffer1;
 
-
 int32_t dist_result_mm = 0;
 
 //debug only - in us
 volatile uint16_t delta_time = 0;
 
-float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
-float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
+//float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
+//float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
+
+uint16_t apd_voltage_calib_buf[APD_VOLT_CALIB_LENGTH];
+
+// Amlitude is decreased ~2 times if voltage is decreased for this value
+uint8_t apd_voltage_decrease = APD_VOLT_DECREASE_DEFAULT_V;
 
 uint8_t debug_freq_num = 0;
 
@@ -179,20 +183,19 @@ void auto_handle_data_processing(void)
 void do_distance_calculation(void)
 {  
   //subtract zero phase offset
-  result1.CalibPhase = result1.Phase - zero_phase1_calibration;
-  if (result1.CalibPhase < 0) 
-    result1.CalibPhase = MAX_ANGLE * PHASE_MULT + result1.CalibPhase;
+  int16_t tmp_phase1 = result1.Phase - zero_phase1_calibration;
+  if (tmp_phase1 < 0) 
+    tmp_phase1 = MAX_ANGLE * PHASE_MULT + tmp_phase1;
   
-  result2.CalibPhase = result2.Phase - zero_phase2_calibration;
-  if (result2.CalibPhase < 0) 
-    result2.CalibPhase = MAX_ANGLE * PHASE_MULT + result2.CalibPhase;
+  int16_t tmp_phase2 = result2.Phase - zero_phase2_calibration;
+  if (tmp_phase2 < 0) 
+    tmp_phase2 = MAX_ANGLE * PHASE_MULT + tmp_phase2;
   
-  result3.CalibPhase = result3.Phase - zero_phase3_calibration;
-  if (result3.CalibPhase < 0) 
-    result3.CalibPhase = MAX_ANGLE * PHASE_MULT + result3.CalibPhase;
+  int16_t tmp_phase3 = result3.Phase - zero_phase3_calibration;
+  if (tmp_phase3 < 0) 
+    tmp_phase3 = MAX_ANGLE * PHASE_MULT + tmp_phase3;
   
-  dist_result_mm = triple_dist_calculaton(
-    result1.CalibPhase, result2.CalibPhase, result3.CalibPhase);
+  dist_result_mm = triple_dist_calculaton(tmp_phase1, tmp_phase2, tmp_phase3);
 }
 
 ErrorStatus do_phase_calibration(void)
@@ -203,7 +206,7 @@ ErrorStatus do_phase_calibration(void)
   
   //short_beep();
   
-  printf("Calib Start 85U\r\n");
+  printf("Calib Start U85\r\n");
   enable_laser();
   measure_enabled = 1;
   
@@ -386,36 +389,60 @@ AnalyseResultType process_captured_data(uint16_t* captured_data)
 // Try to find APD saturation voltage
 void enhanced_apd_calibration(void)
 {
-#ifdef ENHANCED_APD_CALIBADION
+#if (ENHANCED_APD_CALIBADION)
   
   float apd_calibration_voltage = APD_START_CALIB_VOLTAGE;
   AnalyseResultType tmp_result;
   uint8_t signal_detected_flag = 0;
   
   delay_ms(300);
-  
   set_apd_voltage(apd_calibration_voltage);
   delay_ms(200);
   
+  uint8_t step = 0;
   while (apd_calibration_voltage < APD_STOP_CALIB_VOLTAGE)
   {
     tmp_result = do_capture();//measure signal
+    apd_voltage_calib_buf[step] = tmp_result.Amplitude;
+    
     if (tmp_result.Amplitude > ENHANCED_CALIBADION_START_AMPL)
       signal_detected_flag = 1; //Signal detected
     
     if ((signal_detected_flag == 1) && (tmp_result.Amplitude < ENHANCED_CALIBADION_STOP_AMPL))
     {
       //Get APD voltage range
-      apd_saturation_voltage = apd_calibration_voltage - 5.0f;
-      apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+      //apd_saturation_voltage = apd_calibration_voltage - 5.0f;
+     // apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+      if (step > 1)
+        step--;
       break;
     }
     
-    apd_calibration_voltage += 1.0f;
+    step++;
+    apd_calibration_voltage += APD_VOLT_CALIB_STEP_V;
     set_apd_voltage(apd_calibration_voltage);
     delay_ms(200);
   }
-  printf("APD Saturation Voltage: %.1f\r\n", apd_saturation_voltage);
+  
+  apd_voltage_decrease = APD_VOLT_DECREASE_DEFAULT_V;
+  if (step > 1)
+  {
+    uint16_t threshold_amplitude = tmp_result.Amplitude / 2;
+    for (uint8_t i = 0; i < step; i++)
+    {
+      if (apd_voltage_calib_buf[i] > threshold_amplitude)
+      {
+        apd_voltage_decrease =
+           (uint8_t)(APD_STOP_CALIB_VOLTAGE - 
+                    (APD_START_CALIB_VOLTAGE + APD_VOLT_CALIB_STEP_V * i));
+        if (apd_voltage_decrease > 50) //error
+          apd_voltage_decrease = APD_VOLT_DECREASE_DEFAULT_V;
+        break;
+      }
+    }
+  }
+  
+  //printf("APD Saturation Voltage: %.1f\r\n", apd_saturation_voltage);
   
 #endif
 }
@@ -430,9 +457,10 @@ void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t cal
   FLASH_ProgramHalfWord(start_address+2, (uint16_t)calib_phase1); //phase
   FLASH_ProgramHalfWord(start_address+4, (uint16_t)calib_phase2); //phase
   FLASH_ProgramHalfWord(start_address+6, (uint16_t)calib_phase3); //phase
-  FLASH_ProgramHalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
-  FLASH_Lock();
+  //FLASH_ProgramHalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
+  FLASH_ProgramHalfWord(start_address+10, (uint16_t)apd_voltage_decrease);
   
+  FLASH_Lock();
 }
 
 //read calibration data
@@ -449,7 +477,14 @@ void read_calib_data_from_flash(void)
   
   uint16_t tmp_value = (*(__IO uint16_t*)(start_address + 8));//voltage
   if ((tmp_value < 50) || (tmp_value > 150)) //apd voltage
-    return;
-  apd_saturation_voltage = (float)tmp_value;
-  apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+  {}
+  else
+  {
+    //apd_saturation_voltage = (float)tmp_value;
+    //apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+  }
+  
+  uint16_t tmp_value2 = (*(__IO int16_t*)(start_address + 10));
+  if (tmp_value2 < 50)
+    apd_voltage_decrease  = (uint8_t)tmp_value2;
 }
