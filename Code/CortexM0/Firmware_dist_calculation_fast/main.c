@@ -31,8 +31,8 @@ uint8_t calibration_needed = 0;//1- calibration needed flag
 extern uint8_t uart_disabled_flag;
 extern AnalyseResultType result1;
 
-/* Private function prototypes -----------------------------------------------*/
 
+/* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
 

@@ -56,8 +56,7 @@ int32_t dist_result_mm = 0;
 //debug only - in us
 volatile uint16_t delta_time = 0;
 
-//float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
-//float apd_min_voltage = APD_DEFAULT_SATURATIION_VOLT - APD_VOLTAGE_RANGE;
+float apd_saturation_voltage = APD_DEFAULT_SATURATIION_VOLT;
 
 uint16_t apd_voltage_calib_buf[APD_VOLT_CALIB_LENGTH];
 
@@ -399,6 +398,8 @@ void enhanced_apd_calibration(void)
   set_apd_voltage(apd_calibration_voltage);
   delay_ms(200);
   
+  float apd_saturation_voltage = 0.0;
+  
   uint8_t step = 0;
   while (apd_calibration_voltage < APD_STOP_CALIB_VOLTAGE)
   {
@@ -411,8 +412,7 @@ void enhanced_apd_calibration(void)
     if ((signal_detected_flag == 1) && (tmp_result.Amplitude < ENHANCED_CALIBADION_STOP_AMPL))
     {
       //Get APD voltage range
-      //apd_saturation_voltage = apd_calibration_voltage - 5.0f;
-     // apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+      apd_saturation_voltage = apd_calibration_voltage - 5.0f;
       if (step > 1)
         step--;
       break;
@@ -424,6 +424,7 @@ void enhanced_apd_calibration(void)
     delay_ms(200);
   }
   
+  //Try to find voltage, where signal is 2 times less than at maximum
   apd_voltage_decrease = APD_VOLT_DECREASE_DEFAULT_V;
   if (step > 1)
   {
@@ -442,7 +443,7 @@ void enhanced_apd_calibration(void)
     }
   }
   
-  //printf("APD Saturation Voltage: %.1f\r\n", apd_saturation_voltage);
+  printf("APD Saturation Voltage: %.1f\r\n", apd_saturation_voltage);
   
 #endif
 }
@@ -457,7 +458,7 @@ void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t cal
   FLASH_ProgramHalfWord(start_address+2, (uint16_t)calib_phase1); //phase
   FLASH_ProgramHalfWord(start_address+4, (uint16_t)calib_phase2); //phase
   FLASH_ProgramHalfWord(start_address+6, (uint16_t)calib_phase3); //phase
-  //FLASH_ProgramHalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
+  FLASH_ProgramHalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
   FLASH_ProgramHalfWord(start_address+10, (uint16_t)apd_voltage_decrease);
   
   FLASH_Lock();
@@ -480,8 +481,7 @@ void read_calib_data_from_flash(void)
   {}
   else
   {
-    //apd_saturation_voltage = (float)tmp_value;
-    //apd_min_voltage = apd_saturation_voltage - APD_VOLTAGE_RANGE;
+    apd_saturation_voltage = (float)tmp_value;
   }
   
   uint16_t tmp_value2 = (*(__IO int16_t*)(start_address + 10));
