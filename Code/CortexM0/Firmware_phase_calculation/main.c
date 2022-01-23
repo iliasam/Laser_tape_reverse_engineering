@@ -28,9 +28,6 @@ AnalyseResultType result1;
 AnalyseResultType result2;
 AnalyseResultType result3;
 
-int tmp_phase_deg = 0;
-int gebug_curr_freq_num = 0;
-
 
 /* Private function prototypes -----------------------------------------------*/
 void do_triple_phase_measurement(void);
@@ -71,9 +68,7 @@ int main(void)
     printf("freqA_phase:%d\r\n", result1.Phase);
     printf("freqB_phase:%d\r\n", result2.Phase);
     printf("freqC_phase:%d\r\n", result3.Phase);
-    
-    tmp_phase_deg = (int)(result1.Phase / 10);
-    
+
     //if auto switch enabled, manual switching is not working
     auto_switch_apd_voltage((uint16_t)result1.Amplitude);
     
@@ -89,20 +84,17 @@ void do_triple_phase_measurement(void)
     
     //set freq1
     pll_set_frequency_1();
-    gebug_curr_freq_num = 1;
     //dwt_delay(SWITCH_DELAY);
     delay_ms(1);
     result1 = do_capture();
     
     pll_set_frequency_2();
     //dwt_delay(SWITCH_DELAY);
-    gebug_curr_freq_num = 2;
     delay_ms(1);
     result2 = do_capture();
     
     pll_set_frequency_3();
     //dwt_delay(SWITCH_DELAY);
-    gebug_curr_freq_num = 3;
     delay_ms(1);
     result3 = do_capture();
 }

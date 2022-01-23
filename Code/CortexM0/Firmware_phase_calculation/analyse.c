@@ -21,9 +21,6 @@ float sin_coef = 0.0;
 float cos_coef = 0.0;
 float g_coef = 0.0;//goertzel coefficient
 
-float calc_phase_offset_small(float a, float b, float start, float stop, float step);
-float calc_phase_offset(float a, float b);
-
 
 void init_goertzel(void)
 {
@@ -104,12 +101,11 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
     tmp_val = tmp_val / length;//positive value
     //remove additional shift
     tmp_val = HMAX_ANGLE * PHASE_MULT - tmp_val;//can be negative
-    if (tmp_val < 0) tmp_val = MAX_ANGLE * PHASE_MULT + tmp_val;
+    if (tmp_val < 0) 
+      tmp_val = MAX_ANGLE * PHASE_MULT + tmp_val;
     return tmp_val;
   }
 }
-
-
 
 //phase is deg * 10
 int16_t calculate_correction(
@@ -120,84 +116,8 @@ int16_t calculate_correction(
   /// correction -  deg
   float correction_t = 0.226974f * APD_temperature; 
   correction_t+= -0.0049827f * APD_temperature * APD_temperature;
-  
-  //float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
-  float amp_corr_deg;
-  
-  if (amplitude < 15)
-    amp_corr_deg = -22;//deg
-  else if (amplitude < 100)
-  {
-    float a0  = -25.77460f;
-    float a1  = 0.2833150f;
-    float a2  = -0.001258f;
-    amp_corr_deg = a0 + a1 * amplitude + a2*amplitude*amplitude;
-  }
-  else if (amplitude < 700)
-    amp_corr_deg = 0.05f * amplitude - 14.8f;//deg
-  else
-    amp_corr_deg = 0.03f * amplitude + 2.0f;//deg
-  
-  float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
-  
-  float phase_rad = phase * 0.1 * M_PI / 180.0f;
-  
-  if (gebug_curr_freq_num == 1) //freq1
-  {
-    gebug_amp_corr = (int)amp_corr_deg;
-    debug_raw_phase_deg = (int)(phase / 10);
-  }
-  
-  //Corrected phase, not offset
-  float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
-  float corr_deg = corr_rad * 180.0f / M_PI;
-  
-  corr_deg = corr_deg - correction_t;
-  
-  return (int16_t)(corr_deg * PHASE_MULT);
-}
 
-//a is amplitude correction
-//b is measured phase, rad
-//equation sin(x)=(x-b)/a
-//return x
-float calc_phase_offset_small(float a, float b, float start, float stop, float step)
-{
-  float min_error = 1;
-  float best_x = start;
-  
-  for (float x = start; x < stop; x += step)
-  {
-    //b+a*sin(x)-x
-    float error = a * sinf(x) + b - x;
-    error = fabs(error);
-    if (error < min_error)
-    {
-      min_error = error;
-      best_x = x;
-    }
-  }
-  
-  return best_x;
-}
-
-//a is amplitude correction
-//b is measured phase, rad
-//result is true phase
-float calc_phase_offset(float a, float b)
-{
-  float start = -a + b - 0.1f;
-  float stop = a + b + 0.1f;
-  
-  float best_x = calc_phase_offset_small(a, b, start, stop, 0.1f);
-  start = best_x - 0.2f;
-  stop = best_x + 0.2f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.01f);
-  start = best_x - 0.02f;
-  stop = best_x + 0.02f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.002f);
-  
-  return best_x;
+  return (int16_t)(correction_t * PHASE_MULT);
 }
 
 
