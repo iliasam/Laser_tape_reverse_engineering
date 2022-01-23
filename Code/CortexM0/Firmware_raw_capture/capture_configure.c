@@ -82,7 +82,7 @@ void init_adc_capture(void)
   ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see chanels values
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_1_5Cycles);
+  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_71_5Cycles);
 
   ADC_GetCalibrationFactor(ADC1);
   

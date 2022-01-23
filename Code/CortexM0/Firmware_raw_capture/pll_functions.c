@@ -103,25 +103,21 @@ void pll_set_frequency_1(void)
 //191.5 + 191.505
 void pll_set_frequency_2(void)
 {
-  /*
   pll_disable_divider();
   pll_change_freq(30, 800, 801, 1250);
-  */
-  
+}
+
+
+void pll_set_frequency_3(void)
+{
+  pll_disable_divider();
+  //diff is 4.8 kHz
   set_pll_coeff(25, 14323, 15625, MSNA_PLL_START_REG); //161.9792 MHz
   set_pll_coeff(25, 28622, 31250, MSNB_PLL_START_REG); //161.9744 MHz
   PLL_send_reset();
   PLL_send_enable_output();
-  
-  pll_disable_divider();
 }
 
-//193.5 + 193.505
-void pll_set_frequency_3(void)
-{
-  pll_disable_divider();
-  pll_change_freq(30, 1200, 1201, 1250);
-}
 //25 mhz
 void pll_set_frequency_4(void)
 {

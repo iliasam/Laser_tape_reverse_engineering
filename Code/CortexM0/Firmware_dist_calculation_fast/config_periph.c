@@ -13,6 +13,11 @@
 extern float  APD_current_voltage;//value in volts
 extern uint16_t APD_temperature_raw;
 extern float APD_temperature_deg;
+extern uint8_t apd_voltage_decrease;
+
+float test_apd_voltage = 90.0f;
+uint8_t apd_voltage_reduced_flag = 0;
+uint16_t corrected_amplitude = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void init_sys_clock(void);
@@ -85,8 +90,8 @@ void init_gpio(void)
 //new_voltage - target APD voltage in volts
 void set_apd_voltage(float new_voltage)
 {   
-  if (new_voltage > 115.0f)
-      new_voltage = 115;
+  if (new_voltage > APD_MAX_VOLTAGE_V)
+      new_voltage = APD_MAX_VOLTAGE_V;
   
   if (new_voltage < 70.0f)
     new_voltage = 70.0f;
@@ -189,30 +194,32 @@ void calculate_real_temperature(uint16_t raw_value)
 
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
-//APD voltage is depending only from a temperature ?
-//"APD_temperature_deg" value in deg
-#ifndef ENHANCED_APD_CALIBADION
-  float voltage_to_set = 0.4866667f * APD_temperature_deg + 94.0f;
-  set_apd_voltage(voltage_to_set);
-#else
-  float voltage_to_set = 
-      (APD_VOLTAGE_RANGE / APD_MAX_TEMP) * APD_temperature_deg + apd_min_voltage;
-  if (voltage_to_set >= apd_saturation_voltage)
-    voltage_to_set = apd_saturation_voltage;
-    
-  if (current_amplitude > 2200)
+  //Kind of AGC
+  if (apd_voltage_reduced_flag)
   {
-    if (TIMER_ELAPSED(apt_agc_timer))
+    corrected_amplitude = current_amplitude * 2;
+    if (corrected_amplitude < SIGNAL_AMPL_INCREASE_LEVEL)
     {
-      set_apd_voltage(APD_current_voltage - 1.0);//try to decrease voltage
-      START_TIMER(apt_agc_timer, 500);
+      apd_voltage_reduced_flag = 0;
     }
-    return;
   }
-  else if (current_amplitude < 2000)
-    set_apd_voltage(voltage_to_set);  
-
-#endif
+  else
+  {
+    corrected_amplitude = current_amplitude;
+    if (corrected_amplitude > SIGNAL_AMPL_REDUCE_LEVEL)
+    {
+      apd_voltage_reduced_flag = 1;
+    }
+  }
+  
+  //APD voltage is depending only from a temperature ?
+  //"APD_temperature_deg" value in deg
+  float voltage_to_set_v = 0.4866667f * APD_temperature_deg + 90.0f; //TODO
+  if (apd_voltage_reduced_flag)
+    voltage_to_set_v -= apd_voltage_decrease;
+  set_apd_voltage(voltage_to_set_v);
+  //set_apd_voltage(test_apd_voltage);
+  
 }
 
 

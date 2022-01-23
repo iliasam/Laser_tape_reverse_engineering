@@ -1,6 +1,6 @@
 "PC_raw_capture" - PC utility to be used with "Firmware_raw_capture".  
 Allows to view data captured by ADC; calculate FFT and calculate phase difference using Goertzel algorithm.  
-Set "Auto Request" checkbox to get data from module.  
+Set "Auto Request" checkbox to get data from module!  
 ![Alt text](Screenshot1.png?raw=true "Image")  
 
 "PC_phase_analyse" - PC utility to be used with "Firmware_phase_calculation".  

@@ -5,6 +5,7 @@
 #include "config_periph.h"
 #include "pll_functions.h"
 #include "capture_configure.h"
+#include "stm32f0xx_it.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -46,7 +47,7 @@ int main(void)
   {
     uint8_t rx_byte;
     while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET){}
-    rx_byte = USART_ReceiveData (USART1);
+    rx_byte = USART_ReceiveData(USART1);
     process_rx_data(rx_byte);
   }
 }
@@ -56,8 +57,8 @@ void process_rx_data(uint8_t data)
 {
   if (set_fine_voltage_flag != 0)
   {
-    set_apd_voltage((float)data);
     set_fine_voltage_flag = 0;
+    set_apd_voltage((float)data);
     return;
   }
   
@@ -76,7 +77,13 @@ void process_rx_data(uint8_t data)
       case (uint8_t)'M': //Start raw data capture
       {
         start_adc_capture();
-        while(capture_done == 0){}
+        uint32_t start_time  = HAL_GetTick();
+        while(capture_done == 0)
+        {
+          uint32_t duration_ms = HAL_GetTick() - start_time;
+          if (duration_ms > 100)//timeout
+            capture_done = 1;
+        }
         sent_captured_data_to_pc();
         break;
       }
@@ -105,9 +112,9 @@ void process_rx_data(uint8_t data)
         pll_set_frequency_2();
         break;
       }
-      case (uint8_t)'C'://Set PLL freq4 - low
+      case (uint8_t)'C'://Set PLL freq4 - "FREQ LOW"
       {
-        pll_set_frequency_4();
+        pll_set_frequency_4();//25 mhz
         break;
       }
       case (uint8_t)'1'://'one' - Set PLL freq4 - high modulation
@@ -115,25 +122,31 @@ void process_rx_data(uint8_t data)
         pll_set_frequency_5();
         break;
       }
-    default: break;
+      case (uint8_t)'T':
+      {
+        pll_set_frequency_3();
+        break;
+      }
+      case (uint8_t)'V'://Set fine APD voltage
+      {
+        set_fine_voltage_flag = 1;
+        return;
+        break;
+      }
+    default:
+      break;
   }
   
-  if (data == 'V') //Set fine APD voltage
-    set_fine_voltage_flag = 1;
-  else
-    set_fine_voltage_flag = 0;
-  
+  set_fine_voltage_flag = 0;
 }
 
 //send array to UART
 void uart_send_data(uint8_t* data, uint16_t length)
 {
-  uint16_t i;
-  
   if (uart_disabled_flag)
     return;
   
-  for (i = 0; i < length; i++)
+  for (uint16_t i = 0; i < length; i++)
   {
     while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET) {} //while not empty
     USART_SendData(USART1, (uint8_t)data[i]);  

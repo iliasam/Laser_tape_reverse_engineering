@@ -4,7 +4,7 @@ Used IDE - IAR 7.50.
 See programming instructions: https://github.com/iliasam/Laser_tape_reverse_engineering/wiki/U85-module-programming  
   
 "_boot.hex" is compiled firmware for using  with bootloader, it user do not need SWD debugging.  
-SWD interface is disabled after 1s after firmware startup - go free UART TX pin.  
+SWD interface is disabled after 1s after firmware startup - to free UART TX pin.  
 So UART would be working in any case. Firmware could be changed with DFU UART bootloader or with programmer (use NRST!).  
   
 Not "_boot.hex" firmware is build from sources, it check state of MCU UART RX pin at startup.  

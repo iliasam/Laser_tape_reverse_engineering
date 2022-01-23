@@ -28,6 +28,7 @@ AnalyseResultType result1;
 AnalyseResultType result2;
 AnalyseResultType result3;
 
+
 /* Private function prototypes -----------------------------------------------*/
 void do_triple_phase_measurement(void);
 void process_rx_data(uint8_t data);
@@ -67,7 +68,7 @@ int main(void)
     printf("freqA_phase:%d\r\n", result1.Phase);
     printf("freqB_phase:%d\r\n", result2.Phase);
     printf("freqC_phase:%d\r\n", result3.Phase);
-    
+
     //if auto switch enabled, manual switching is not working
     auto_switch_apd_voltage((uint16_t)result1.Amplitude);
     

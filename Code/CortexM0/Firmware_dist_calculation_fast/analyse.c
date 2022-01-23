@@ -17,21 +17,14 @@
 #define SCALING         ((float)POINTS_TO_SAMPLE / 2.0f)
 #define OMEGA           ((2.0f * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
+int debug_raw_freq = 0;
+extern uint8_t debug_freq_num;
+
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_temperature_deg;//temperature value in deg
-float calc_phase_offset_small(float a, float b, float start, float stop, float step);
-float calc_phase_offset(float a, float b);
 
 void init_goertzel(void)
 {
-  /*
-  uint16_t i;
-  for (i=0; i<POINTS_TO_SAMPLE; i++)
-  {
-    sin_buf[i] = (int32_t)(sin(i * OMEGA) * INT_COEF);
-    cos_buf[i] = (int32_t)(cos(i * OMEGA) * INT_COEF);
-  }
-  */
 }
 
 //data goes like data[used] + data[not used] + data[used] ...
@@ -122,58 +115,14 @@ int16_t calculate_true_phase(
   float correction_t = 0.226974f * APD_temperature_deg; 
   correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
   
-  float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
-  float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
-  
-  float phase_rad = phase * 0.1f * M_PI / 180.0f;
-  
-  //Corrected phase, not offset
-  float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
-  float corr_deg = corr_rad * 180.0f / M_PI;
-  
-  corr_deg = corr_deg - correction_t;
-  
-  return (int16_t)(corr_deg * PHASE_MULT);
-}
-
-//equation sin(x)=(x-b)/a. We need to find x
-float calc_phase_offset_small(float a, float b, float start, float stop, float step)
-{
-  float min_error = 1;
-  float best_x = start;
-  
-  for (float x = start; x < stop; x += step)
+  if (debug_freq_num == 1)
   {
-    //b+a*sin(x)-x
-    float error = a * sinf(x) + b - x;
-    error = fabs(error);
-    if (error < min_error)
-    {
-      min_error = error;
-      best_x = x;
-    }
+    debug_raw_freq = (int)(phase / 10);
   }
   
-  return best_x;
-}
-
-//a is amplitude corection
-//b is measured phase
-//result is true phase
-float calc_phase_offset(float a, float b)
-{
-  float start = -a + b - 0.1f;
-  float stop = a + b + 0.1f;
+  float corr_deg = (float)phase / (float)PHASE_MULT - correction_t;
   
-  float best_x = calc_phase_offset_small(a, b, start, stop, 0.1f);
-  start = best_x - 0.2f;
-  stop = best_x + 0.2f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.01f);
-  start = best_x - 0.02f;
-  stop = best_x + 0.02f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.002f);
-  
-  return best_x;
+  return (int16_t)(corr_deg * PHASE_MULT);
 }
 
 //return 1 if phase is close to zero
@@ -185,5 +134,3 @@ uint8_t phase_close_to_zero(int16_t phase)
     return 1;
   return 0;
 }
-
-

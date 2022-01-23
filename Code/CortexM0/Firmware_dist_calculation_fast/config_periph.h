@@ -3,26 +3,27 @@
 
 #include "main.h"
 
-#define LASER_DAC1_VALUE (uint16_t)(1737) //1.4v/3.3v*4096
+#define APD_DEFAULT_VOLTAGE                     100.6f
 
-#define APD_DAC2_VALUE1 (uint16_t)(2010) //1.62v/3.3v*4096
-#define APD_DAC2_VALUE2 (uint16_t)(1588) //1.28v/3.3v*4096
-
-#define APD_DAC2_VALUE3 (uint16_t)(1663) //1.34v/3.3v*4096 - ~~81V
-#define APD_DAC2_VALUE4 (uint16_t)(1514) //1.22v/3.3v*4096 - ~~93V
-#define APD_DAC2_VALUE5 (uint16_t)(1450) //~~98V
-//#define APD_DAC2_VALUE5 (uint16_t)(1400) //102
-
-#define APD_LOW_VOLTAGE         80.6f
-#define APD_HIGH_VOLTAGE        98.6f
-#define APD_DEFAULT_VOLTAGE     100.6f
+#define APD_MAX_VOLTAGE_V                       115.0f
 
 //Constants for "ENHANCED_APD_CALIBADION"
-#define APD_START_CALIB_VOLTAGE 75.0f
-#define APD_STOP_CALIB_VOLTAGE  123.0f
-#define APD_VOLTAGE_RANGE       20.0f
+#define APD_START_CALIB_VOLTAGE                 75.0f
+#define APD_STOP_CALIB_VOLTAGE                  APD_MAX_VOLTAGE_V
+//#define APD_VOLTAGE_RANGE                     20.0f
+#define APD_VOLT_CALIB_STEP_V                   1.0f
+
+//Voltage would be decreased for sush value if signal is too high
+#define APD_VOLT_DECREASE_DEFAULT_V             20
+
+#define APD_VOLT_CALIB_LENGTH    ((int)APD_STOP_CALIB_VOLTAGE - (int)APD_START_CALIB_VOLTAGE + 2)
+
 //#define APD_MAX_TEMP            45.0f//Degrees - max temperature
-#define APD_DEFAULT_SATURATIION_VOLT  114.0f
+#define APD_DEFAULT_SATURATIION_VOLT            114.0f
+
+//ADC points
+#define SIGNAL_AMPL_REDUCE_LEVEL                (1200)
+#define SIGNAL_AMPL_INCREASE_LEVEL              (900)
 
 #define DCDC_R_UP               5100000.0f //Ohm - upper - R37
 #define DCDC_R_DOWN             74000.0f //Ohm - down - R103

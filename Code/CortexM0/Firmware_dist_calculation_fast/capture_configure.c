@@ -82,10 +82,10 @@ void capture_init_adc(void)
   ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_Rising;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see chanels values
+  ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see channels values
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_1_5Cycles);
+  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_71_5Cycles);
 
   ADC_GetCalibrationFactor(ADC1);
   
