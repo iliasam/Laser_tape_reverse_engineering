@@ -3,16 +3,6 @@
 
 #include "main.h"
 
-#define LASER_DAC1_VALUE (uint16_t)(1737) //1.4v/3.3v*4096
-
-#define APD_DAC2_VALUE1 (uint16_t)(2010) //1.62v/3.3v*4096
-#define APD_DAC2_VALUE2 (uint16_t)(1588) //1.28v/3.3v*4096
-
-#define APD_DAC2_VALUE3 (uint16_t)(1663) //1.34v/3.3v*4096 - ~~81V
-#define APD_DAC2_VALUE4 (uint16_t)(1514) //1.22v/3.3v*4096 - ~~93V
-#define APD_DAC2_VALUE5 (uint16_t)(1450) //~~98V
-//#define APD_DAC2_VALUE5 (uint16_t)(1400) //102
-
 #define APD_LOW_VOLTAGE         80.6f
 #define APD_HIGH_VOLTAGE        98.6f
 #define APD_DEFAULT_VOLTAGE     100.6f
@@ -88,11 +78,8 @@
 
 void enable_laser(void);
 void disable_laser(void);
-
 void set_apd_voltage(float new_voltage);
-
 void init_all_hardware(void);
-
 void delay_ms(uint32_t ms);
 
 #endif
