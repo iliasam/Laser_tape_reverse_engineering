@@ -19,7 +19,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint16_t APD_temperature_raw = 0;//raw temperature value
-float  APD_temperature = 0.0;//temperature value in deg
+float  APD_temperature_deg = 0.0;//temperature value in deg
 float  APD_current_voltage = 80;//value in volts
 
 extern uint8_t uart_disabled_flag;

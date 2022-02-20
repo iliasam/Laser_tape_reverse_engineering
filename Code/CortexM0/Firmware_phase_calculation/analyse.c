@@ -11,7 +11,7 @@
 
 #define OMEGA ((2.0 * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
-extern float  APD_temperature;//temperature value in deg
+extern float  APD_temperature_deg;//temperature value in deg
 extern int gebug_curr_freq_num;
 
 int gebug_amp_corr = 0;
@@ -108,16 +108,17 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 }
 
 //phase is deg * 10
-int16_t calculate_correction(
-  uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase)
+int16_t calculate_corrected_phase(
+  uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, int16_t phase)
 {
+ // return phase;
   //temperature compensation
-  //it is bad to use APD_temperature here
+  //it is bad to use APD_temperature_deg here
   /// correction -  deg
-  float correction_t = 0.226974f * APD_temperature; 
-  correction_t+= -0.0049827f * APD_temperature * APD_temperature;
+  float correction_t = 0.226974f * APD_temperature_deg; 
+  correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
 
-  return (int16_t)(correction_t * PHASE_MULT);
+  return ((int16_t)(correction_t * PHASE_MULT) + phase);
 }
 
 

@@ -12,7 +12,7 @@
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_current_voltage;//value in volts
 extern uint16_t APD_temperature_raw;
-extern float  APD_temperature;
+extern float  APD_temperature_deg;
 
 uint8_t uart_disabled_flag = 0;
 
@@ -230,14 +230,13 @@ void calculate_real_temperature(uint16_t raw_value)
   float result = 66.843f;
   result+= -0.029572f * (float)raw_value;
   result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
-  APD_temperature = result;
+  APD_temperature_deg = result;
 }
 
 void auto_switch_apd_voltage(uint16_t current_amplitude)
 {
   //APD voltage is depending only from a temperature
-  //float voltage_to_set = 0.4866667f * APD_temperature + 98.933f;
-  float voltage_to_set = 0.4866667f * APD_temperature + 94.0f;
+  float voltage_to_set = 0.8f * APD_temperature_deg + 80.0f;
   set_apd_voltage(voltage_to_set);//testing only
 }
 
