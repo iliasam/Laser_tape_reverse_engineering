@@ -3,20 +3,25 @@
 
 #include "main.h"
 
+// When enabled, RX pin state will be analyzed at startup
+// If RX is low, UART is disabled. This is needed for debugger
+//if not defined, UART is always enabled - "boot" configuration
+#define DETECT_UART_PRESENCE
+
 #define APD_LOW_VOLTAGE         80.6f
 #define APD_HIGH_VOLTAGE        98.6f
 #define APD_DEFAULT_VOLTAGE     100.6f
+#define APD_SHIGH_VOLTAGE       115.0f
 
 #define DCDC_R_UP               5100000.0f //Ohm - upper - R37
 #define DCDC_R_DOWN             74000.0f //Ohm - down - R103
 #define DCDC_R_DAC              (float)(2100 + 46800) //Ohm - after dac - R38 + R39
 #define DCDC_VREF               1.27f //V - internal VREF voltage of the DC-DC
 
-
 #define AREF_VOLTAGE            3.3f //AREF voltage of the MCU
 #define ADC_SIGNAL              ADC_Channel_5 //PA5
 #define APD_CORR_COEF           1.0236f
-#define APD_SHIGH_VOLTAGE       115.0f
+
 #define ADC_REF_CHANNEL         ADC_Channel_4 //PA4
 #define ADC_REF_PIN             GPIO_Pin_4
 #define ADC_SIGNAL_PIN          GPIO_Pin_5

@@ -3,6 +3,7 @@
 #include "delay_us_timer.h"
 #include "config_periph.h"
 
+//Real DWT is not accessible in Cortex M0.
 void dwt_init(void)
 {
   TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;

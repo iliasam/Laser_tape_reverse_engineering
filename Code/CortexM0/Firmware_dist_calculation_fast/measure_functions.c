@@ -63,8 +63,6 @@ uint16_t apd_voltage_calib_buf[APD_VOLT_CALIB_LENGTH];
 // Amlitude is decreased ~2 times if voltage is decreased for this value
 uint8_t apd_voltage_decrease = APD_VOLT_DECREASE_DEFAULT_V;
 
-uint8_t debug_freq_num = 0;
-
 /* Private functions ---------------------------------------------------------*/
 void enhanced_apd_calibration(void);
 ErrorStatus calibration_set_voltage(void);
@@ -148,7 +146,6 @@ void auto_handle_data_processing(void)
     delta_time = cur_dwt_value - old_dwt_value;
     old_dwt_value = cur_dwt_value;
   
-    debug_freq_num = 3;
     result3 = process_captured_data((uint16_t*)process_ptr);
     do_distance_calculation();
     
@@ -167,13 +164,11 @@ void auto_handle_data_processing(void)
   }
   else if ((dma_state == DMA_FREQ2_CAPTURING) || (dma_state == DMA_FREQ2_DONE)) 
   {
-    debug_freq_num = 1;
     result1 = process_captured_data((uint16_t*)process_ptr);
     new_data_captured = 0;
   }
   else if ((dma_state == DMA_FREQ3_CAPTURING) || (dma_state == DMA_FREQ3_DONE)) 
   {
-    debug_freq_num = 2;
     result2 = process_captured_data((uint16_t*)process_ptr);
     new_data_captured = 0;
   }

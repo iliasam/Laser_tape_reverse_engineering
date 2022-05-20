@@ -20,8 +20,6 @@
 //Goertzel coefficent - MUST be integer, or quality fall
 #define K_COEF                  ((float)SIGNAL_FREQ * (float)POINTS_TO_SAMPLE / (float)ADC_TRIGGER_FREQ_HZ)
 
-
-
 #define TIMER1_PERIOD           (uint16_t)(TIMER1_FREQ / TIMER1_DIV / ADC_TRIGGER_FREQ_HZ)
 
 void prepare_capture(void);

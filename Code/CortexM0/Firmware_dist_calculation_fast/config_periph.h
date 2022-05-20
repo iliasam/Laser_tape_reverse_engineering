@@ -3,6 +3,11 @@
 
 #include "main.h"
 
+// When enabled, RX pin state will be analyzed at startup
+// If RX is low, UART is disabled. This is needed for debugger
+//if not defined, UART is always enabled - "boot" configuration
+//#define DETECT_UART_PRESENCE
+
 #define APD_DEFAULT_VOLTAGE                     100.6f
 
 #define APD_MAX_VOLTAGE_V                       115.0f
@@ -52,7 +57,8 @@
 #define UART_GPIO_AF            GPIO_AF_1
 #define UART_RX_PIN_SRC         GPIO_PinSource15
 #define UART_TX_PIN_SRC         GPIO_PinSource14
-#define UART_BAURDATE           256000
+//#define UART_BAURDATE           256000
+#define UART_BAURDATE           115200
 #define UART_IRQ_NAME           USART1_IRQn
 
 #define UART_TX_DMA_CHANNEL     DMA1_Channel2
@@ -72,7 +78,6 @@
 
 #define BEEP_PIN                GPIO_Pin_7
 #define BEEP_PORT               GPIOA
-
 
 #define MAIN_POWER_PIN          GPIO_Pin_8//0 - enable main DC-DC
 #define MAIN_POWER_PORT         GPIOA

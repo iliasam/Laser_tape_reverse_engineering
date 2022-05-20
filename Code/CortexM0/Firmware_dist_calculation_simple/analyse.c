@@ -111,64 +111,7 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 int16_t calculate_true_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase)
 {
-  //temperature compensation
-  //it is bad to use APD_temperature here
-  /// correction -  deg
-  float correction_t = 0.226974f * APD_temperature; 
-  correction_t+= -0.0049827f * APD_temperature * APD_temperature;
-  
-  float amp_corr_deg = 0.03f * amplitude - 9.5f;//deg
-  float amp_corr_rad = amp_corr_deg * M_PI / 180.0f;
-  
-  float phase_rad = phase * 0.1 * M_PI / 180.0f;
-  
-  //Corrected phase, not offset
-  float corr_rad = calc_phase_offset(amp_corr_rad, phase_rad);
-  float corr_deg = corr_rad * 180.0f / M_PI;
-  
-  corr_deg = corr_deg - correction_t;
-  
-  return (int16_t)(corr_deg * PHASE_MULT);
-}
-
-//equation sin(x)=(x-b)/a
-float calc_phase_offset_small(float a, float b, float start, float stop, float step)
-{
-  float min_error = 1;
-  float best_x = start;
-  
-  for (float x = start; x < stop; x += step)
-  {
-    //b+a*sin(x)-x
-    float error = a * sinf(x) + b - x;
-    error = fabs(error);
-    if (error < min_error)
-    {
-      min_error = error;
-      best_x = x;
-    }
-  }
-  
-  return best_x;
-}
-
-//a is amplitude corection
-//b is measured phase
-//result is true phase
-float calc_phase_offset(float a, float b)
-{
-  float start = -a + b - 0.1f;
-  float stop = a + b + 0.1f;
-  
-  float best_x = calc_phase_offset_small(a, b, start, stop, 0.1f);
-  start = best_x - 0.2f;
-  stop = best_x + 0.2f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.01f);
-  start = best_x - 0.02f;
-  stop = best_x + 0.02f;
-  best_x = calc_phase_offset_small(a, b, start, stop, 0.002f);
-  
-  return best_x;
+  return phase;
 }
 
 //return 1 if phase is close to zero

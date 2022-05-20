@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DIST_MULT       32 //resulting distance is multiplyed to this walue
+#define DIST_MULT       32 //resulting distance is multiplied to this value
 
 #define WAVE_L1         59036 //wavelength for 162.5Mhz in mm * 32
 #define WAVE_L2         50095 //wavelength for 191.5Mhz in mm * 32

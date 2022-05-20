@@ -60,7 +60,6 @@ int main(void)
     capture_do_single_adc_measurements();//measure temperature
     do_triple_phase_measurement();
     
-
     //Send results to UART
     printf("freqA_amp:%d\r\n",  result1.Amplitude);
     printf("APD temp:%d\r\n",   APD_temperature_raw);

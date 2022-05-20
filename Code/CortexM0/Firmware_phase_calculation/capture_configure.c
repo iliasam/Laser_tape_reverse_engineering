@@ -83,7 +83,8 @@ void capture_init_adc(void)
   ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see chanels values
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_1_5Cycles);
+  // Sample time is importaint!
+  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_7_5Cycles);
 
   ADC_GetCalibrationFactor(ADC1);
   
@@ -126,7 +127,7 @@ void capture_init_adc_dma(void)
   NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 }
 
-//init ADC for single software triggered measure
+//init ADC for SINGLE software triggered measure - like temperature
 void capture_init_adc_single_measure(void)
 {
     ADC_InitTypeDef  ADC_InitStructure;
@@ -209,7 +210,7 @@ AnalyseResultType do_capture(void)
 
   main_result.Phase = calculate_corrected_phase(
     APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
-    //phase < 0 or > 360
+  //phase < 0 or > 360
   if (main_result.Phase < 0) 
     main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
   else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT))

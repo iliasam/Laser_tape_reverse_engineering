@@ -85,7 +85,8 @@ void capture_init_adc(void)
   ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see channels values
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_71_5Cycles);
+  // Sample time is important!
+  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_7_5Cycles);
 
   ADC_GetCalibrationFactor(ADC1);
   
@@ -101,7 +102,7 @@ void capture_init_adc(void)
 
 void capture_init_adc_dma(void)
 {
-  DMA_InitTypeDef           DMA_InitStructure;
+  DMA_InitTypeDef DMA_InitStructure;
   
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
   

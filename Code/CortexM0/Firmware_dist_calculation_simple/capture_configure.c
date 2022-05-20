@@ -80,15 +80,16 @@ void capture_init_adc(void)
   ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_Rising;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see chanels values
+  ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;//see channels values
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_1_5Cycles);
+  // Sample time is important!
+  ADC_ChannelConfig(ADC1, ADC_SIGNAL | ADC_REF_CHANNEL, ADC_SampleTime_7_5Cycles);
 
   ADC_GetCalibrationFactor(ADC1);
   
   ADC_DMARequestModeConfig(ADC1, ADC_DMAMode_OneShot);
-  ADC_DMACmd(ADC1, ENABLE);//adc generate events for DMA
+  ADC_DMACmd(ADC1, ENABLE);//ADC generate events for DMA
   
   // Enable ADC1
   ADC_Cmd(ADC1, ENABLE);

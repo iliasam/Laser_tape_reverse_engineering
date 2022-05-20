@@ -17,9 +17,6 @@
 #define SCALING         ((float)POINTS_TO_SAMPLE / 2.0f)
 #define OMEGA           ((2.0f * M_PI * K_COEF) / POINTS_TO_SAMPLE)
 
-int debug_raw_freq = 0;
-extern uint8_t debug_freq_num;
-
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_temperature_deg;//temperature value in deg
 
@@ -109,20 +106,7 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 int16_t calculate_true_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase)
 {
-  //temperature compensation
-  //it is bad to use APD_temperature_deg here
-  // correction -  deg
-  float correction_t = 0.226974f * APD_temperature_deg; 
-  correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
-  
-  if (debug_freq_num == 1)
-  {
-    debug_raw_freq = (int)(phase / 10);
-  }
-  
-  float corr_deg = (float)phase / (float)PHASE_MULT - correction_t;
-  
-  return (int16_t)(corr_deg * PHASE_MULT);
+  return phase;
 }
 
 //return 1 if phase is close to zero

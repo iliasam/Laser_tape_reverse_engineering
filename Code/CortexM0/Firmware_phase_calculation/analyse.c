@@ -111,14 +111,17 @@ int16_t calculate_avr_phase(int16_t* data, uint16_t length)
 int16_t calculate_corrected_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, int16_t phase)
 {
- // return phase;
+  return phase;
+  
+  /*
   //temperature compensation
-  //it is bad to use APD_temperature_deg here
+  //it is bad to use "APD_temperature_deg" here
   /// correction -  deg
   float correction_t = 0.226974f * APD_temperature_deg; 
   correction_t+= -0.0049827f * APD_temperature_deg * APD_temperature_deg;
 
   return ((int16_t)(correction_t * PHASE_MULT) + phase);
+  */
 }
 
 

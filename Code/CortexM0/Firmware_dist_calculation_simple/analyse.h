@@ -22,11 +22,9 @@ typedef struct
 
 void init_goertzel(void);
 AnalyseResultType goertzel_analyse(uint16_t* data);
-//AnalyseResultType do_result_conversion(GoertzelResultType point);
 AnalyseResultType do_result_conversion(float real, float imag);
 int16_t calculate_avr_phase(int16_t* data, uint16_t length);
 
-int16_t calculate_median_phase(int16_t* data, uint16_t length);
 int16_t calculate_true_phase(
   uint16_t raw_temperature, uint16_t amplitude, uint8_t apd_voltage, uint16_t phase);
 uint8_t phase_close_to_zero(int16_t phase);

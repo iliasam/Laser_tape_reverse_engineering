@@ -25,12 +25,14 @@ void init_uart1(void)
   GPIO_Init(UART_PORT, &GPIO_InitStructure);
   GPIO_PinAFConfig(UART_PORT, UART_RX_PIN_SRC, UART_GPIO_AF); //GPIO_AF_1 - uart1
   
+#if defined(DETECT_UART_PRESENCE)
   if ((UART_PORT->IDR & UART_RX_PIN) == 0)
   {
     //no external pull up, debugger mode
     uart_disabled_flag = 1;
     return;
   }
+#endif
   
   uart_dma_init();
   

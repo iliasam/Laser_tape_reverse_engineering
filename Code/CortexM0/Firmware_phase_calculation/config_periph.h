@@ -3,15 +3,10 @@
 
 #include "main.h"
 
-#define LASER_DAC1_VALUE (uint16_t)(1737) //1.4v/3.3v*4096
-
-#define APD_DAC2_VALUE1 (uint16_t)(2010) //1.62v/3.3v*4096
-#define APD_DAC2_VALUE2 (uint16_t)(1588) //1.28v/3.3v*4096
-
-#define APD_DAC2_VALUE3 (uint16_t)(1663) //1.34v/3.3v*4096 - ~~81V
-#define APD_DAC2_VALUE4 (uint16_t)(1514) //1.22v/3.3v*4096 - ~~93V
-#define APD_DAC2_VALUE5 (uint16_t)(1450) //~~98V
-//#define APD_DAC2_VALUE5 (uint16_t)(1400) //102
+// When enabled, RX pin state will be analysed at startup
+// If RX is low, UART is disabled. This is neded for debugger
+//if not defined, UART is always enabld - "boot" configuration
+//#define DETECT_UART_PRESENCE
 
 #define APD_LOW_VOLTAGE         80.6f
 #define APD_HIGH_VOLTAGE        98.6f
@@ -26,7 +21,6 @@
 #define AREF_VOLTAGE            3.3f //AREF voltage of the MCU
 #define ADC_SIGNAL              ADC_Channel_5 //PA5
 #define APD_CORR_COEF           1.0236f
-#define APD_SHIGH_VOLTAGE       115.0f
 #define ADC_REF_CHANNEL         ADC_Channel_4 //PA4
 #define ADC_REF_PIN             GPIO_Pin_4
 #define ADC_SIGNAL_PIN          GPIO_Pin_5
@@ -59,7 +53,6 @@
 
 #define BEEP_PIN                GPIO_Pin_7
 #define BEEP_PORT               GPIOA
-
 
 #define MAIN_POWER_PIN          GPIO_Pin_8//0 - enable main DC-DC
 #define MAIN_POWER_PORT         GPIOA
