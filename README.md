@@ -7,6 +7,7 @@ UPD 11/2019: Attention: It was found that newer "x-40" laser tape measures come 
 UPD 06/2022: Added support for newer U85A/U85B modules based on STM32F0 MCU. See Code/CortexM0 folder.    
 "701A" module dimensions: 25x13x50 mm.   
 "U85" module dimensions: 17x7x41mm, Weight: ~4g  
+See Github Wiki for more information!  
   
 Big article in Russian: https://habr.com/post/327642/  
 Google translated: [Link](http://translate.google.com/translate?sl=ru&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=https%3A%2F%2Fhabr.com%2Fpost%2F327642%2F&edit-text=).  
