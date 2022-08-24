@@ -133,6 +133,7 @@ void pll_set_frequency_5(void)
   pll_change_freq(30, 1200, 1202, 1250);
 }
 
+// Set divider to 16
 void pll_enable_divider(void)
 {
   //(DIV = 1) - 16 - div 16
@@ -143,6 +144,7 @@ void pll_enable_divider(void)
   PLL_send_data((uint8_t*)pll_data_array_div_enableB, 2);
 }
 
+// Set divider to 4
 void pll_disable_divider(void)
 {
   const uint8_t pll_data_array_div_enableA[2] =  {44, 12};//ms0 - Divide by 4 enabled.
