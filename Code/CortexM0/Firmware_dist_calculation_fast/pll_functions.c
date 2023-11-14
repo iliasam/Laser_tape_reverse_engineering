@@ -1,4 +1,3 @@
-
 #include "pll_functions.h"
 #include "stm32f0xx_it.h"
 #include "config_periph.h"
@@ -23,6 +22,8 @@ const uint8_t pll_data_array1[51] =
 0xF5,0x00,0x00,0x13,0x04,0xE2,0x00,0x0A,0xF5,0x00,0x03,0x36,0x00,0x01,0x0C,0x00,
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x0C,0x00,
 0x00,0x00,0x00,};
+
+//*********************************************************************************
 
 void PLL_send_enable_output(void)
 {
@@ -62,7 +63,7 @@ void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
   uint8_t params[8];
   memset(params, 0, 8);
   
-  //calculate "p" coefficuents
+  //calculate "p" coefficients
   p3  = c;
   p2  = (128 * b) % c;
   p1  = 128 * a;
@@ -81,10 +82,12 @@ void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
   PLL_send_data2(config_reg, params, 8);
 }
 
-//pll_mult - A
-//plla_coef/pllb_coef - B
-//pll_div - C
-//freqA = 25mhz*(MULT + A/DIV) / 4
+//pll_mult - common multiplication
+//plla_coef/pllb_coef - outputA/outputB coefficients
+//pll_div - common divider
+//freqA = 25mhz*(pll_mult + plla_coef/pll_div) / 4
+//freqB = 25mhz*(pll_mult + pllb_coef/pll_div) / 4
+//Divider to 4 can be switched
 void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div)
 {
     set_pll_coeff(pll_mult, plla_coef, pll_div, MSNA_PLL_START_REG);

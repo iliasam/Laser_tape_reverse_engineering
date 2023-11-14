@@ -81,10 +81,12 @@ void set_pll_coeff(uint32_t a, uint32_t b, uint32_t c, uint8_t config_reg)
   PLL_send_data2(config_reg, params, 8);
 }
 
-//pll_mult - A
-//plla_coef/pllb_coef - B
-//pll_div - C
-//freqA = 25mhz*(MULT + A/DIV) / 4
+//pll_mult - common multiplication
+//plla_coef/pllb_coef - outputA/outputB coefficients
+//pll_div - common divider
+//freqA = 25mhz*(pll_mult + plla_coef/pll_div) / 4
+//freqB = 25mhz*(pll_mult + pllb_coef/pll_div) / 4
+//Divider to 4 can be switched
 void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, uint32_t pll_div)
 {
     set_pll_coeff(pll_mult, plla_coef, pll_div, MSNA_PLL_START_REG);
