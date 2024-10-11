@@ -10,39 +10,90 @@ STM32F030x6
 is STM32F0x0 Value Line
 But STM32F030 do not have QFN32 package!
 
-PA14 - TX - SWCLK
-PA15 - RX
+pin24 - PA14 - TX - SWCLK
+pin25 - PA15 - RX
 
-PA9 - SCL
-PA10 - SDA
+pin19 - PA9 - SCL
+pin20 - PA10 - SDA
 
-PA1 - MCU_APD_CTRL - PWM - 100 khz. -1.5V. - TIM2_CH2
-PA2 - LASER_POWER_PWM -  100 khz 40% duty. - TIM2_CH3
+pin7  - PA1 - MCU_APD_CTRL - PWM - 100 khz. -1.5V. - TIM2_CH2
+pin8  - PA2 - LASER_POWER_PWM -  100 khz 40% duty. - TIM2_CH3
 
-PA4 - ADC_IN4 - MCU_ref_sig
-PA5 - ADC_IN5 - MCU_apd_signal
-PB0 - ADC_IN8 - APD_TEMP
+pin10 - PA4 - ADC_IN4 - MCU_ref_sig
+pin11 - PA5 - ADC_IN5 - MCU_apd_signal
+pin14 - PB0 - ADC_IN8 - APD_TEMP
 
-PA7 - beeper
+pin13 - PA7 - beeper
 
-PA12 - SW4
-PA11 - SW3/SW1
-PA6 - SW1
+pin22 - PA12 - SW4
+pin21 - PA11 - SW3/SW1
+pin12 - PA6 - SW1
 
-PA8 - MCU_power -> pull low to enable power
-PA0 - MCU_key1
-PF1 - APD power enable? 1 - on
+pin18 - PA8 - MCU_power -> pull low to enable power
+pin6  - PA0 - MCU_key1
+pin3  - PF1 - APD power enable? 1 - on
 
-PB1 - что-то аналоговое, вроде не батарея - нет сигнала, пока выключено. Не подсветка. Не связано с лазером.
-PA6 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
-PA3 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
-PF0 - при включении подтянуто к 1. Не подсветка. Не связано с лазером.
+pin15 - PB1 - что-то аналоговое, вроде не батарея - нет сигнала, пока выключено. Не подсветка. Не связано с лазером.
+pin12 - PA6 - при включении подтянуто к 0. Не подсветка. Не связано с лазером. SW1?
+pin9  - PA3 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
+pin2  - PF0 - при включении подтянуто к 1. Не подсветка. Не связано с лазером.
 
-PB2 - LCD backlight
+pin16 - PB2 - LCD backlight
 
 APD voltage:
 74.5В - sleep mode, 1.46V - PWM(PA1) - 48%
 107В - working voltage, 1.16V - PWM(PA1) - 29.8%
+
+=====================
+
+
+
+pin1  - @VDD
+pin2  - PF0 - при включении подтянуто к 1. Не подсветка. Не связано с лазером.
+pin3  - PF1 - APD power enable? 1 - on
+pin4  - @NRST
+pin5  - @VDDA
+pin6  - PA0 - MCU_key1
+pin7  - PA1 - MCU_APD_CTRL - PWM - 100 khz. -1.5V. - TIM2_CH2
+pin8  - PA2 - LASER_POWER_PWM -  100 khz 40% duty. - TIM2_CH3
+
+pin9  - PA3 - при включении подтянуто к 0. Не подсветка. Не связано с лазером.
+pin10 - PA4 - ADC_IN4 - MCU_ref_sig
+pin11 - PA5 - ADC_IN5 - MCU_apd_signal
+pin12 - PA6 - при включении подтянуто к 0. Не подсветка. Не связано с лазером. SW1?
+pin13 - PA7 - beeper
+pin14 - PB0 - ADC_IN8 - APD_TEMP
+pin15 - PB1 - что-то аналоговое, вроде не батарея - нет сигнала, пока выключено. Не подсветка. Не связано с лазером.
+pin16 - PB2 - LCD backlight
+
+pin17 - @VDD
+pin18 - PA8 - MCU_power -> pull low to enable power
+pin19 - PA9 - SCL
+pin20 - PA10 - SDA
+pin21 - PA11 - SW3/SW1
+pin22 - PA12 - SW4
+pin23 - @SWDIO
+pin24 - PA14 - TX - SWCLK
+
+pin25 - PA15 - RX
+pin26 - PB3 - SPI_DATA
+pin27 - PB4 - SPI_CS
+pin28 - PB5 - LCD_POWER ??
+pin31 - @BOOT
+pin32 - PB8 - SPI_SCK???
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
