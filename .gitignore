@@ -5,6 +5,7 @@
 *.map
 *.pdb
 *.out
+stm32g0xx_hal*
 /Debug
 Code/Firmware_phase_calculation/Debug/
 Code/Firmware_raw_capture/Debug/
@@ -19,3 +20,11 @@ Code/CortexM0/Firmware_dist_calculation_fast/EWARM/Output/
 Code/CortexM0/Firmware_dist_calculation_fast/EWARM/settings/
 PC_utility/Result_2023-11-14 17-03-39.txt
 PC_utility/Result_2023-11-14 17-06-36.txt
+Code/CortexM0_STM32G0/Firmware_raw_capture/MDK-ARM/Firmware_raw_capture/
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q7.c
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/NN/
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/RTOS/
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/RTOS2/
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/DSP/
+Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/docs/
+Code/CortexM0_STM32G0/Firmware_raw_capture/MDK-ARM/DebugConfig/

@@ -1,0 +1,66 @@
+Chip ID:0x466 Marked NM002, programmers says that FlashSize = 64Kb
+
+Suitable packege:
+stm32g031k4/k6/k8
+stm32g041k6/k8
+With 64Kb flash:
+stm32g031k8 - no i2c
+stm32g041k6
+stm32g041k8 <<<<<<<<<<<< FlashSize = 64Kb
+
+pin1 - LCD backlight cathode
+pin2 ??
+pin3 ??
+pin4 - @VDDA
+pin5 - @GND
+pin6 - @nrst - PAD4
+pin7  - PA0 - MCU_key1
+pin8  - PA1 - MCU_APD_CTRL - TIM2_CH2 pwm? 100khz 34%
+pin9  - PA2 - LASER_POWER_PWM - TIM2_CH3 100khz 52%
+pin10 - PA3 - battery voltage = 2v at 4.2v | 1.75 at 3.7v
+pin11 - PA4 - ADC_IN4 - MCU_ref_sig
+pin12 - PA5 - ADC_IN5 - MCU_apd_signal ??
+pin13 - PA6 - SWITCH1
+pin14 - PA7 - beeper
+pin15 - PB0 -  ADC_IN8 - APD_TEMP
+pin17 - PB2 - connected to grounded cap - laser part? input? - no vbat adc = 1.63v at las on 0v las off
+pin18 - PA8 -  MCU_power -> pull low to enable power
+pin19 - PA9 -  PAD5 - USART1 TX
+pin20 - PC6 - connected to m3we sot23-5 (ME2019FM5G ?) APD power enable 1=on
+pin21 - PA10 - PAD3 (rx?)
+pin22 - PA11 - SWITCH3/1
+pin23 - PA12 - SWITCH4
+pin24 - pa13  -PAD1 (swdio?)
+pin25 - pa14 - PAD2 (swclk + TX?) USART2_TX - boot0? - FPC_pin1
+pin26 - PA15 - FPC_pin2
+pin27 - PB3 - LCD CLK 1mhz by osciloscope
+pin28 - PB4 - LCD data by osciloscope
+pin29 - PB5 - LCD CS by osciloscope
+pin30 - PB6  - scl
+pin31 - PB7  - sda
+pin32 - PB8 - LCD reset
+
+
+MCU bootloader
+PA10 pin: USART1 RX - pin21
+PA9 pin: USART1 TX - pin19
+
+PA14 (PAD2) is shared with BOOT0 functionality. Caution is required as the debugging device can
+manipulate BOOT0 pin value.
+
+LCD Anode - to one of power rails (big cap.)
+
+SWitch0/8 - connected to the line at the bottom - see U85
+
+Vadp=105V
+
+FPC_8 = backlight cathode
+FPC_9 = VDD backlight anode?
+FPC_10 - PB3 pin27 - clk
+FPC_11 - PB4 pin28 - dat
+FPC_12 - PB5 pin29 - cs
+FPC_13 - PB8 pin32 - res
+FPC_14 = VDD
+FPC_15 = GND
+
+Laser is ON but dim when PAD7 (power on) is High with original firmware.
