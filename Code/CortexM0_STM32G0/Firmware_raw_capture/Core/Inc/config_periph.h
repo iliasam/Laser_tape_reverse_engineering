@@ -3,15 +3,15 @@
 
 #include "main.h"
 
-#define GPIO_Pin_1  LL_GPIO_PIN_1
-#define GPIO_Pin_2  LL_GPIO_PIN_2
-#define GPIO_Pin_3  LL_GPIO_PIN_3
-#define GPIO_Pin_4  LL_GPIO_PIN_4
-#define GPIO_Pin_5  LL_GPIO_PIN_5
-#define GPIO_Pin_6  LL_GPIO_PIN_6
-#define GPIO_Pin_7  LL_GPIO_PIN_7
-#define GPIO_Pin_8  LL_GPIO_PIN_8
-#define GPIO_Pin_9  LL_GPIO_PIN_9
+#define GPIO_Pin_1   LL_GPIO_PIN_1
+#define GPIO_Pin_2   LL_GPIO_PIN_2
+#define GPIO_Pin_3   LL_GPIO_PIN_3
+#define GPIO_Pin_4   LL_GPIO_PIN_4
+#define GPIO_Pin_5   LL_GPIO_PIN_5
+#define GPIO_Pin_6   LL_GPIO_PIN_6
+#define GPIO_Pin_7   LL_GPIO_PIN_7
+#define GPIO_Pin_8   LL_GPIO_PIN_8
+#define GPIO_Pin_9   LL_GPIO_PIN_9
 #define GPIO_Pin_10  LL_GPIO_PIN_10
 #define GPIO_Pin_11  LL_GPIO_PIN_11
 #define GPIO_Pin_12  LL_GPIO_PIN_12
@@ -50,15 +50,15 @@
 #define UART_BAURDATE           256000
 
 #define PLL_I2C                 I2C1
-#define PLL_I2C_CLK             RCC_APB1Periph_I2C1
+#define PLL_I2C_CLK             LL_RCC_I2C1_CLKSOURCE_PCLK1
+#define PLL_I2C_CLK_2           LL_APB1_GRP1_PERIPH_I2C1
 
+#define I2C_GPIO_PORT_CLK       LL_IOP_GRP1_PERIPH_GPIOB
 #define I2C_SDA_PIN             GPIO_Pin_7
 #define I2C_SCL_PIN             GPIO_Pin_6
 #define I2C_GPIO_PORT           GPIOB
-#define I2C_SDA_AF_SRC          GPIO_PinSource7
-#define I2C_SCL_AF_SRC          GPIO_PinSource6
 
-#define I2C_GPIO_AF             GPIO_AF_4
+#define I2C_GPIO_AF             LL_GPIO_AF_6
 
 #define BEEP_PIN                GPIO_Pin_7
 #define BEEP_PORT               GPIOA
