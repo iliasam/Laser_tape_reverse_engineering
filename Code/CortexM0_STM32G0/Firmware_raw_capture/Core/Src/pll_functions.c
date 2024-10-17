@@ -14,7 +14,7 @@ void pll_disable_divider(void);
 const uint8_t pll_data_array_dis_output[2] = {3, 0xff};//0-enable
 const uint8_t pll_data_array_en_output[2] =  {3, 0xFA};
 
-const uint8_t pll_data_array_en_fanout[2] =  {187, 0xC0};//187 - 0xbb
+
 const uint8_t pll_data_array_reset[2] =      {177, 0xAC};//177 - 0xb1
 
 const uint8_t pll_data_array1[51] =
@@ -26,7 +26,9 @@ const uint8_t pll_data_array1[51] =
 
 void pll_send_enable_output(void)
 {
-  pll_send_data((uint8_t*)pll_data_array_en_output, 2);
+  pll_send_data((uint8_t*)"\x11\x54", 2);
+  pll_send_data((uint8_t*)"\x04\x33", 2);
+  pll_send_data((uint8_t*)"\x06\x33", 2);
 }
 
 void pll_send_disable_output(void)
@@ -36,7 +38,7 @@ void pll_send_disable_output(void)
 
 void pll_send_fanout_enable(void)
 {
-  pll_send_data((uint8_t*)pll_data_array_en_fanout, 2);
+
 }
 
 void pll_send_reset(void)
@@ -48,10 +50,43 @@ void pll_send_reset(void)
 
 void configure_pll(void)
 {
-  pll_send_disable_output();
-  pll_send_fanout_enable();
-  pll_send_data((uint8_t*)pll_data_array1, 51);
-  pll_send_reset();
+  //pll_send_data((uint8_t*)pll_data_array1, 51);
+  
+  pll_send_data((uint8_t*)"\xB6", 1);
+  pll_send_data((uint8_t*)"\x01", 1);
+  pll_send_data((uint8_t*)"\x02\x80", 2);
+  pll_send_data((uint8_t*)"\x04\x30", 2);
+  pll_send_data((uint8_t*)"\x05\x32", 2);
+  pll_send_data((uint8_t*)"\x06\x30", 2);
+  pll_send_data((uint8_t*)"\x07\x0B", 2);
+  pll_send_data((uint8_t*)"\x08\xF4", 2);
+  pll_send_data((uint8_t*)"\x10\x80", 2);
+  pll_send_data((uint8_t*)"\x11\x04", 2);
+  
+  pll_send_data((uint8_t*)"\x20\x80", 2);
+  pll_send_data((uint8_t*)"\x21\x02", 2);
+  pll_send_data((uint8_t*)"\x22\x42", 2);
+  pll_send_data((uint8_t*)"\x30\x00", 2);
+  pll_send_data((uint8_t*)"\x31\x00", 2);
+  pll_send_data((uint8_t*)"\x32\x02", 2);
+  pll_send_data((uint8_t*)"\x33\x01", 2);
+  
+  pll_send_data((uint8_t*)"\x60\x80", 2);
+  pll_send_data((uint8_t*)"\x61\x02", 2);
+  pll_send_data((uint8_t*)"\x62\x42", 2);
+  pll_send_data((uint8_t*)"\x70\x00", 2);
+  pll_send_data((uint8_t*)"\x71\x00", 2);
+  pll_send_data((uint8_t*)"\x72\x02", 2);
+  pll_send_data((uint8_t*)"\x73\x01", 2);
+  
+  delay_ms(100);
+  
+  pll_send_data((uint8_t*)"\x25\x02\x61\x86\x18", 5);
+  pll_send_data((uint8_t*)"\x2d\x01", 2);
+  
+  pll_send_data((uint8_t*)"\x65\x02\x61\x8a\x39", 5);
+  pll_send_data((uint8_t*)"\x6d\x01", 2);
+  
   pll_send_enable_output();
 }
 

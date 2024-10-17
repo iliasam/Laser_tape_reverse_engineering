@@ -100,8 +100,7 @@ int main(void)
   enable_laser();
   set_apd_voltage(APD_DEFAULT_VOLTAGE);
   delay_ms(50);
-  pll_send_disable_output();
-  //configure_pll();
+  configure_pll();
   delay_ms(100);
   //pll_set_frequency_1();
   delay_ms(100);
