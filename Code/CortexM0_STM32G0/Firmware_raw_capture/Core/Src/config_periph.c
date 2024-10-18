@@ -74,38 +74,50 @@ void init_gpio(void)
 
 void init_uart1(void)
 {
-    /*
-  GPIO_InitTypeDef  GPIO_InitStructure;
-  USART_InitTypeDef USART_InitStructure;
-  
-  // Enable GPIO clock
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
-  RCC_USARTCLKConfig(RCC_USART1CLK_SYSCLK);
 
-  // Configure USART1 Rx as alternate function push-pull
-  GPIO_StructInit(&GPIO_InitStructure);
-  GPIO_InitStructure.GPIO_Pin = UART_RX_PIN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;//to detect external pullup
-  GPIO_Init(UART_PORT, &GPIO_InitStructure);
-  GPIO_PinAFConfig(UART_PORT, UART_RX_PIN_SRC, UART_GPIO_AF); //GPIO_AF_1 - uart1
-  
-  GPIO_InitStructure.GPIO_Pin = UART_TX_PIN;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(UART_PORT, &GPIO_InitStructure);
-  GPIO_PinAFConfig(UART_PORT, UART_TX_PIN_SRC, UART_GPIO_AF); //GPIO_AF_1 - uart1
-  
-  USART_InitStructure.USART_BaudRate    = UART_BAURDATE;
-  USART_InitStructure.USART_WordLength  = USART_WordLength_8b;
-  USART_InitStructure.USART_StopBits    = USART_StopBits_1;
-  USART_InitStructure.USART_Parity      = USART_Parity_No;
-  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_InitStructure.USART_Mode        = USART_Mode_Tx | USART_Mode_Rx;
-  
-  USART_Init(USART1, &USART_InitStructure);  
-  USART_Cmd(USART1, ENABLE);
-  */
+  LL_USART_InitTypeDef USART_InitStruct = {0};
+  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
+  LL_RCC_SetUSARTClockSource(LL_RCC_USART1_CLKSOURCE_PCLK1);
+
+  /* Peripheral clock enable */
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1);
+
+  LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOA);
+
+  GPIO_InitStruct.Pin = UART_TX_PIN;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
+  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+  GPIO_InitStruct.Alternate = UART_GPIO_AF;
+  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = UART_RX_PIN;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  LL_USART_DeInit(USART1);
+  USART_InitStruct.PrescalerValue = LL_USART_PRESCALER_DIV1;
+  USART_InitStruct.BaudRate = UART_BAURDATE;
+  USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
+  USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
+  USART_InitStruct.Parity = LL_USART_PARITY_NONE;
+  USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX_RX;
+  USART_InitStruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
+  USART_InitStruct.OverSampling = LL_USART_OVERSAMPLING_16;
+  LL_USART_Init(USART1, &USART_InitStruct);
+  LL_USART_SetTXFIFOThreshold(USART1, LL_USART_FIFOTHRESHOLD_1_8);
+  LL_USART_SetRXFIFOThreshold(USART1, LL_USART_FIFOTHRESHOLD_1_8);
+  LL_USART_DisableFIFO(USART1);
+  LL_USART_ConfigAsyncMode(USART1);
+
+  LL_USART_Enable(USART1);
+
+  /* Polling USART1 initialisation */
+  while((!(LL_USART_IsActiveFlag_TEACK(USART1))) || 
+    (!(LL_USART_IsActiveFlag_REACK(USART1))))
+  {
+  }
 }
 
 

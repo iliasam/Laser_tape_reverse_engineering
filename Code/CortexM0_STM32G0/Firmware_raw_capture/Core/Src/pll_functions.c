@@ -133,20 +133,21 @@ void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, 
 //162.5 + 162.505
 void pll_set_frequency_1(void)
 {
-  pll_disable_divider();
-  pll_change_freq(26, 0, 1, 1250);
+  //pll_disable_divider();
+ // pll_change_freq(26, 0, 1, 1250);
 }
 
 //191.5 + 191.505
 void pll_set_frequency_2(void)
 {
-  pll_disable_divider();
-  pll_change_freq(30, 800, 801, 1250);
+ // pll_disable_divider();
+  //pll_change_freq(30, 800, 801, 1250);
 }
 
 
 void pll_set_frequency_3(void)
 {
+  return;
   pll_disable_divider();
   //diff is 4.8 kHz
   set_pll_coeff(25, 14323, 15625, MSNA_PLL_START_REG); //161.9792 MHz
@@ -158,16 +159,16 @@ void pll_set_frequency_3(void)
 //25 mhz
 void pll_set_frequency_4(void)
 {
-  pll_enable_divider();
-  pll_change_freq(16, 0, 4, 1250);
+ // pll_enable_divider();
+ // pll_change_freq(16, 0, 4, 1250);
 }
 
 
 void pll_set_frequency_5(void)
 {
   //10 khz
-  pll_disable_divider();
-  pll_change_freq(30, 1200, 1202, 1250);
+ // pll_disable_divider();
+ // pll_change_freq(30, 1200, 1202, 1250);
 }
 
 // Set divider to 16

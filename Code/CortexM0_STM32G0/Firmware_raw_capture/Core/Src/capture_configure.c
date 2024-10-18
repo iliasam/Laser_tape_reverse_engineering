@@ -11,7 +11,7 @@ uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 uint16_t signal_buffer[ADC_CAPURE_BUF_LENGTH/2];
 uint16_t reference_buffer[ADC_CAPURE_BUF_LENGTH/2];
 
-extern uint8_t capture_done;
+extern volatile uint8_t capture_done;
 
 /* Private function prototypes -----------------------------------------------*/
 void init_adc_capture_timer(void);
@@ -93,7 +93,7 @@ void init_adc_capture(void)
   LL_ADC_REG_SetSequencerScanDirection(ADC1, LL_ADC_REG_SEQ_SCAN_DIR_BACKWARD); //see chanels values
   LL_ADC_SetOverSamplingScope(ADC1, LL_ADC_OVS_DISABLE);
   LL_ADC_SetTriggerFrequencyMode(ADC1, LL_ADC_CLOCK_FREQ_MODE_HIGH);
-  LL_ADC_REG_SetSequencerChAdd(ADC1, LL_ADC_CHANNEL_4 | LL_ADC_CHANNEL_5);
+  LL_ADC_REG_SetSequencerChAdd(ADC1, ADC_REF_CHANNEL | ADC_SIGNAL_CHANNEL);
   
   
   // Poll for ADC channel configuration ready 

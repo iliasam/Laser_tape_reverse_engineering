@@ -32,10 +32,10 @@
 #define DCDC_VREF               1.27f //V - internal VREF voltage of the DC-DC
 
 #define AREF_VOLTAGE            3.3f //AREF voltage of the MCU
-#define ADC_SIGNAL              ADC_Channel_5 //PA5
+#define ADC_SIGNAL_CHANNEL      LL_ADC_CHANNEL_5 //PA5
 #define APD_CORR_COEF           1.0236f
 
-#define ADC_REF_CHANNEL         ADC_Channel_4 //PA4
+#define ADC_REF_CHANNEL         LL_ADC_CHANNEL_4 //PA4
 #define ADC_REF_PIN             GPIO_Pin_4
 #define ADC_SIGNAL_PIN          GPIO_Pin_5
 
@@ -44,7 +44,7 @@
 #define UART_RX_PIN             GPIO_Pin_10
 #define UART_TX_PIN             GPIO_Pin_9
 #define UART_PORT               GPIOA
-#define UART_GPIO_AF            GPIO_AF_1
+#define UART_GPIO_AF            LL_GPIO_AF_1
 #define UART_RX_PIN_SRC         GPIO_PinSource10
 #define UART_TX_PIN_SRC         GPIO_PinSource9
 #define UART_BAURDATE           256000
