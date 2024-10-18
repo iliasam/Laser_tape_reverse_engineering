@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "config_periph.h"
-//#include "stm32f0xx_i2c.h"
 
 #include "stm32g0xx_it.h"
 
@@ -51,7 +50,7 @@ void init_gpio(void)
   LL_GPIO_SetPinOutputType(ANALOG_POWER_PORT, ANALOG_POWER_PIN, LL_GPIO_OUTPUT_PUSHPULL);
   LL_GPIO_SetOutputPin(ANALOG_POWER_PORT, ANALOG_POWER_PIN); //enable power 
   
-  LL_GPIO_SetPinMode(GPIOA, ANALOG_POWER_PIN, ADC_REF_PIN); //adc pins
+  LL_GPIO_SetPinMode(GPIOA, ADC_REF_PIN, LL_GPIO_MODE_ANALOG);
   LL_GPIO_SetPinMode(GPIOA, ADC_SIGNAL_PIN, LL_GPIO_MODE_ANALOG);
   
   LL_GPIO_SetPinMode(VOLT_PWM_TIMER_LASER_CTRL_PORT, 

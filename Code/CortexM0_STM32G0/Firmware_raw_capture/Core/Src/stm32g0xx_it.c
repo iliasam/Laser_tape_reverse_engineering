@@ -42,6 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 volatile uint32_t ms_uptime = 0;
+volatile uint8_t capture_done = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -141,5 +142,30 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /* USER CODE BEGIN 1 */
-
+/**
+  * @brief  This function handles DMA interrupt request. Connected to ADC
+  * @param  None
+  * @retval : None
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  if(LL_DMA_IsActiveFlag_HT1(DMA1) == 1)
+  {
+    /* Clear DMA1 Channel1 half transfer interrupt pending bits */
+    LL_DMA_ClearFlag_HT1(DMA1);
+  }
+  else if(LL_DMA_IsActiveFlag_TC1(DMA1) == 1)
+  {
+    /* Clear DMA1 Channel1 transfer complete interrupt pending bits */
+    LL_DMA_ClearFlag_TC1(DMA1);
+    capture_done = 1;
+  }
+  else
+  if(LL_DMA_IsActiveFlag_TC1(DMA1) == 1)
+  {
+    /* Clear DMA1 Channel1 transfer error interrupt pending bits */
+    LL_DMA_ClearFlag_TE1(DMA1);
+  }
+  
+}
 /* USER CODE END 1 */
