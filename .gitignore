@@ -68,3 +68,4 @@ Code/CortexM0_STM32G0/Firmware_raw_capture/Drivers/CMSIS/Include/mpu_armv8.h
 i2c_signal_capture/b2a/decode/py_decode1.sln
 i2c_signal_capture/b2a/decode/py_decode1/py_decode1.pyproj
 i2c_signal_capture/b2a/decode/.vs/py_decode1/v15/.suo
+Code/CortexM0_STM32G0/Firmware_phase_calculation/MDK-ARM/Firmware_phase_calculation/

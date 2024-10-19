@@ -371,12 +371,12 @@ ARM Macro Assembler    Page 6
               00000200 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
-work --depend=firmware_raw_capture\startup_stm32g041xx.d -ofirmware_raw_capture
-\startup_stm32g041xx.o -I.\RTE\_Firmware_raw_capture -IC:\Keil_v5\ARM\PACK\ARM\
-CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32G0xx_DFP\1.5.0\Driver
-s\CMSIS\Device\ST\STM32G0xx\Include --predefine="__UVISION_VERSION SETA 524" --
-predefine="_RTE_ SETA 1" --predefine="STM32G041xx SETA 1" --list=startup_stm32g
-041xx.lst startup_stm32g041xx.s
+work --depend=firmware_phase_calculation\startup_stm32g041xx.d -ofirmware_phase
+_calculation\startup_stm32g041xx.o -I.\RTE\_Firmware_phase_calculation -IC:\Kei
+l_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32G0x
+x_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G0xx\Include --predefine="__UVISION_VE
+RSION SETA 524" --predefine="_RTE_ SETA 1" --predefine="STM32G041xx SETA 1" --l
+ist=startup_stm32g041xx.lst startup_stm32g041xx.s
 
 
 
