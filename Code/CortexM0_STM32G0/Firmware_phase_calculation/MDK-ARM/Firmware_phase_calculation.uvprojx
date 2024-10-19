@@ -420,6 +420,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32g0xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>analyse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\analyse.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -964,6 +969,11 @@
               <FileName>pll_functions.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Core\Inc\pll_functions.h</FilePath>
+            </File>
+            <File>
+              <FileName>analyse.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\analyse.h</FilePath>
             </File>
           </Files>
         </Group>

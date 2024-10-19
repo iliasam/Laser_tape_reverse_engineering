@@ -10,7 +10,7 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-float  APD_current_voltage = 0.0f;//value in volts
+extern float  APD_current_voltage;//value in volts
 
 extern volatile uint32_t ms_uptime;
 
@@ -193,5 +193,14 @@ void delay_ms(uint32_t ms)
 {
   uint32_t start_ms = ms_uptime;
   while ((ms_uptime - start_ms) < ms) {}
+}
+
+//Calculate temperature in degrees from raw ADC value
+float calculate_real_temperature(uint16_t raw_value)
+{
+  float result = 66.843f;
+  result+= -0.029572f * (float)raw_value;
+  result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
+  return result;
 }
 

@@ -1,3 +1,10 @@
+//Firmware for "x-40" laser tape
+//By ILIASAM
+//This program captures data from ADC, calculate phase difference using Goertzel algorithm, send results to UART.
+//All this done sequentially for 3 frequencies.
+//UART baudrate - 256000
+//Phase units - 0.1 deg
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -6,6 +13,9 @@
 #include "i2c_functions.h"
 #include "pll_functions.h"
 #include "capture_configure.h"
+#include "analyse.h"
+#include "stdio.h"
+#include <stdlib.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -14,7 +24,23 @@
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-uint8_t set_fine_voltage_flag = 0;
+
+struct __FILE
+{
+  int dummyVar; //Just for the sake of redefining __FILE, we won't we using it anyways ;)
+};
+
+FILE __stdout;
+FILE __stdin;
+
+uint16_t APD_temperature_raw = 0;//raw temperature value
+float  APD_temperature_deg = 30.0f;//temperature value in deg
+float  APD_current_voltage = 80.0f;//value in volts
+
+AnalyseResultType result1;
+AnalyseResultType result2;
+AnalyseResultType result3;
+
 extern volatile uint32_t ms_uptime;
 extern volatile uint8_t capture_done;
 extern uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];
@@ -27,7 +53,7 @@ void SystemClock_Config(void);
 void process_rx_data(uint8_t data);
 void send_captured_data_to_pc(void);
 void uart_send_data(uint8_t* data, uint16_t length);
-
+void do_triple_phase_measurement(void);
 
 /* Private user code ---------------------------------------------------------*/
 
@@ -49,6 +75,7 @@ int main(void)
   delay_ms(200);
   enable_laser();
   set_apd_voltage(APD_DEFAULT_VOLTAGE);
+  init_goertzel();
   delay_ms(50);
   configure_pll();
   prepare_capture();
@@ -59,10 +86,23 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-    uint8_t rx_byte;
-    while (LL_USART_IsActiveFlag_RXNE_RXFNE(USART1) == 0){}
-    rx_byte = LL_USART_ReceiveData8(USART1);
-    process_rx_data(rx_byte);
+    do_triple_phase_measurement();
+    
+    //Send results to UART
+    printf("freqA_amp:%d\r\n",  result1.Amplitude);
+    printf("APD temp:%d\r\n",   APD_temperature_raw);
+    printf("Volt:%d\r\n",       (uint16_t)APD_current_voltage);
+    printf("freqA_phase:%d\r\n", result1.Phase);
+    printf("freqB_phase:%d\r\n", result2.Phase);
+    printf("freqC_phase:%d\r\n", result3.Phase);
+    
+    
+    if (LL_USART_IsActiveFlag_RXNE_RXFNE(USART1))
+    {
+      uint8_t rx_byte;
+      rx_byte = LL_USART_ReceiveData8(USART1);
+      process_rx_data(rx_byte);
+    }
   }
 }
 
@@ -113,13 +153,6 @@ void SystemClock_Config(void)
 //Process data byte, received by MCU
 void process_rx_data(uint8_t data)
 {
-  if (set_fine_voltage_flag != 0)
-  {
-    set_fine_voltage_flag = 0;
-    set_apd_voltage((float)data);
-    return;
-  }
-  
   switch (data)
   {
       case (uint8_t)'E': //Enable laser
@@ -132,69 +165,39 @@ void process_rx_data(uint8_t data)
         disable_laser();
         break;
       }
-      case (uint8_t)'M': //Start raw data capture
-      {
-        start_adc_capture();
-        uint32_t start_time  = ms_uptime;
-        while(capture_done == 0)
-        {
-          uint32_t duration_ms = ms_uptime - start_time;
-          if (duration_ms > 100)//timeout
-            capture_done = 1;
-        }
-        send_captured_data_to_pc();
-        break;
-      }
-      case (uint8_t)'S': //Set APD super high voltage
-      {
-        set_apd_voltage(APD_SHIGH_VOLTAGE);
-        break;
-      }
       case (uint8_t)'H': //Set APD high voltage
       {
-        set_apd_voltage(APD_HIGH_VOLTAGE);
+        set_apd_voltage(APD_DEFAULT_VOLTAGE);
         break;
       }
-      case (uint8_t)'L'://Set APD low voltage
+      case (uint8_t)'L': //Set APD low voltage
       {
         set_apd_voltage(APD_LOW_VOLTAGE);
         break;
       }
-      case (uint8_t)'A'://Set PLL freq1
-      {
-        pll_set_frequency_1();
-        break;
-      }
-      case (uint8_t)'B'://Set PLL freq2
-      {
-        pll_set_frequency_2();
-        break;
-      }
-      case (uint8_t)'C'://Set PLL freq4 - "FREQ LOW"
-      {
-        pll_set_frequency_4();//25 mhz
-        break;
-      }
-      case (uint8_t)'1'://'one' - Set PLL freq4 - high modulation
-      {
-        pll_set_frequency_5();
-        break;
-      }
-      case (uint8_t)'T':
-      {
-        pll_set_frequency_3();
-        break;
-      }
-      case (uint8_t)'V'://Set fine APD voltage
-      {
-        set_fine_voltage_flag = 1;
-        return;
-      }
-    default:
-      break;
+    
+    default: break;
   }
-  
-  set_fine_voltage_flag = 0;
+}
+
+//Measure phase shifts for three frequencies
+void do_triple_phase_measurement(void)
+{
+    //init for main signal capture
+    //prepare_capture();
+    
+    //set freq1
+    pll_set_frequency_1();
+    delay_ms(1);
+    result1 = do_capture();
+    
+    pll_set_frequency_2();
+    delay_ms(1);
+    result2 = do_capture();
+    
+    pll_set_frequency_3();
+    delay_ms(1);
+    result3 = do_capture();
 }
 
 //send array to UART
@@ -207,10 +210,11 @@ void uart_send_data(uint8_t* data, uint16_t length)
   }
 }
 
-void send_captured_data_to_pc(void)
+int fputc(int c, FILE * stream)
 {
-  uart_send_data((uint8_t*)"ABCD",4);//header
-  uart_send_data((uint8_t*)adc_capture_buffer, (ADC_CAPURE_BUF_LENGTH * 2));//2 * uint16_t points
+  while(LL_USART_IsActiveFlag_TXE_TXFNF(USART1) == 0) {} //while not empty
+  LL_USART_TransmitData8(USART1, (uint8_t)c);  
+  return c;
 }
 
 /**

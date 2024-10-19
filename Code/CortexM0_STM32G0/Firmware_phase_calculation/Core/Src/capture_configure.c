@@ -3,15 +3,15 @@
 #include "capture_configure.h"
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
 
+/* Private typedef -----------------------------------------------------------*/
+int16_t phase_buffer[REPEAT_NUMBER];
 uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];//signal+reference points
 
 /* Private variables ---------------------------------------------------------*/
-uint16_t signal_buffer[ADC_CAPURE_BUF_LENGTH/2];
-uint16_t reference_buffer[ADC_CAPURE_BUF_LENGTH/2];
-
 extern volatile uint8_t capture_done;
+extern uint16_t APD_temperature_raw;
+extern float  APD_current_voltage;
 
 /* Private function prototypes -----------------------------------------------*/
 void init_adc_capture_timer(void);
@@ -205,18 +205,44 @@ void start_adc_capture(void)
   LL_TIM_EnableCounter(TIM1);
 }
 
-// split captured data from "adc_capture_buffer" 
-// to "reference_buffer" and "signal_buffer"
-void sort_captured_data(void)
+//for single frequency
+AnalyseResultType do_capture(void)
 {
-  /*
-  uint16_t i;
-  uint16_t count = 0;
-  for (i=0; i < ADC_CAPURE_BUF_LENGTH; i+=2)
+  uint8_t i;
+  AnalyseResultType main_result = {0,0};
+  
+  AnalyseResultType signal_result = {0,0};
+  AnalyseResultType reference_result = {0,0};
+  
+  uint32_t amplitude_summ = 0;
+  int16_t tmp_phase = 0;
+  
+  for (i = 0; i < REPEAT_NUMBER; i++)
   {
-    reference_buffer[count] = adc_capture_buffer[i];
-    signal_buffer[count] = adc_capture_buffer[i+1];
-    count++;
+    start_adc_capture();
+    while(capture_done == 0){}
+    signal_result = goertzel_analyse(&adc_capture_buffer[0]);//signal
+    reference_result = goertzel_analyse(&adc_capture_buffer[1]);//reference
+    
+    tmp_phase = reference_result.Phase - signal_result.Phase;//difference between signal and reference phase
+    if (tmp_phase < 0) 
+      tmp_phase = 360 * PHASE_MULT + tmp_phase;
+    
+    amplitude_summ += (uint32_t)signal_result.Amplitude;
+    phase_buffer[i] = tmp_phase;
   }
-  */
+  
+  main_result.Amplitude = (uint16_t)(amplitude_summ / REPEAT_NUMBER);
+  main_result.Phase = calculate_avr_phase(phase_buffer, REPEAT_NUMBER);
+
+  main_result.Phase = calculate_corrected_phase(
+    APD_temperature_raw, main_result.Amplitude, (uint8_t)APD_current_voltage, main_result.Phase);
+  //phase < 0 or > 360
+  if (main_result.Phase < 0) 
+    main_result.Phase = MAX_ANGLE * PHASE_MULT + main_result.Phase;
+  else if (main_result.Phase > (MAX_ANGLE * PHASE_MULT))
+    main_result.Phase = main_result.Phase - MAX_ANGLE * PHASE_MULT;
+  
+  
+  return main_result;
 }

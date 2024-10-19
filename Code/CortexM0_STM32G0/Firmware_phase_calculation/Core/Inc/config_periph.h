@@ -99,5 +99,6 @@ void disable_laser(void);
 void set_apd_voltage(float new_voltage);
 void init_all_hardware(void);
 void delay_ms(uint32_t ms);
+float calculate_real_temperature(uint16_t raw_value);
 
 #endif
