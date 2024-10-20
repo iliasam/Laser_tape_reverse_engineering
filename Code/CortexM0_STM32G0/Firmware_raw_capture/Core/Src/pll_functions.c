@@ -125,6 +125,7 @@ void pll_change_freq(uint32_t pll_mult, uint32_t plla_coef, uint32_t pllb_coef, 
     pll_send_enable_output();
 }
 
+//189,0 + 188.995 MHz
 void pll_set_frequency_1(void)
 {
   pll_send_data((uint8_t*)"\x25\x02\x61\x86\x18", 5);
@@ -134,7 +135,7 @@ void pll_set_frequency_1(void)
   pll_send_data((uint8_t*)"\x6d\x01", 2);
 }
 
-//191.5 + 191.505
+//192,75 + 192.745 MHz
 void pll_set_frequency_2(void)
 {
   pll_send_data((uint8_t*)"\x25\x02\x55\xAA\x56", 5);
@@ -144,7 +145,7 @@ void pll_set_frequency_2(void)
   pll_send_data((uint8_t*)"\x6d\x01", 2);
 }
 
-
+//193,5 + 193,495 MHz
 void pll_set_frequency_3(void)
 {
   pll_send_data((uint8_t*)"\x25\x02\x53\x59\x4D", 5);
@@ -154,7 +155,7 @@ void pll_set_frequency_3(void)
   pll_send_data((uint8_t*)"\x6d\x01", 2);
 }
 
-
+//162,0 + 161.995 MHz
 void pll_set_frequency_4(void)
 {
   pll_send_data((uint8_t*)"\x25\x02\xC7\x1C\x72", 5);

@@ -11,6 +11,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 extern float  APD_current_voltage;//value in volts
+extern float  APD_temperature_deg;
 
 extern volatile uint32_t ms_uptime;
 
@@ -52,6 +53,7 @@ void init_gpio(void)
   
   LL_GPIO_SetPinMode(GPIOA, ADC_REF_PIN, LL_GPIO_MODE_ANALOG);
   LL_GPIO_SetPinMode(GPIOA, ADC_SIGNAL_PIN, LL_GPIO_MODE_ANALOG);
+  LL_GPIO_SetPinMode(ADC_TEMP_PORT, ADC_TEMP_PIN, LL_GPIO_MODE_ANALOG);
   
   LL_GPIO_SetPinMode(VOLT_PWM_TIMER_LASER_CTRL_PORT, 
     VOLT_PWM_TIMER_LASER_CTRL_PIN, LL_GPIO_MODE_ALTERNATE);
@@ -202,5 +204,34 @@ float calculate_real_temperature(uint16_t raw_value)
   result+= -0.029572f * (float)raw_value;
   result+= (2.122e-6f) * (float)raw_value * (float)raw_value;
   return result;
+}
+
+void auto_switch_apd_voltage(uint16_t current_amplitude)
+{
+//APD voltage is depending only from a temperature ?
+//"APD_temperature" value in deg
+#ifndef ENHANCED_APD_CALIBADION
+  float voltage_to_set = 0.4866f * APD_temperature_deg + 94.0f;
+  set_apd_voltage(voltage_to_set);
+#else
+  /*
+  float voltage_to_set = 
+      (APD_VOLTAGE_RANGE / APD_MAX_TEMP) * APD_temperature + apd_min_voltage;
+  if (voltage_to_set >= apd_saturation_voltage)
+    voltage_to_set = apd_saturation_voltage;
+    
+  if (current_amplitude > 2200)
+  {
+    if (TIMER_ELAPSED(apt_agc_timer))
+    {
+      set_apd_voltage(APD_current_voltage - 1.0);//try to decrease voltage
+      START_TIMER(apt_agc_timer, 500);
+    }
+    return;
+  }
+  else if (current_amplitude < 2000)
+    set_apd_voltage(voltage_to_set);  
+  */
+#endif
 }
 

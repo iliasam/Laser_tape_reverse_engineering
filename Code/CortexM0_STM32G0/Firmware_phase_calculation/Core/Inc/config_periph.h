@@ -3,6 +3,7 @@
 
 #include "main.h"
 
+#define GPIO_Pin_0   LL_GPIO_PIN_0
 #define GPIO_Pin_1   LL_GPIO_PIN_1
 #define GPIO_Pin_2   LL_GPIO_PIN_2
 #define GPIO_Pin_3   LL_GPIO_PIN_3
@@ -38,6 +39,10 @@
 #define ADC_REF_CHANNEL         LL_ADC_CHANNEL_4 //PA4
 #define ADC_REF_PIN             GPIO_Pin_4
 #define ADC_SIGNAL_PIN          GPIO_Pin_5
+
+#define ADC_TEMP_CHANNEL        LL_ADC_CHANNEL_8 //PB8
+#define ADC_TEMP_PIN            GPIO_Pin_0
+#define ADC_TEMP_PORT           GPIOB
 
 #define PLL_I2C_ADDRESS         0xC0
 
@@ -100,5 +105,6 @@ void set_apd_voltage(float new_voltage);
 void init_all_hardware(void);
 void delay_ms(uint32_t ms);
 float calculate_real_temperature(uint16_t raw_value);
+void auto_switch_apd_voltage(uint16_t current_amplitude);
 
 #endif

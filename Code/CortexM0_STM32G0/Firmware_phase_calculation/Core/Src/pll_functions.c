@@ -49,9 +49,9 @@ void configure_pll(void)
   pll_send_enable_output();
 }
 
+//162.0 + 161.995 MHz
 void pll_set_frequency_1(void)
 {
-  //162.0 + 161.995MHz
   pll_send_data((uint8_t*)"\x25\x02\xC7\x1C\x72", 5);
   pll_send_data((uint8_t*)"\x2d\x01", 2);
   
@@ -59,20 +59,19 @@ void pll_set_frequency_1(void)
   pll_send_data((uint8_t*)"\x6d\x01", 2);
 }
 
+//189.0 + 188.995 MHz
 void pll_set_frequency_2(void)
 {
-  //192.75 + 192.745Mhz - WRONG!!
-  pll_send_data((uint8_t*)"\x25\x02\x55\xAA\x56", 5);
+  pll_send_data((uint8_t*)"\x25\x02\x61\x86\x18", 5);
   pll_send_data((uint8_t*)"\x2d\x01", 2);
   
-  pll_send_data((uint8_t*)"\x65\x02\x55\xAE\x4E", 5);
+  pll_send_data((uint8_t*)"\x65\x02\x61\x8a\x39", 5);
   pll_send_data((uint8_t*)"\x6d\x01", 2);
 }
 
-
+//193.5 + 193,495 MHz
 void pll_set_frequency_3(void)
 {
-  //193.5 + 193,495MHz
   pll_send_data((uint8_t*)"\x25\x02\x53\x59\x4D", 5);
   pll_send_data((uint8_t*)"\x2d\x01", 2);
   

@@ -27,5 +27,6 @@ void prepare_capture(void);
 void start_adc_capture(void);
 void sort_captured_data(void);
 AnalyseResultType do_capture(void);
+void capture_do_single_adc_measurements(void);
 
 #endif

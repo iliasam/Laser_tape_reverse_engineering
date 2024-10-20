@@ -49,7 +49,6 @@ extern uint16_t adc_capture_buffer[ADC_CAPURE_BUF_LENGTH];
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 
-
 void process_rx_data(uint8_t data);
 void send_captured_data_to_pc(void);
 void uart_send_data(uint8_t* data, uint16_t length);
@@ -87,14 +86,18 @@ int main(void)
   while (1)
   {
     do_triple_phase_measurement();
+    capture_do_single_adc_measurements();
     
     //Send results to UART
     printf("freqA_amp:%d\r\n",  result1.Amplitude);
+    printf("B2A\r\n");//used by PC utility to recognize new freq. set.
     printf("APD temp:%d\r\n",   APD_temperature_raw);
     printf("Volt:%d\r\n",       (uint16_t)APD_current_voltage);
     printf("freqA_phase:%d\r\n", result1.Phase);
     printf("freqB_phase:%d\r\n", result2.Phase);
     printf("freqC_phase:%d\r\n", result3.Phase);
+    
+    auto_switch_apd_voltage((uint16_t)result1.Amplitude);
     
     
     if (LL_USART_IsActiveFlag_RXNE_RXFNE(USART1))
@@ -242,9 +245,7 @@ void Error_Handler(void)
   */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
