@@ -5,7 +5,6 @@
 *.map
 *.pdb
 *.out
-stm32g0xx_hal*
 /Debug
 Code/Firmware_phase_calculation/Debug/
 Code/Firmware_raw_capture/Debug/

@@ -291,24 +291,24 @@ void enhanced_apd_calibration(void)
 //write calibratio data to flash
 void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t calib_phase3)
 {
-  return;
+  /*
   uint32_t start_address = 0x8000000 + STM32G0_PAGE_SIZE_BYTES * NVRAM_PAGE;
+  
+  uint32_t primask_bit = __get_PRIMASK();
+  __disable_irq();
+  
   LL_Flash_Unlock();
   
   LL_Flash_PageErase(NVRAM_PAGE);
-  LL_FLASH_Program(ProgaraType_DATA16, start_address, 0x1234);
-  LL_FLASH_Program(ProgaraType_DATA16, start_address+2, (uint16_t)calib_phase1);
-  LL_FLASH_Program(ProgaraType_DATA16, start_address+4, (uint16_t)calib_phase2);
-  LL_FLASH_Program(ProgaraType_DATA16, start_address+6, (uint16_t)calib_phase3);
-  LL_FLASH_Program(ProgaraType_DATA16, start_address+8, (uint16_t)apd_saturation_voltage);
-  /*
-  LL_FLASH_Program_HalfWord(start_address, 0x1234); //data present key
-  LL_FLASH_Program_HalfWord(start_address+2, (uint16_t)calib_phase1); //phase
-  LL_FLASH_Program_HalfWord(start_address+4, (uint16_t)calib_phase2); //phase
-  LL_FLASH_Program_HalfWord(start_address+6, (uint16_t)calib_phase3); //phase
-  LL_FLASH_Program_HalfWord(start_address+8, (uint16_t)apd_saturation_voltage);
-  */
+
+  LL_FLASH_Program16(start_address, 0x1234);
+  LL_FLASH_Program16(start_address+2, (uint16_t)calib_phase1);
+  LL_FLASH_Program16(start_address+4, (uint16_t)calib_phase2);
+  LL_FLASH_Program16(start_address+6, (uint16_t)calib_phase3);
+  LL_FLASH_Program16(start_address+8, (uint16_t)apd_saturation_voltage);
   LL_Flash_Lock();
+  __set_PRIMASK(primask_bit);//enable IRQ
+  */
   
 }
 
