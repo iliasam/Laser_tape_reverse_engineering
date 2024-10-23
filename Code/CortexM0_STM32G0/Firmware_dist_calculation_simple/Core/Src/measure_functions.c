@@ -291,24 +291,31 @@ void enhanced_apd_calibration(void)
 //write calibratio data to flash
 void write_data_to_flash(int16_t calib_phase1, int16_t calib_phase2, int16_t calib_phase3)
 {
-  /*
   uint32_t start_address = 0x8000000 + STM32G0_PAGE_SIZE_BYTES * NVRAM_PAGE;
   
   uint32_t primask_bit = __get_PRIMASK();
   __disable_irq();
   
-  LL_Flash_Unlock();
+  LL_FLASH_Unlock();
   
-  LL_Flash_PageErase(NVRAM_PAGE);
+  FLASH_EraseInitTypeDef page_erase_struct;
+  page_erase_struct.TypeErase = FLASH_TYPEERASE_PAGES;
+  page_erase_struct.NbPages = 1;
+  page_erase_struct.Page = NVRAM_PAGE;
+  page_erase_struct.Banks = FLASH_BANK_1;
+  
+  uint32_t page_erase_err = 0;
+  ErrorStatus page_res = LL_FLASH_Erase(&page_erase_struct, &page_erase_err);
+  
+  //Data can be written only by 64-bits
+  LL_FLASH_Program_DoubleWord((uint32_t *)start_address, (uint64_t)0x1234);
+  LL_FLASH_Program_DoubleWord((uint32_t *)(start_address + (8 * 1)), (uint16_t)calib_phase1);
+  LL_FLASH_Program_DoubleWord((uint32_t *)(start_address + (8 * 2)), (uint16_t)calib_phase2);
+  LL_FLASH_Program_DoubleWord((uint32_t *)(start_address + (8 * 3)), (uint16_t)calib_phase3);
+  LL_FLASH_Program_DoubleWord((uint32_t *)(start_address + (8 * 4)), (uint16_t)apd_saturation_voltage);
 
-  LL_FLASH_Program16(start_address, 0x1234);
-  LL_FLASH_Program16(start_address+2, (uint16_t)calib_phase1);
-  LL_FLASH_Program16(start_address+4, (uint16_t)calib_phase2);
-  LL_FLASH_Program16(start_address+6, (uint16_t)calib_phase3);
-  LL_FLASH_Program16(start_address+8, (uint16_t)apd_saturation_voltage);
-  LL_Flash_Lock();
+  LL_FLASH_Lock();
   __set_PRIMASK(primask_bit);//enable IRQ
-  */
   
 }
 
@@ -320,11 +327,11 @@ void read_calib_data_from_flash(void)
   if (data_key != 0x1234)
     return; //no data in flash
   
-  zero_phase1_calibration = (*(__IO int16_t*)(start_address + 2));
-  zero_phase2_calibration = (*(__IO int16_t*)(start_address + 4));
-  zero_phase3_calibration = (*(__IO int16_t*)(start_address + 6));
+  zero_phase1_calibration = (*(__IO int16_t*)(start_address + (8 * 1)));
+  zero_phase2_calibration = (*(__IO int16_t*)(start_address + (8 * 2)));
+  zero_phase3_calibration = (*(__IO int16_t*)(start_address + (8 * 3)));
   
-  uint16_t tmp_value = (*(__IO uint16_t*)(start_address + 8));//voltage
+  uint16_t tmp_value = (*(__IO uint16_t*)(start_address + (8 * 4)));//voltage
   if ((tmp_value < 50) || (tmp_value > 150)) //apd voltage
     return;
   apd_saturation_voltage = (float)tmp_value;

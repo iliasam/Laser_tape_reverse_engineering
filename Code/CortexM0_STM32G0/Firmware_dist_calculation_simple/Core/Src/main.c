@@ -1,9 +1,9 @@
-//Firmware for "x-40" laser tape
+//Firmware for "B2A" laser tape measure module
 //By ILIASAM
-//This program captures data from ADC, calculate phase difference using Goertzel algorithm, send results to UART.
-//All this done sequentially for 3 frequencies.
+//3 frequencies
+//This program calculate distance to object in mm
+//Plain data processing
 //UART baudrate - 256000
-//Phase units - 0.1 deg
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"

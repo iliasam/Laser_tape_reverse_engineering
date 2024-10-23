@@ -5,8 +5,9 @@ I create my own firmware that allow to use this module for DIY purposes.
 Supported module types are: "512A" and "701A". Working of "703A" is confirmed by "Damian" here: [Link](https://www.hackster.io/iliasam/making-a-cheap-laser-rangefinder-for-arduino-4dd849).  
 UPD 11/2019: Attention: It was found that newer "x-40" laser tape measures come with "M88B" modules. Marking is "88B" at the PCB near MCU. That modules are based on STM32F0 MCU (it has QFN-32 package). That modules are not supported by my firmware!  
 UPD 06/2022: Added support for newer U85A/U85B modules based on STM32F0 MCU. See Code/CortexM0 folder.    
+UPD 10/2024: Added support for newer B2A modules based on STM32G0 MCU. See Code/CortexM0_STM32G0 folder.    
 "701A" module dimensions: 25x13x50 mm.   
-"U85" module dimensions: 17x7x41mm, Weight: ~4g  
+"U85/B2A" module dimensions: 17x7x41mm, Weight: ~4g  
 See [Github Wiki](https://github.com/iliasam/Laser_tape_reverse_engineering/wiki) for more information!    
   
 Big article in Russian: https://habr.com/post/327642/  

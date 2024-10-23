@@ -825,6 +825,8 @@ typedef struct
 ErrorStatus LL_FLASH_Program_DoubleWord(const uint32_t *Address, uint64_t Data);
 ErrorStatus LL_FLASH_Program_Fast(const uint32_t *Address, uint32_t *DataAddress);
 ErrorStatus LL_FLASH_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t *PageError);
+
+void FLASH_PageErase(uint32_t Banks, uint32_t Page);
 /**
   * @}
   */

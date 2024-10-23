@@ -11,7 +11,7 @@
 
 static ErrorStatus FLASH_WaitForLastOperation(void);
 static void        FLASH_MassErase           (uint32_t Banks);
-static void        FLASH_PageErase           (uint32_t Banks, uint32_t Page);
+
 
 static ErrorStatus FLASH_WaitForLastOperation(void)
 {
@@ -159,7 +159,7 @@ static void FLASH_MassErase(uint32_t Banks)
     FLASH->CR |= (FLASH_CR_STRT | Banks);
 }
 
-static void FLASH_PageErase(uint32_t Banks, uint32_t Page)
+void FLASH_PageErase(uint32_t Banks, uint32_t Page)
 {
     uint32_t tmp;
 
@@ -193,13 +193,16 @@ ErrorStatus LL_FLASH_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t *PageErr
         pEraseInit->Banks = FLASH_BANK_1;
 #endif /* FLASH_DBANK_SUPPORT */
 
-        if (pEraseInit->TypeErase == FLASH_TYPEERASE_MASS) {
+        if (pEraseInit->TypeErase == FLASH_TYPEERASE_MASS) 
+        {
             /* Proceed to Mass Erase */
             FLASH_MassErase(pEraseInit->Banks);
 
             /* Wait for last operation to be completed */
             status = FLASH_WaitForLastOperation();
-        } else {
+        } 
+        else 
+          {
             /*Initialization of PageError variable*/
             *PageError = 0xFFFFFFFFU;
 
