@@ -1,0 +1,3 @@
+1 measurement cycle = 0.23s
+1 freq change period = 3.7ms
+62 freq changes?
